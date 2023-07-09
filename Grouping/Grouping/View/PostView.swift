@@ -1,5 +1,5 @@
 //
-//  Post.swift
+//  PostView.swift
 //  Grouping
 //
 //  Created by J_Min on 2023/07/09.
@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PostView: View {
     @State var showFullText: Bool = false
+    @State var post: Post
     
     var body: some View {
         VStack {
@@ -16,7 +17,7 @@ struct PostView: View {
                 .padding(.horizontal, 16)
             
             // post image main
-            Image("test_image")
+            Image(post.images.first!)
                 .resizable()
                 .frame(width: Constant.screenWidth, height: Constant.screenWidth * 1.1)
                 .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
@@ -30,10 +31,14 @@ struct PostView: View {
                 .padding(.vertical, 6)
                 .padding(.bottom, 2)
             
-            Text("안녕하세요 이건 post 문구입니다ㅏ언ㄹ;ㅣㅁㄴ얼;ㅣㅏㄴ어리ㅏㄴ얼;ㅣㅏㅁ너ㅣ;ㅏㄴㅁ;ㅣ러님아러ㅣㅏㅇ널;ㅣㅏ먼이라ㅓㄴ이ㅏㅓ리;ㅇ나ㅓㄹ아이ㅏㄹ미;ㄴ어린ㅁ아ㅓ린ㅁ아ㅓ리ㅏㄴㅁ어ㅣㄴㅁ;리ㅓㅏㄴ어리;마넝리;ㅏㄴ얼")
-                .multilineTextAlignment(.leading)
-                .lineLimit(showFullText ? nil : 3)
-                .padding(.horizontal, 16)
+            HStack {
+                Text(post.content)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(showFullText ? nil : 3)
+                    .padding(.horizontal, 16)
+                
+                Spacer()
+            }
             
             HStack {
                 
@@ -69,7 +74,7 @@ struct PostView: View {
                     
                 }
             
-            Text("User 이름")
+            Text(post.createUserId)
             
             Spacer()
             
@@ -128,12 +133,6 @@ struct PostView: View {
 
 struct PostView_Preview: PreviewProvider {
     static var previews: some View {
-        VStack {
-            ScrollView(showsIndicators: false) {
-                PostView()
-                PostView()
-                PostView()
-            }
-        }
+        PostView(post: dummyPostData.first!)
     }
 }
