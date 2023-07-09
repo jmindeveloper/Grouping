@@ -9,13 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack {
+                ForEach(dummyPostData, id: \.self) { post in
+                    PostView(post: post)
+                }
+            }
         }
-        .padding()
     }
 }
 
