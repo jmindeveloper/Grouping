@@ -1,0 +1,9 @@
+.DS_Store
+*xcworkspace/xcuserdata/*
+Grouping/.DS_Store
+*.xcbkptlist
+*.xcuserstate
+Grouping/Grouping.xcodeproj/xcuserdata
+Grouping/Grouping.xcworkspace/xcuserdata
+Grouping/Grouping.xcodeproj/xcuserdata
+Grouping/Grouping.xcworkspace/xcuserdata
