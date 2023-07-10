@@ -55,7 +55,7 @@ struct LoginMainView: View {
             
             HStack {
                 NavigationLink {
-                    Text("이메일로 로그인")
+                    EmailSignInView()
                 } label: {
                     Text("이메일로 로그인")
                         .foregroundColor(.gray)

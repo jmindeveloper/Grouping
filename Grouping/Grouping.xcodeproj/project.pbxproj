@@ -23,6 +23,7 @@
 		0E90B8752A5C1BA9006725B1 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E90B8742A5C1BA9006725B1 /* UIColor+.swift */; };
 		0E90B8772A5C1BBC006725B1 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E90B8762A5C1BBC006725B1 /* Color+.swift */; };
 		0E90B87A2A5C397F006725B1 /* EmailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E90B8792A5C397F006725B1 /* EmailTextField.swift */; };
+		0E90B87C2A5C441E006725B1 /* EmailSignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E90B87B2A5C441E006725B1 /* EmailSignInView.swift */; };
 		EE3CB0E3416E552B5ED21608 /* Pods_Grouping.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA3BB0D1585E6F5FBDAB73B /* Pods_Grouping.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		0E90B8742A5C1BA9006725B1 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		0E90B8762A5C1BBC006725B1 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		0E90B8792A5C397F006725B1 /* EmailTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailTextField.swift; sourceTree = "<group>"; };
+		0E90B87B2A5C441E006725B1 /* EmailSignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSignInView.swift; sourceTree = "<group>"; };
 		131C136F5F1EDBF40127D035 /* Pods-Grouping.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grouping.debug.xcconfig"; path = "Target Support Files/Pods-Grouping/Pods-Grouping.debug.xcconfig"; sourceTree = "<group>"; };
 		3DA3BB0D1585E6F5FBDAB73B /* Pods_Grouping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Grouping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A1BBE5FB9020C2134FAE514 /* Pods-Grouping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grouping.release.xcconfig"; path = "Target Support Files/Pods-Grouping/Pods-Grouping.release.xcconfig"; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 		0E90B86D2A5C19CE006725B1 /* Lgoin */ = {
 			isa = PBXGroup;
 			children = (
+				0E90B86F2A5C19E8006725B1 /* LoginMainView.swift */,
 				0E90B8782A5C3970006725B1 /* CommonView */,
 				0E90B86E2A5C19D9006725B1 /* SignIn */,
 			);
@@ -161,7 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				0E90B8712A5C1ACA006725B1 /* View */,
-				0E90B86F2A5C19E8006725B1 /* LoginMainView.swift */,
+				0E90B87B2A5C441E006725B1 /* EmailSignInView.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				0E6CC3442A5AC0B900BE97AD /* RoundedCorner.swift in Sources */,
 				0E90B8752A5C1BA9006725B1 /* UIColor+.swift in Sources */,
 				0E6CC3242A5AA09000BE97AD /* ContentView.swift in Sources */,
+				0E90B87C2A5C441E006725B1 /* EmailSignInView.swift in Sources */,
 				0E90B8732A5C1AD8006725B1 /* LoginButton.swift in Sources */,
 				0E90B8702A5C19E8006725B1 /* LoginMainView.swift in Sources */,
 				0E90B87A2A5C397F006725B1 /* EmailTextField.swift in Sources */,
