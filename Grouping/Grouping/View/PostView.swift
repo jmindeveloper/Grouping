@@ -19,6 +19,7 @@ struct PostView: View {
             // post image main
             Image(post.images.first!)
                 .resizable()
+                .scaledToFill()
                 .frame(width: Constant.screenWidth, height: Constant.screenWidth * 1.1)
                 .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
                 .shadow(radius: 5, x: 0, y: 5)
