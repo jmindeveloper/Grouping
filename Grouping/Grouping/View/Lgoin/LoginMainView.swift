@@ -67,7 +67,7 @@ struct LoginMainView: View {
                     .padding(.horizontal, 3)
                 
                 NavigationLink {
-                    EmailSignUpView()
+                    EmailSignUpView(viewModel: EmailLoginViewModel(type: .SignUp))
                 } label: {
                     Text("이메일로 회원가입")
                         .foregroundColor(.gray)
