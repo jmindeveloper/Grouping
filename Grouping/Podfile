@@ -9,6 +9,7 @@ target 'Grouping' do
   pod 'FirebaseAnalytics'
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
+  pod 'FirebaseFirestoreSwift'
   pod 'FirebaseStorage'
 
 end
