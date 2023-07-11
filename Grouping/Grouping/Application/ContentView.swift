@@ -9,13 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            VStack {
-                ForEach(dummyPostData, id: \.self) { post in
-                    PostView(post: post)
-                }
-            }
-        }
+        LoginMainView()
     }
 }
 
