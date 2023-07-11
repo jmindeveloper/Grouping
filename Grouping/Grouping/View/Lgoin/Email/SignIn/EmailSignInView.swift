@@ -7,17 +7,16 @@
 
 import SwiftUI
 
-struct EmailSignInView: View {
-    @State var email: String = ""
-    @State var password: String = ""
+struct EmailSignInView<VM>: View where VM: EmailLoginViewModelInterface {
+    @ObservedObject var viewModel: VM
     
     var body: some View {
         VStack {
             VStack {
-                EmailTextField(text: $email, type: .Email)
+                EmailTextField(text: $viewModel.email, type: .Email)
                     .placeHolder("이메일")
                 
-                EmailTextField(text: $password, type: .Password)
+                EmailTextField(text: $viewModel.password, type: .Password)
                     .secureMode(true)
                     .placeHolder("비밀번호")
             }
@@ -27,7 +26,7 @@ struct EmailSignInView: View {
             Spacer()
             
             Button {
-                
+                viewModel.signIn()
             } label: {
                 Text("로그인")
             }
@@ -40,6 +39,6 @@ struct EmailSignInView: View {
 
 struct EmailSignInView_Previews: PreviewProvider {
     static var previews: some View {
-        EmailSignInView()
+        EmailSignInView(viewModel: EmailLoginViewModel(type: .SignIn))
     }
 }
