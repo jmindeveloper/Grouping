@@ -39,7 +39,7 @@ struct LoginMainView: View {
             Button {
                 
             } label: {
-                LoginButton(title: "구글로 로그인하기", imageName: "test_image", backgroundColor: .white)
+                LoginButton(title: "구글로 로그인하기", imageName: "test_image_1", backgroundColor: .white)
                     .border(true)
                     .foregroundColor(.black)
             }
@@ -48,14 +48,14 @@ struct LoginMainView: View {
             Button {
                 
             } label: {
-                LoginButton(title: "애플로 로그인하기", imageName: "test_image", backgroundColor: .black)
+                LoginButton(title: "애플로 로그인하기", imageName: "test_image_5", backgroundColor: .black)
                     .foregroundColor(.white)
             }
             .buttonStyle(.plain)
             
             HStack {
                 NavigationLink {
-                    EmailSignInView()
+                    EmailSignInView(viewModel: EmailLoginViewModel(type: .SignIn))
                 } label: {
                     Text("이메일로 로그인")
                         .foregroundColor(.gray)
@@ -67,7 +67,7 @@ struct LoginMainView: View {
                     .padding(.horizontal, 3)
                 
                 NavigationLink {
-                    EmailSignUpView()
+                    EmailSignUpView(viewModel: EmailLoginViewModel(type: .SignUp))
                 } label: {
                     Text("이메일로 회원가입")
                         .foregroundColor(.gray)
