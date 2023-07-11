@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E309FC22A5D728700191B3B /* EmailSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E309FC12A5D728700191B3B /* EmailSignUpView.swift */; };
 		0E6CC3222A5AA09000BE97AD /* GroupingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6CC3212A5AA09000BE97AD /* GroupingApp.swift */; };
 		0E6CC3242A5AA09000BE97AD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6CC3232A5AA09000BE97AD /* ContentView.swift */; };
 		0E6CC3262A5AA09100BE97AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E6CC3252A5AA09100BE97AD /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E309FC12A5D728700191B3B /* EmailSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailSignUpView.swift; sourceTree = "<group>"; };
 		0E6CC31E2A5AA09000BE97AD /* Grouping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Grouping.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E6CC3212A5AA09000BE97AD /* GroupingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupingApp.swift; sourceTree = "<group>"; };
 		0E6CC3232A5AA09000BE97AD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,6 +65,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E309FC02A5D726C00191B3B /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				0E309FC12A5D728700191B3B /* EmailSignUpView.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
 		0E6CC3152A5AA09000BE97AD = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +165,7 @@
 			children = (
 				0E90B86F2A5C19E8006725B1 /* LoginMainView.swift */,
 				0E90B8782A5C3970006725B1 /* CommonView */,
+				0E309FC02A5D726C00191B3B /* SignUp */,
 				0E90B86E2A5C19D9006725B1 /* SignIn */,
 			);
 			path = Lgoin;
@@ -330,6 +341,7 @@
 				0E90B87A2A5C397F006725B1 /* EmailTextField.swift in Sources */,
 				0E6CC34E2A5ACB5B00BE97AD /* User.swift in Sources */,
 				0E6CC3222A5AA09000BE97AD /* GroupingApp.swift in Sources */,
+				0E309FC22A5D728700191B3B /* EmailSignUpView.swift in Sources */,
 				0E6CC3472A5AC1CF00BE97AD /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
