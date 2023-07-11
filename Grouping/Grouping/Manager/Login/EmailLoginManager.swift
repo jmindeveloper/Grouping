@@ -8,6 +8,12 @@
 import Foundation
 import FirebaseAuth
 
+enum EmailLoginError: Error {
+    case EmailMissmatch
+    case PasswordMismatch
+    case CheckPasswordMismatch
+}
+
 final class EmailLoginManager {
     private let auth = Auth.auth()
     

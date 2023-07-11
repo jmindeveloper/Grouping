@@ -17,16 +17,21 @@ struct EmailTextField: View {
     private var secureMode: Bool
     @State var fieldType: FieldType
     @State var fieldSecure: Bool = false
+    private var caption: String
+    private var showCaption: Bool = false
     
-    private init(text: Binding<String>, placeHolder: String, secureMode: Bool, type: FieldType) {
+    private init(text: Binding<String>, placeHolder: String, secureMode: Bool, type: FieldType, caption: String, showCaption: Bool) {
         self._text = text
         self.placeHolder = placeHolder
         self.secureMode = secureMode
+        self.showCaption = showCaption
         self._fieldType = State(initialValue: type)
+        self.showCaption = showCaption
+        self.caption = caption
     }
     
-    init(text: Binding<String>, type: FieldType) {
-        self.init(text: text, placeHolder: "", secureMode: false, type: type)
+    init(text: Binding<String>, type: FieldType, caption: String) {
+        self.init(text: text, placeHolder: "", secureMode: false, type: type, caption: caption, showCaption: false)
     }
     
     var body: some View {
@@ -71,15 +76,26 @@ struct EmailTextField: View {
             Rectangle()
                 .fill()
                 .frame(height: 1)
+            
+            if showCaption {
+                Text(caption)
+                    .font(.system(size: 12))
+                    .foregroundColor(.red)
+                    .padding(.top, 3)
+            }
         }
     }
     
     func placeHolder(_ text: String) -> EmailTextField {
-        EmailTextField(text: $text, placeHolder: text, secureMode: secureMode, type: fieldType)
+        EmailTextField(text: $text, placeHolder: text, secureMode: secureMode, type: fieldType, caption: caption, showCaption: showCaption)
     }
     
     func secureMode(_ enable: Bool) -> EmailTextField {
-        EmailTextField(text: $text, placeHolder: placeHolder, secureMode: enable, type: fieldType)
+        EmailTextField(text: $text, placeHolder: placeHolder, secureMode: enable, type: fieldType, caption: caption, showCaption: showCaption)
+    }
+    
+    func caption(_ show: Bool) -> EmailTextField {
+        EmailTextField(text: $text, placeHolder: placeHolder, secureMode: secureMode, type: fieldType, caption: caption, showCaption: show)
     }
 }
 
@@ -87,7 +103,7 @@ struct EmailTextField_Previews: PreviewProvider {
     @State static var text: String = ""
     
     static var previews: some View {
-        EmailTextField(text: EmailTextField_Previews.$text, type: .Email)
+        EmailTextField(text: EmailTextField_Previews.$text, type: .Email, caption: "dkdkd")
             .placeHolder("이메일을 입력하세요")
             .padding(.horizontal, 16)
     }
