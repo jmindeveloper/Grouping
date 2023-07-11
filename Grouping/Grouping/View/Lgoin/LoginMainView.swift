@@ -39,7 +39,7 @@ struct LoginMainView: View {
             Button {
                 
             } label: {
-                LoginButton(title: "구글로 로그인하기", imageName: "test_image", backgroundColor: .white)
+                LoginButton(title: "구글로 로그인하기", imageName: "test_image_1", backgroundColor: .white)
                     .border(true)
                     .foregroundColor(.black)
             }
@@ -48,7 +48,7 @@ struct LoginMainView: View {
             Button {
                 
             } label: {
-                LoginButton(title: "애플로 로그인하기", imageName: "test_image", backgroundColor: .black)
+                LoginButton(title: "애플로 로그인하기", imageName: "test_image_5", backgroundColor: .black)
                     .foregroundColor(.white)
             }
             .buttonStyle(.plain)
