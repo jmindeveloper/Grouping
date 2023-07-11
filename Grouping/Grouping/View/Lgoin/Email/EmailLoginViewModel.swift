@@ -15,7 +15,7 @@ protocol EmailLoginViewModelInterface: ObservableObject {
     init(type: EmailLoginViewModel.ViewModelType)
     
     func signIn(completion: ((_ isSuccess: Bool) -> Void)?) throws
-    func signUp(completion: ((_ isSuccess: Bool) -> Void)?) throws
+    func signUp(completion: ((Result<Bool, EmailLoginError>) -> Void)?) throws
 }
 
 final class EmailLoginViewModel: EmailLoginViewModelInterface {
@@ -46,7 +46,7 @@ final class EmailLoginViewModel: EmailLoginViewModelInterface {
         }
     }
     
-    func signUp(completion: ((_ isSuccess: Bool) -> Void)? = nil) throws {
+    func signUp(completion: ((Result<Bool, EmailLoginError>) -> Void)? = nil) throws {
         if !validateEmail() {
             throw EmailLoginError.EmailMissmatch
         }
@@ -56,8 +56,15 @@ final class EmailLoginViewModel: EmailLoginViewModelInterface {
         if !validateCheckPassword() {
             throw EmailLoginError.CheckPasswordMismatch
         }
-        loginManager.signUp(email: email, password: password) {
-            completion?($0)
+        loginManager.checkEmailExist(email: email) { [weak self] isExist in
+            guard let self = self else { return }
+            if !isExist {
+                self.loginManager.signUp(email: self.email, password: self.password) {
+                    completion?(.success($0))
+                }
+            } else {
+                completion?(.failure(.EmailAlreadyExist))
+            }
         }
     }
     

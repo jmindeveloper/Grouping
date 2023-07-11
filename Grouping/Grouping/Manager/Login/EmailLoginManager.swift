@@ -12,6 +12,7 @@ enum EmailLoginError: Error {
     case EmailMissmatch
     case PasswordMismatch
     case CheckPasswordMismatch
+    case EmailAlreadyExist
 }
 
 final class EmailLoginManager {
@@ -34,6 +35,25 @@ final class EmailLoginManager {
                 return
             }
             completion?(true)
+        }
+    }
+    
+    func checkEmailExist(email: String, completion: ((_ isExist: Bool) -> Void)? = nil) {
+        auth.fetchSignInMethods(forEmail: email) { strs, error in
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            if let strs = strs {
+                if strs.isEmpty {
+                    completion?(false)
+                } else {
+                    completion?(true)
+                }
+            } else {
+                completion?(false)
+            }
         }
     }
 }

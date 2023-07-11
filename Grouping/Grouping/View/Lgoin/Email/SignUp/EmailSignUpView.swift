@@ -12,6 +12,7 @@ struct EmailSignUpView<VM>: View where VM: EmailLoginViewModelInterface {
     @State var emailCaption: Bool = false
     @State var passwordCaption: Bool = false
     @State var checkPasswordCaption: Bool = false
+    @State var showWrongAlert: Bool = false
     
     var body: some View {
         VStack {
@@ -41,8 +42,15 @@ struct EmailSignUpView<VM>: View where VM: EmailLoginViewModelInterface {
                 checkPasswordCaption = false
 
                 do {
-                    try viewModel.signUp { isSuccess in
-                        
+                    try viewModel.signUp { result in
+                        switch result {
+                        case .success(let Success):
+                            break
+                        case .failure(let error):
+                            if error == .EmailAlreadyExist {
+                                showWrongAlert = true
+                            }
+                        }
                     }
                 } catch {
                     let error = error as! EmailLoginError
@@ -53,12 +61,17 @@ struct EmailSignUpView<VM>: View where VM: EmailLoginViewModelInterface {
                         passwordCaption = true
                     case .CheckPasswordMismatch:
                         checkPasswordCaption = true
+                    default:
+                        break
                     }
                 }
             } label: {
                 Text("회원가입")
             }
             .padding(.bottom, 10)
+        }
+        .alert(isPresented: $showWrongAlert) {
+            Alert(title: Text(""), message: Text("이미 가입된 메일이 존재합니다"), dismissButton: .default(Text("확인")))
         }
         .navigationTitle("이메일 회원가입")
         .navigationBarTitleDisplayMode(.inline)

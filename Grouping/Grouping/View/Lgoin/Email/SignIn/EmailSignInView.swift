@@ -49,7 +49,7 @@ struct EmailSignInView<VM>: View where VM: EmailLoginViewModelInterface {
                         emailCaption = true
                     case .PasswordMismatch:
                         passwordCaption = true
-                    case .CheckPasswordMismatch:
+                    default:
                         break
                     }
                 }
