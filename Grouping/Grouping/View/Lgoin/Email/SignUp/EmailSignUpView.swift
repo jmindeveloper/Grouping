@@ -41,7 +41,9 @@ struct EmailSignUpView<VM>: View where VM: EmailLoginViewModelInterface {
                 checkPasswordCaption = false
 
                 do {
-                    try viewModel.signUp()
+                    try viewModel.signUp { isSuccess in
+                        
+                    }
                 } catch {
                     let error = error as! EmailLoginError
                     switch error {

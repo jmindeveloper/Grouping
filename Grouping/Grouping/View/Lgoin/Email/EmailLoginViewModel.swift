@@ -14,8 +14,8 @@ protocol EmailLoginViewModelInterface: ObservableObject {
     
     init(type: EmailLoginViewModel.ViewModelType)
     
-    func signIn() throws
-    func signUp() throws
+    func signIn(completion: ((_ isSuccess: Bool) -> Void)?) throws
+    func signUp(completion: ((_ isSuccess: Bool) -> Void)?) throws
 }
 
 final class EmailLoginViewModel: EmailLoginViewModelInterface {
@@ -34,7 +34,7 @@ final class EmailLoginViewModel: EmailLoginViewModelInterface {
         self.type = type
     }
     
-    func signIn() throws {
+    func signIn(completion: ((_ isSuccess: Bool) -> Void)? = nil) throws {
         if !validateEmail() {
             throw EmailLoginError.EmailMissmatch
         }
@@ -42,11 +42,11 @@ final class EmailLoginViewModel: EmailLoginViewModelInterface {
             throw EmailLoginError.PasswordMismatch
         }
         loginManager.signIn(email: email, password: password) {
-            print("로그인 성공!!!!")
+            completion?($0)
         }
     }
     
-    func signUp() throws {
+    func signUp(completion: ((_ isSuccess: Bool) -> Void)? = nil) throws {
         if !validateEmail() {
             throw EmailLoginError.EmailMissmatch
         }
@@ -57,7 +57,7 @@ final class EmailLoginViewModel: EmailLoginViewModelInterface {
             throw EmailLoginError.CheckPasswordMismatch
         }
         loginManager.signUp(email: email, password: password) {
-            print("회원가입 성공!!!!")
+            completion?($0)
         }
     }
     

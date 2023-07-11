@@ -11,6 +11,7 @@ struct EmailSignInView<VM>: View where VM: EmailLoginViewModelInterface {
     @ObservedObject var viewModel: VM
     @State var emailCaption: Bool = false
     @State var passwordCaption: Bool = false
+    @State var showWrongAlert: Bool = false
     
     var body: some View {
         VStack {
@@ -34,7 +35,13 @@ struct EmailSignInView<VM>: View where VM: EmailLoginViewModelInterface {
                 passwordCaption = false
                 
                 do {
-                    try viewModel.signIn()
+                    try viewModel.signIn { isSuccess in
+                        if isSuccess {
+                            // TODO: -
+                        } else {
+                            showWrongAlert = true
+                        }
+                    }
                 } catch {
                     let error = error as! EmailLoginError
                     switch error {
@@ -50,6 +57,9 @@ struct EmailSignInView<VM>: View where VM: EmailLoginViewModelInterface {
                 Text("로그인")
             }
             .padding(.bottom, 10)
+        }
+        .alert(isPresented: $showWrongAlert) {
+            Alert(title: Text(""), message: Text("이메일 또는 비밀번호가 잘못됐습니다"), dismissButton: .default(Text("확인")))
         }
         .navigationTitle("이메일 로그인")
         .navigationBarTitleDisplayMode(.inline)
