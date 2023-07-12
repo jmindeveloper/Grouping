@@ -20,8 +20,9 @@ class User: Codable {
     var gender: Gender?
     var followersCount: Int
     var followingCount: Int
+    var email: String
     
-    init(id: String, nickName: String, profileImagePath: String? = nil, birthDay: Date? = nil, phoneNumber: Int? = nil, gender: Gender? = nil, followersCount: Int, followingCount: Int) {
+    init(id: String, nickName: String, profileImagePath: String? = nil, birthDay: Date? = nil, phoneNumber: Int? = nil, gender: Gender? = nil, followersCount: Int, followingCount: Int, email: String) {
         self.id = id
         self.nickName = nickName
         self.profileImagePath = profileImagePath
@@ -30,5 +31,6 @@ class User: Codable {
         self.gender = gender
         self.followersCount = followersCount
         self.followingCount = followingCount
+        self.email = email
     }
 }

@@ -23,7 +23,7 @@ final class UserAuthManager {
         auth.currentUser?.uid
     }
     
-    func createUser(id: String) -> User {
+    func createUser(id: String, email: String) -> User {
         return User(
             id: id,
             nickName: UUID().uuidString,
@@ -32,7 +32,8 @@ final class UserAuthManager {
             phoneNumber: nil,
             gender: nil,
             followersCount: 0,
-            followingCount: 0
+            followingCount: 0,
+            email: email
         )
     }
     
