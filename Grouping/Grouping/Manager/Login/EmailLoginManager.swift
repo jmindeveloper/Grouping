@@ -18,23 +18,27 @@ enum EmailLoginError: Error {
 final class EmailLoginManager {
     private let auth = Auth.auth()
     
-    func signUp(email: String, password: String, completion: ((_ isSuccess: Bool) -> Void)? = nil) {
+    func signUp(email: String, password: String, completion: ((_ isSuccess: String) -> Void)? = nil) {
         auth.createUser(withEmail: email, password: password) { result, error in
             guard error == nil else {
-                completion?(false)
                 return
             }
-            completion?(true)
+            guard let result = result else {
+                return
+            }
+            completion?(result.user.uid)
         }
     }
     
-    func signIn(email: String, password: String, completion: ((_ isSuccess: Bool) -> Void)? = nil) {
+    func signIn(email: String, password: String, completion: ((_ id: String) -> Void)? = nil) {
         auth.signIn(withEmail: email, password: password) { result, error in
             guard error == nil else {
-                completion?(false)
                 return
             }
-            completion?(true)
+            guard let result = result else {
+                return
+            }
+            completion?(result.user.uid)
         }
     }
     

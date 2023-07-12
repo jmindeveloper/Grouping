@@ -41,8 +41,11 @@ final class EmailLoginViewModel: EmailLoginViewModelInterface {
         if !validatePassword() {
             throw EmailLoginError.PasswordMismatch
         }
-        loginManager.signIn(email: email, password: password) {
-            completion?($0)
+        loginManager.signIn(email: email, password: password) { id in
+            UserAuthManager.shared.getUser(id: id) {
+                print("로그인 성공")
+                completion?(true)
+            }
         }
     }
     
@@ -60,7 +63,11 @@ final class EmailLoginViewModel: EmailLoginViewModelInterface {
             guard let self = self else { return }
             if !isExist {
                 self.loginManager.signUp(email: self.email, password: self.password) {
-                    completion?(.success($0))
+                    let user = UserAuthManager.shared.createUser(id: $0)
+                    UserAuthManager.shared.uploadUser(user: user) {
+                        print("User 업로드 성공")
+                        completion?(.success(true))
+                    }
                 }
             } else {
                 completion?(.failure(.EmailAlreadyExist))
