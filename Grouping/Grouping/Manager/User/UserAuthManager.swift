@@ -26,14 +26,15 @@ final class UserAuthManager {
     }
     
     /// 새로운 유저 생성
-    func createUser(id: String) -> User {
+    func createUser(id: String, email: String) -> User {
         return User(
             id: id,
             nickName: UUID().uuidString,
             profileImagePath: nil,
             birthDay: nil,
             phoneNumber: nil,
-            gender: nil
+            gender: nil,
+            email: email
         )
     }
     

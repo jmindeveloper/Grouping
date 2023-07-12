@@ -65,7 +65,7 @@ final class EmailLoginViewModel: EmailLoginViewModelInterface {
             guard let self = self else { return }
             if !isExist {
                 self.loginManager.signUp(email: self.email, password: self.password) {
-                    let user = UserAuthManager.shared.createUser(id: $0)
+                    let user = UserAuthManager.shared.createUser(id: $0, email: self.email)
                     UserAuthManager.shared.uploadUser(user: user) {
                         print("User 업로드 성공")
                         completion?(.success(true))
