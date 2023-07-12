@@ -15,7 +15,7 @@ protocol EmailLoginViewModelInterface: ObservableObject {
     init(type: EmailLoginViewModel.ViewModelType)
     
     func signIn(completion: ((_ isSuccess: Bool) -> Void)?) throws
-    func signUp(completion: ((Result<Bool, EmailLoginError>) -> Void)?) throws
+    func signUp(completion: ((Result<String, EmailLoginError>) -> Void)?) throws
 }
 
 final class EmailLoginViewModel: EmailLoginViewModelInterface {
@@ -46,7 +46,7 @@ final class EmailLoginViewModel: EmailLoginViewModelInterface {
         }
     }
     
-    func signUp(completion: ((Result<Bool, EmailLoginError>) -> Void)? = nil) throws {
+    func signUp(completion: ((Result<String, EmailLoginError>) -> Void)? = nil) throws {
         if !validateEmail() {
             throw EmailLoginError.EmailMissmatch
         }

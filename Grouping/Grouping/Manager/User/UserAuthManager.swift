@@ -6,14 +6,22 @@
 //
 
 import Foundation
+import FirebaseAuth
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 final class UserAuthManager {
     
     static let shared = UserAuthManager()
-    let db = Firestore.firestore().collection("Users")
+    private let auth = Auth.auth()
+    private let db = Firestore.firestore().collection("Users")
+    var user: User?
     
     private init() { }
+    
+    var getCurrentUserId: String? {
+        auth.currentUser?.providerID
+    }
     
     func createUser(id: String) -> User {
         return User(
@@ -28,5 +36,19 @@ final class UserAuthManager {
         )
     }
     
+    func uploadUser(user: User, completion: (() -> Void)? = nil) {
+        do {
+            try db.document(user.id).setData(from: user) { [weak self] error in
+                guard error == nil else {
+                    print(error!.localizedDescription)
+                    return
+                }
+                self?.user = user
+                completion?()
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }
 
