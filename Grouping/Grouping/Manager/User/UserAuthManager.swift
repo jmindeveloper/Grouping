@@ -20,7 +20,7 @@ final class UserAuthManager {
     private init() { }
     
     var getCurrentUserId: String? {
-        auth.currentUser?.providerID
+        auth.currentUser?.uid
     }
     
     func createUser(id: String) -> User {
@@ -51,21 +51,23 @@ final class UserAuthManager {
         }
     }
     
-    func getUser(id: String, completion: (() -> Void)? = nil) {
+    func getUser(id: String, completion: ((_ isSuccess: Bool) -> Void)? = nil) {
         
         db.document(id).getDocument { [weak self] snap, error in
             guard error == nil else {
                 print(error!.localizedDescription)
+                completion?(false)
                 return
             }
             
             do {
                 guard let user = try snap?.data(as: User.self) else {
+                    completion?(false)
                     return
                 }
                 
                 self?.user = user
-                completion?()
+                completion?(true)
             } catch {
                 print(error.localizedDescription)
             }

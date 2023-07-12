@@ -9,7 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        LoginMainView()
+        ScrollView {
+            ForEach(dummyPostData, id: \.self) { post in
+                PostView(post: post)
+                    .padding(.vertical, 4)
+            }
+        }
+        .onAppear {
+            UserAuthManager.shared.getUser(id: UserAuthManager.shared.getCurrentUserId ?? "") { isSuccess in
+                
+            }
+        }
     }
 }
 

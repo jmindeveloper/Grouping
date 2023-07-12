@@ -42,9 +42,11 @@ final class EmailLoginViewModel: EmailLoginViewModelInterface {
             throw EmailLoginError.PasswordMismatch
         }
         loginManager.signIn(email: email, password: password) { id in
-            UserAuthManager.shared.getUser(id: id) {
-                print("로그인 성공")
-                completion?(true)
+            UserAuthManager.shared.getUser(id: id) { isSuccess in
+                if isSuccess {
+                    print("로그인 성공")
+                }
+                completion?(isSuccess)
             }
         }
     }
