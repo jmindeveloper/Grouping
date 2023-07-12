@@ -45,8 +45,9 @@ struct EmailSignUpView<VM>: View where VM: EmailLoginViewModelInterface {
                     try viewModel.signUp { result in
                         switch result {
                         case .success(let success):
-                            // TODO: - 홈화면 이동
-                            break
+                            if success {
+                                Constant.rootVC?.dismiss(animated: true)
+                            }
                         case .failure(let error):
                             if error == .EmailAlreadyExist {
                                 showWrongAlert = true
