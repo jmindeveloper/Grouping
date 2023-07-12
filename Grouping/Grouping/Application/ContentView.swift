@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var showLoginVC: Bool = false
+    
     var body: some View {
         ScrollView {
             ForEach(dummyPostData, id: \.self) { post in
@@ -15,9 +17,17 @@ struct ContentView: View {
                     .padding(.vertical, 4)
             }
         }
+        .fullScreenCover(isPresented: $showLoginVC) {
+            LoginMainView()
+        }
         .onAppear {
-            UserAuthManager.shared.getUser(id: UserAuthManager.shared.getCurrentUserId ?? "") { isSuccess in
-                
+            
+            UserAuthManager.shared.logout()
+            
+            UserAuthManager.shared.getUser(id: UserAuthManager.shared.getCurrentUserId) { isSuccess in
+                if !isSuccess {
+                    showLoginVC = true
+                }
             }
         }
     }

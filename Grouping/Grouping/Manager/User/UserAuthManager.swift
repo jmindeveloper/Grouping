@@ -51,7 +51,11 @@ final class UserAuthManager {
         }
     }
     
-    func getUser(id: String, completion: ((_ isSuccess: Bool) -> Void)? = nil) {
+    func getUser(id: String?, completion: ((_ isSuccess: Bool) -> Void)? = nil) {
+        guard let id = id else {
+            completion?(false)
+            return
+        }
         
         db.document(id).getDocument { [weak self] snap, error in
             guard error == nil else {
@@ -71,6 +75,15 @@ final class UserAuthManager {
             } catch {
                 print(error.localizedDescription)
             }
+        }
+    }
+    
+    func logout(completion: (() -> Void)? = nil) {
+        do {
+            try auth.signOut()
+            completion?()
+        } catch {
+            print(error.localizedDescription)
         }
     }
 }
