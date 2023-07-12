@@ -15,7 +15,7 @@ protocol EmailLoginViewModelInterface: ObservableObject {
     init(type: EmailLoginViewModel.ViewModelType)
     
     func signIn(completion: ((_ isSuccess: Bool) -> Void)?) throws
-    func signUp(completion: ((Result<String, EmailLoginError>) -> Void)?) throws
+    func signUp(completion: ((Result<Bool, EmailLoginError>) -> Void)?) throws
 }
 
 final class EmailLoginViewModel: EmailLoginViewModelInterface {
@@ -41,12 +41,15 @@ final class EmailLoginViewModel: EmailLoginViewModelInterface {
         if !validatePassword() {
             throw EmailLoginError.PasswordMismatch
         }
-        loginManager.signIn(email: email, password: password) {
-            completion?($0)
+        loginManager.signIn(email: email, password: password) { id in
+            UserAuthManager.shared.getUser(id: id) {
+                print("로그인 성공")
+                completion?(true)
+            }
         }
     }
     
-    func signUp(completion: ((Result<String, EmailLoginError>) -> Void)? = nil) throws {
+    func signUp(completion: ((Result<Bool, EmailLoginError>) -> Void)? = nil) throws {
         if !validateEmail() {
             throw EmailLoginError.EmailMissmatch
         }
@@ -60,7 +63,11 @@ final class EmailLoginViewModel: EmailLoginViewModelInterface {
             guard let self = self else { return }
             if !isExist {
                 self.loginManager.signUp(email: self.email, password: self.password) {
-                    completion?(.success($0))
+                    let user = UserAuthManager.shared.createUser(id: $0)
+                    UserAuthManager.shared.uploadUser(user: user) {
+                        print("User 업로드 성공")
+                        completion?(.success(true))
+                    }
                 }
             } else {
                 completion?(.failure(.EmailAlreadyExist))

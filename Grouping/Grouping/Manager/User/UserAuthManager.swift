@@ -50,5 +50,26 @@ final class UserAuthManager {
             print(error.localizedDescription)
         }
     }
+    
+    func getUser(id: String, completion: (() -> Void)? = nil) {
+        
+        db.document(id).getDocument { [weak self] snap, error in
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            do {
+                guard let user = try snap?.data(as: User.self) else {
+                    return
+                }
+                
+                self?.user = user
+                completion?()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 

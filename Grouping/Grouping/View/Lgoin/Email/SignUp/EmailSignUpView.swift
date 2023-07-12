@@ -44,11 +44,9 @@ struct EmailSignUpView<VM>: View where VM: EmailLoginViewModelInterface {
                 do {
                     try viewModel.signUp { result in
                         switch result {
-                        case .success(let id):
-                            let user = UserAuthManager.shared.createUser(id: id)
-                            UserAuthManager.shared.uploadUser(user: user) {
-                                print("User 업로드 성공")
-                            }
+                        case .success(let success):
+                            // TODO: - 홈화면 이동
+                            break
                         case .failure(let error):
                             if error == .EmailAlreadyExist {
                                 showWrongAlert = true
