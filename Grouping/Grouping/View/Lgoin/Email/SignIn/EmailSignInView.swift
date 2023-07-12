@@ -37,7 +37,7 @@ struct EmailSignInView<VM>: View where VM: EmailLoginViewModelInterface {
                 do {
                     try viewModel.signIn { isSuccess in
                         if isSuccess {
-                            // TODO: -
+                            Constant.rootVC?.dismiss(animated: true)
                         } else {
                             showWrongAlert = true
                         }

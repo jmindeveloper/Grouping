@@ -11,4 +11,8 @@ struct Constant {
     static var screenWidth: CGFloat {
         UIScreen.main.bounds.width
     }
+    
+    static var rootVC: UIViewController? {
+        UIApplication.shared.windows.first?.rootViewController
+    }
 }
