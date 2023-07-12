@@ -18,17 +18,17 @@ class User: Codable {
     var birthDay: Date?
     var phoneNumber: Int?
     var gender: Gender?
-    var followersCount: Int
-    var followingCount: Int
+    var followers: [String]
+    var following: [String]
     
-    init(id: String, nickName: String, profileImagePath: String? = nil, birthDay: Date? = nil, phoneNumber: Int? = nil, gender: Gender? = nil, followersCount: Int, followingCount: Int) {
+    init(id: String, nickName: String, profileImagePath: String? = nil, birthDay: Date? = nil, phoneNumber: Int? = nil, gender: Gender? = nil, followers: [String] = [], following: [String] = []) {
         self.id = id
         self.nickName = nickName
         self.profileImagePath = profileImagePath
         self.birthDay = birthDay
         self.phoneNumber = phoneNumber
         self.gender = gender
-        self.followersCount = followersCount
-        self.followingCount = followingCount
+        self.followers = followers
+        self.following = following
     }
 }

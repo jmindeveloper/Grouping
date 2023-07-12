@@ -30,9 +30,7 @@ final class UserAuthManager {
             profileImagePath: nil,
             birthDay: nil,
             phoneNumber: nil,
-            gender: nil,
-            followersCount: 0,
-            followingCount: 0
+            gender: nil
         )
     }
     
