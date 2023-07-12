@@ -14,16 +14,19 @@ final class UserAuthManager {
     
     static let shared = UserAuthManager()
     private let auth = Auth.auth()
-    private let db = Firestore.firestore().collection("Users")
+    private let db = Firestore.firestore().collection(FBFieldName.users)
     var user: User?
     
     private init() { }
     
-    var getCurrentUserId: String? {
+    /// 현재 로그인 돼있는 User의 아이디
+    /// 현재 로그인 돼있지 않으면 nil
+    var currentUserId: String? {
         auth.currentUser?.uid
     }
     
-    func createUser(id: String) -> User {
+    /// 새로운 유저 생성
+    func createUser(id: String, email: String) -> User {
         return User(
             id: id,
             nickName: UUID().uuidString,
@@ -31,11 +34,11 @@ final class UserAuthManager {
             birthDay: nil,
             phoneNumber: nil,
             gender: nil,
-            followersCount: 0,
-            followingCount: 0
+            email: email
         )
     }
     
+    /// 유저 업로드
     func uploadUser(user: User, completion: (() -> Void)? = nil) {
         do {
             try db.document(user.id).setData(from: user) { [weak self] error in
@@ -51,8 +54,9 @@ final class UserAuthManager {
         }
     }
     
-    func getUser(id: String?, completion: ((_ isSuccess: Bool) -> Void)? = nil) {
-        guard let id = id else {
+    /// 유저 가져오기
+    func getUser(completion: ((_ isSuccess: Bool) -> Void)? = nil) {
+        guard let id = currentUserId else {
             completion?(false)
             return
         }
@@ -78,6 +82,7 @@ final class UserAuthManager {
         }
     }
     
+    /// 로그아웃
     func logout(completion: (() -> Void)? = nil) {
         do {
             try auth.signOut()

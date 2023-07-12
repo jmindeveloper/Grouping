@@ -21,10 +21,7 @@ struct ContentView: View {
             LoginMainView()
         }
         .onAppear {
-            
-            UserAuthManager.shared.logout()
-            
-            UserAuthManager.shared.getUser(id: UserAuthManager.shared.getCurrentUserId) { isSuccess in
+            UserAuthManager.shared.getUser() { isSuccess in
                 if !isSuccess {
                     showLoginVC = true
                 }

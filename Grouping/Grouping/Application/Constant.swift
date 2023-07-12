@@ -16,3 +16,17 @@ struct Constant {
         UIApplication.shared.windows.first?.rootViewController
     }
 }
+
+struct FBFieldName {
+    static var users: String {
+        return "Users"
+    }
+    
+    static var followers: String {
+        return "followers"
+    }
+    
+    static var following: String {
+        return "following"
+    }
+}
