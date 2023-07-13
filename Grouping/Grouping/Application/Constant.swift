@@ -18,14 +18,27 @@ struct Constant {
 }
 
 struct FBFieldName {
+    private init() { }
+    
+    // MARK: - Collection
+    /// collection Users
     static var users: String {
         return "Users"
     }
     
+    static var post: String {
+        return "Post"
+    }
+    
+    // MARK: - Documents
+    
+    // MARK: - Field
+    /// field followers
     static var followers: String {
         return "followers"
     }
     
+    /// field following
     static var following: String {
         return "following"
     }

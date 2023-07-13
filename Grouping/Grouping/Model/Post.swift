@@ -8,17 +8,34 @@
 import Foundation
 import FirebaseFirestore
 
+struct Location: Codable {
+    /// 위도
+    var latitude: CGFloat
+    /// 경도
+    var longitude: CGFloat
+}
+
 struct Post: Codable, Hashable {
     let id: String
     let createUserId: String
     let images: [String]
     let content: String
     let createdAt: Date
-    var location: CGFloat?
+    var updatedAt: Date?
+    var location: Location?
     var heartCount: Int
     var heartUsers: [String]
     var commentCount: Int
     var tags: [String]
+    
+    static func == (lhs: Post, rhs: Post) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(createUserId)
+    }
 }
 
 let dummyPostData: [Post] = [
