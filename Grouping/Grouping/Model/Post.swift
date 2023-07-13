@@ -27,6 +27,7 @@ struct Post: Codable, Hashable {
     var heartUsers: [String]
     var commentCount: Int
     var tags: [String]
+    var groupId: String?
     
     static func == (lhs: Post, rhs: Post) -> Bool {
         lhs.id == rhs.id
