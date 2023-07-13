@@ -100,12 +100,11 @@ final class PostManagementManager: PostManagementManagerInterface {
         for image in images {
             let ref = ref.child(UUID().uuidString + ".jpg")
             ref.putData(image) { meta, error in
-                doneCount += 1
-                let uploadFinish = doneCount == images.count
                 guard error == nil else {
                     print(error!.localizedDescription)
+                    doneCount += 1
                     uploadDoneCount?(images.count, doneCount)
-                    if uploadFinish {
+                    if doneCount == images.count {
                         completion?(urlStrings)
                     }
                     return
@@ -114,22 +113,25 @@ final class PostManagementManager: PostManagementManagerInterface {
                 ref.downloadURL { url, error in
                     guard error == nil else {
                         print(error!.localizedDescription)
+                        doneCount += 1
                         uploadDoneCount?(images.count, doneCount)
-                        if uploadFinish {
+                        if doneCount == images.count {
                             completion?(urlStrings)
                         }
                         return
                     }
                     guard let url = url else {
+                        doneCount += 1
                         uploadDoneCount?(images.count, doneCount)
-                        if uploadFinish {
+                        if doneCount == images.count {
                             completion?(urlStrings)
                         }
                         return
                     }
                     urlStrings.append(url.absoluteString)
+                    doneCount += 1
                     uploadDoneCount?(images.count, doneCount)
-                    if uploadFinish {
+                    if doneCount == images.count {
                         completion?(urlStrings)
                     }
                 }
