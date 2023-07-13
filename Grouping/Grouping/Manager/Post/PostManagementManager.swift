@@ -17,7 +17,8 @@ protocol PostManagementManagerInterface {
 
 final class PostManagementManager: PostManagementManagerInterface {
     private let ref = Storage.storage().reference()
-    private let db = Firestore.firestore().collection(FBFieldName.users)
+    private let userDB = Firestore.firestore().collection(FBFieldName.users)
+    private let postDB = Firestore.firestore().collection(FBFieldName.post)
     
     func upload(
         images: [Data],
@@ -49,15 +50,24 @@ final class PostManagementManager: PostManagementManagerInterface {
             )
             
             do {
-                try self.db.document(user.id)
-                    .collection(FBFieldName.post)
+                try self.postDB
                     .document(post.id)
-                    .setData(from: post) { error in
+                    .setData(from: post) { [weak self] error in
+                        guard let self = self else { return }
                         guard error == nil else {
                             print(error!.localizedDescription)
                             return
                         }
-                        completion?(post)
+                        self.userDB.document(user.id)
+                            .collection(FBFieldName.post)
+                            .document(FBFieldName.post)
+                            .updateData([FBFieldName.userPosts: FieldValue.arrayUnion([post.id])]) { error in
+                                guard error == nil else {
+                                    print(error!.localizedDescription)
+                                    return
+                                }
+                                completion?(post)
+                            }
                     }
             } catch {
                 print(error.localizedDescription)
@@ -92,10 +102,10 @@ final class PostManagementManager: PostManagementManagerInterface {
         )
         
         do {
-            try self.db.document(user.id)
-                .collection(FBFieldName.post)
+            try self.postDB
                 .document(post.id)
-                .setData(from: post) { error in
+                .setData(from: post) { [weak self] error in
+                    guard let self = self else { return }
                     guard error == nil else {
                         print(error!.localizedDescription)
                         return
@@ -113,15 +123,24 @@ final class PostManagementManager: PostManagementManagerInterface {
             return
         }
         
-        self.db.document(user.id)
-            .collection(FBFieldName.post)
-            .document(post.id).delete { error in
+        postDB
+            .document(post.id)
+            .delete { [weak self] error in
+                guard let self = self else { return }
                 guard error == nil else {
                     print(error!.localizedDescription)
-                    completion?(false)
                     return
                 }
-                completion?(true)
+                self.userDB.document(user.id)
+                    .collection(FBFieldName.post)
+                    .document(FBFieldName.post)
+                    .updateData([FBFieldName.userPosts: FieldValue.arrayRemove([post.id])]) { error in
+                        guard error == nil else {
+                            print(error!.localizedDescription)
+                            return
+                        }
+                        completion?(true)
+                    }
             }
     }
     
