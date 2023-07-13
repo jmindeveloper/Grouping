@@ -18,7 +18,7 @@ protocol PostManagementManagerInterface {
 }
 
 final class PostManagementManager: PostManagementManagerInterface {
-    private let storage = Storage.storage()
+    private let ref = Storage.storage().reference()
     private let db = Firestore.firestore()
     
     func createPost(
@@ -73,4 +73,68 @@ final class PostManagementManager: PostManagementManagerInterface {
         )
     }
     
+    func upload(completion: ((_ post: Post) -> Void)? = nil) {
+        
+    }
+    
+    func update(completion: ((_ post: Post) -> Void)? = nil) {
+        
+    }
+    
+    func delete(completion: ((_ isSuccess: Bool) -> Void)? = nil) {
+        
+    }
+    
+    func uploadImages(
+        images: [Data],
+        uploadDoneCount: ((_ totalCount: Int, _ doneCount: Int) -> Void)? = nil,
+        completion: ((_ urlStrings: [String]) -> Void)? = nil
+    ) {
+        guard let user = UserAuthManager.shared.user else {
+            return
+        }
+        var doneCount = 0
+        var urlStrings: [String] = []
+        
+        let ref = ref.child("Users/\(user.id)/post/images")
+        for image in images {
+            let ref = ref.child(UUID().uuidString + ".jpg")
+            ref.putData(image) { meta, error in
+                doneCount += 1
+                let uploadFinish = doneCount == images.count
+                guard error == nil else {
+                    print(error!.localizedDescription)
+                    uploadDoneCount?(images.count, doneCount)
+                    if uploadFinish {
+                        completion?(urlStrings)
+                    }
+                    return
+                }
+                
+                ref.downloadURL { url, error in
+                    guard error == nil else {
+                        print(error!.localizedDescription)
+                        uploadDoneCount?(images.count, doneCount)
+                        if uploadFinish {
+                            completion?(urlStrings)
+                        }
+                        return
+                    }
+                    guard let url = url else {
+                        uploadDoneCount?(images.count, doneCount)
+                        if uploadFinish {
+                            completion?(urlStrings)
+                        }
+                        return
+                    }
+                    urlStrings.append(url.absoluteString)
+                    uploadDoneCount?(images.count, doneCount)
+                    if uploadFinish {
+                        completion?(urlStrings)
+                    }
+                }
+            }
+        }
+    }
 }
+
