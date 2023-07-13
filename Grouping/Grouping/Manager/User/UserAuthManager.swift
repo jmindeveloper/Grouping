@@ -48,10 +48,10 @@ final class UserAuthManager {
                 }
                 self?.user = user
                 
-                self?.db.document(user.id).collection("Post").document("Post").setData(["posts": Array<String>()])
-                self?.db.document(user.id).collection("Group").document("Group").setData(["groups": Array<String>()])
-                self?.db.document(user.id).collection("StarPost").document("StarPost").setData(["starPosts": Array<String>()])
-                self?.db.document(user.id).collection("StarGroup").document("StarGroup").setData(["starGroups": Array<String>()])
+                self?.db.document(user.id).collection(FBFieldName.post).document(FBFieldName.post).setData([FBFieldName.userPosts: Array<String>()])
+                self?.db.document(user.id).collection(FBFieldName.group).document(FBFieldName.group).setData([FBFieldName.userGroup: Array<String>()])
+                self?.db.document(user.id).collection(FBFieldName.starPost).document(FBFieldName.starPost).setData([FBFieldName.userStarPost: Array<String>()])
+                self?.db.document(user.id).collection(FBFieldName.group).document(FBFieldName.group).setData([FBFieldName.userStarGroup: Array<String>()])
                 
                 completion?()
             }

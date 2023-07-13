@@ -26,11 +26,28 @@ struct FBFieldName {
         return "Users"
     }
     
+    /// collection and document Post
     static var post: String {
         return "Post"
     }
-    
+
+    /// collection and document Post
+    static var group: String {
+        return "Group"
+    }
+
+    /// collection and document Post
+    static var starPost: String {
+        return "StarPost"
+    }
+
+    /// collection and document Post
+    static var starGroup: String {
+        return "StarGroup"
+    }
+
     // MARK: - Documents
+    
     
     // MARK: - Field
     /// field followers
@@ -41,5 +58,25 @@ struct FBFieldName {
     /// field following
     static var following: String {
         return "following"
+    }
+    
+    /// user posts
+    static var userPosts: String {
+        return "posts"
+    }
+
+    /// user groups
+    static var userGroup: String {
+        return "groups"
+    }
+
+    /// user startPosts
+    static var userStarPost: String {
+        return "starPosts"
+    }
+
+    /// user startGroups
+    static var userStarGroup: String {
+        return "starGroups"
     }
 }
