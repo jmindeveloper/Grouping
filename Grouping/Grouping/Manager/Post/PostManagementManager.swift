@@ -12,7 +12,7 @@ import FirebaseStorage
 protocol PostManagementManagerInterface {
     func upload(images: [Data], content: String, location: Location?, tags: [String], completion: ((_ post: Post) -> Void)?)
     func update(post: Post, content: String, location: Location?, tags: [String], completion: ((_ post: Post) -> Void)?)
-    func delete(completion: ((_ isSuccess: Bool) -> Void)?)
+    func delete(post: Post, completion: ((_ isSuccess: Bool) -> Void)?)
 }
 
 final class PostManagementManager: PostManagementManagerInterface {
@@ -107,8 +107,22 @@ final class PostManagementManager: PostManagementManagerInterface {
         }
     }
     
-    func delete(completion: ((_ isSuccess: Bool) -> Void)? = nil) {
+    func delete(post: Post, completion: ((_ isSuccess: Bool) -> Void)? = nil) {
+        guard let user = UserAuthManager.shared.user,
+              user.id == post.createUserId else {
+            return
+        }
         
+        self.db.document(user.id)
+            .collection(FBFieldName.post)
+            .document(post.id).delete { error in
+                guard error == nil else {
+                    print(error!.localizedDescription)
+                    completion?(false)
+                    return
+                }
+                completion?(true)
+            }
     }
     
     private func uploadImages(
