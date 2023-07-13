@@ -47,6 +47,12 @@ final class UserAuthManager {
                     return
                 }
                 self?.user = user
+                
+                self?.db.document(user.id).collection("Post").document("Post").setData(["posts": Array<String>()])
+                self?.db.document(user.id).collection("Group").document("Group").setData(["groups": Array<String>()])
+                self?.db.document(user.id).collection("StarPost").document("StarPost").setData(["starPosts": Array<String>()])
+                self?.db.document(user.id).collection("StarGroup").document("StarGroup").setData(["starGroups": Array<String>()])
+                
                 completion?()
             }
         } catch {
