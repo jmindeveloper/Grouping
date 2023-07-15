@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainTabView: View {
     @State private var selection = 0
-    @State var previousTab: Int = 0
+    @State private var previousTab: Int = 0
     
     var body: some View {
         TabView(selection: $selection) {
@@ -36,7 +36,7 @@ struct MainTabView: View {
                 }
                 .tag(1)
             
-            SelectImageView(tabSelectionIndex: $selection, previousTab: previousTab)
+            SelectImageView(tabSelectionIndex: $selection, previousTab: previousTab, viewModel: SelectImageViewModel())
                 .tabItem {
                     Image(systemName: "plus.circle")
                 }
