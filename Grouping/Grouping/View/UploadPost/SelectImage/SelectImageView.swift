@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-struct SelectImageView: View {
+struct SelectImageView<VM>: View where VM: SelectImageViewModelInterface {
     @Binding var tabSelectionIndex: Int
     private var previousTab: Int
+    @ObservedObject var viewModel: VM
     
     var columns = Array(
         repeating: GridItem(
@@ -19,9 +20,10 @@ struct SelectImageView: View {
         count: 3
     )
     
-    init(tabSelectionIndex: Binding<Int>, previousTab: Int) {
+    init(tabSelectionIndex: Binding<Int>, previousTab: Int, viewModel: VM) {
         self._tabSelectionIndex = tabSelectionIndex
         self.previousTab = previousTab
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -29,10 +31,15 @@ struct SelectImageView: View {
             
             ScrollView {
                 LazyVGrid(columns: columns, alignment: .leading, spacing: 2, pinnedViews: .sectionFooters) {
-                    ForEach(1..<7, id: \.self) { index in
-                        SelectedImage(imageName: "test_image_\(index)")
+                    ForEach(0..<viewModel.images.count, id: \.self) { index in
+                        SelectedImage(imageName: viewModel.images[index])
+                            .select(index: viewModel.getSelectImageNumbers(index: index))
                             .frame(width: (Constant.screenWidth - 4) / 3, height: (Constant.screenWidth - 4) / 3)
+                            .onTapGesture {
+                                viewModel.select(index: index)
+                            }
                             .clipped()
+                            .tag(index)
                     }
                 }
             }
@@ -58,6 +65,6 @@ struct SelectImageView: View {
 
 struct SelectImageView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectImageView(tabSelectionIndex: .constant(1), previousTab: 1)
+        SelectImageView(tabSelectionIndex: .constant(1), previousTab: 1, viewModel: SelectImageViewModel())
     }
 }

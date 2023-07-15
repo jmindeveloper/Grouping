@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct SelectedImage: View {
-    @State var imageName: String
-    @State var selected: Bool = true
-    @State var selectedIndex: Int = 0
+    var imageName: String
+    var selected: Bool = false
+    var selectedIndex: Int = 0
     
     var body: some View {
         ZStack {
@@ -20,9 +20,6 @@ struct SelectedImage: View {
                     .scaledToFill()
                     .frame(width: proxy.size.width, height: proxy.size.height)
                     .clipped()
-                    .onTapGesture {
-                        selected.toggle()
-                    }
             }
             
             if selected {
@@ -49,6 +46,14 @@ struct SelectedImage: View {
                 .padding(.top, 10)
             }
         }
+    }
+    
+    func select(index: Int?) -> SelectedImage {
+        SelectedImage(
+            imageName: self.imageName,
+            selected: index == nil ? false : true,
+            selectedIndex: index ?? -1
+        )
     }
 }
 

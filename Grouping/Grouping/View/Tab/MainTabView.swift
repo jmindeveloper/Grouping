@@ -36,7 +36,7 @@ struct MainTabView: View {
                 }
                 .tag(1)
             
-            SelectImageView(tabSelectionIndex: $selection, previousTab: previousTab)
+            SelectImageView(tabSelectionIndex: $selection, previousTab: previousTab, viewModel: SelectImageViewModel())
                 .tabItem {
                     Image(systemName: "plus.circle")
                 }
