@@ -33,6 +33,7 @@
 		0EF94C2B2A615ECA00557CD8 /* GroupManagementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C2A2A615ECA00557CD8 /* GroupManagementManager.swift */; };
 		0EF94C2D2A615F4100557CD8 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C2C2A615F4100557CD8 /* Group.swift */; };
 		0EF94C2F2A6279DD00557CD8 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C2E2A6279DD00557CD8 /* MainTabView.swift */; };
+		0EF94C332A627FD800557CD8 /* SelectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C322A627FD800557CD8 /* SelectImageView.swift */; };
 		EE3CB0E3416E552B5ED21608 /* Pods_Grouping.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA3BB0D1585E6F5FBDAB73B /* Pods_Grouping.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		0EF94C2A2A615ECA00557CD8 /* GroupManagementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagementManager.swift; sourceTree = "<group>"; };
 		0EF94C2C2A615F4100557CD8 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		0EF94C2E2A6279DD00557CD8 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		0EF94C322A627FD800557CD8 /* SelectImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageView.swift; sourceTree = "<group>"; };
 		131C136F5F1EDBF40127D035 /* Pods-Grouping.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grouping.debug.xcconfig"; path = "Target Support Files/Pods-Grouping/Pods-Grouping.debug.xcconfig"; sourceTree = "<group>"; };
 		3DA3BB0D1585E6F5FBDAB73B /* Pods_Grouping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Grouping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A1BBE5FB9020C2134FAE514 /* Pods-Grouping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grouping.release.xcconfig"; path = "Target Support Files/Pods-Grouping/Pods-Grouping.release.xcconfig"; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 		0E6CC33C2A5AAA6200BE97AD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0EF94C312A627F8000557CD8 /* UploadPost */,
 				0EF94C302A6279DF00557CD8 /* Tab */,
 				0E90B86D2A5C19CE006725B1 /* Lgoin */,
 				0E6CC3422A5AC0A900BE97AD /* Common */,
@@ -274,6 +277,14 @@
 				0EF94C2E2A6279DD00557CD8 /* MainTabView.swift */,
 			);
 			path = Tab;
+			sourceTree = "<group>";
+		};
+		0EF94C312A627F8000557CD8 /* UploadPost */ = {
+			isa = PBXGroup;
+			children = (
+				0EF94C322A627FD800557CD8 /* SelectImageView.swift */,
+			);
+			path = UploadPost;
 			sourceTree = "<group>";
 		};
 		97FCB75F1562CA337CFE90BC /* Frameworks */ = {
@@ -414,6 +425,7 @@
 				0E90B8772A5C1BBC006725B1 /* Color+.swift in Sources */,
 				0EF94C282A601C9F00557CD8 /* PostManagementManager.swift in Sources */,
 				0E309FD82A5DA75E00191B3B /* EmailSignInView.swift in Sources */,
+				0EF94C332A627FD800557CD8 /* SelectImageView.swift in Sources */,
 				0E6CC34F2A5ACCD800BE97AD /* Post.swift in Sources */,
 				0E6CC3412A5AC08900BE97AD /* View+.swift in Sources */,
 				0E6CC3442A5AC0B900BE97AD /* RoundedCorner.swift in Sources */,
