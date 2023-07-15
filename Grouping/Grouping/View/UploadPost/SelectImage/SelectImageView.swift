@@ -28,18 +28,29 @@ struct SelectImageView<VM>: View where VM: SelectImageViewModelInterface {
     
     var body: some View {
         NavigationView {
-            
-            ScrollView {
-                LazyVGrid(columns: columns, alignment: .leading, spacing: 2, pinnedViews: .sectionFooters) {
-                    ForEach(0..<viewModel.assets.count, id: \.self) { index in
-                        SelectedImage(asset: viewModel.assets[index])
-                            .select(index: viewModel.getSelectImageNumbers(index: index))
-                            .frame(width: (Constant.screenWidth - 4) / 3, height: (Constant.screenWidth - 4) / 3)
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                viewModel.select(index: index)
+            VStack {
+                GeometryReader { proxy in
+                    ZStack {
+                        ScrollView {
+                            LazyVGrid(columns: columns, alignment: .leading, spacing: 2, pinnedViews: .sectionFooters) {
+                                ForEach(0..<viewModel.assets.count, id: \.self) { index in
+                                    SelectedImage(asset: viewModel.assets[index])
+                                        .select(index: viewModel.getSelectImageNumbers(index: index))
+                                        .frame(width: (Constant.screenWidth - 4) / 3, height: (Constant.screenWidth - 4) / 3)
+                                        .contentShape(Rectangle())
+                                        .onTapGesture {
+                                            viewModel.select(index: index)
+                                        }
+                                        .tag(index)
+                                }
                             }
-                            .tag(index)
+                        }
+                        .padding(.top, 37)
+                        
+                        VStack {
+                            selectAlbumCollectionView()
+                            Spacer()
+                        }
                     }
                 }
             }
@@ -55,11 +66,35 @@ struct SelectImageView<VM>: View where VM: SelectImageViewModelInterface {
                     }
                 }
             }
-
-            
-//            Text("select image")
         }
         .hideTabBar()
+    }
+    
+    @State var showAlbumCollection: Bool = false
+    
+    @ViewBuilder
+    private func selectAlbumCollectionView() -> some View {
+        GeometryReader { proxy in
+            VStack(spacing: 0) {
+                HStack {
+                    Text("최근 항목 ▾")
+                        .padding(.leading, 16)
+                        .frame(height: 34)
+                        .onTapGesture {
+                            print("show albumView")
+                            withAnimation(.linear(duration: 0.2)) {
+                                showAlbumCollection.toggle()
+                            }
+                        }
+                    Spacer()
+                }
+                .background(Color(uc: .systemGray6).frame(height: 34))
+                
+                Rectangle()
+                    .fill(.red)
+                    .frame(height: showAlbumCollection ? proxy.size.height - 34 + (Constant.safeAreaInsets?.bottom ?? 0) : 0)
+            }
+        }
     }
 }
 
