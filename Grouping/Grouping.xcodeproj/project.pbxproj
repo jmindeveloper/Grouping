@@ -34,6 +34,10 @@
 		0EF94C2D2A615F4100557CD8 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C2C2A615F4100557CD8 /* Group.swift */; };
 		0EF94C2F2A6279DD00557CD8 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C2E2A6279DD00557CD8 /* MainTabView.swift */; };
 		0EF94C332A627FD800557CD8 /* SelectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C322A627FD800557CD8 /* SelectImageView.swift */; };
+		0EF94C352A62865900557CD8 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C342A62865900557CD8 /* UIView+.swift */; };
+		0EF94C382A6286B800557CD8 /* UITabBar+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C372A6286B800557CD8 /* UITabBar+.swift */; };
+		0EF94C3B2A62874600557CD8 /* HiddenTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C3A2A62874600557CD8 /* HiddenTabBar.swift */; };
+		0EF94C3D2A62878700557CD8 /* ShowTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C3C2A62878700557CD8 /* ShowTabBar.swift */; };
 		EE3CB0E3416E552B5ED21608 /* Pods_Grouping.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA3BB0D1585E6F5FBDAB73B /* Pods_Grouping.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +70,10 @@
 		0EF94C2C2A615F4100557CD8 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		0EF94C2E2A6279DD00557CD8 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		0EF94C322A627FD800557CD8 /* SelectImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageView.swift; sourceTree = "<group>"; };
+		0EF94C342A62865900557CD8 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		0EF94C372A6286B800557CD8 /* UITabBar+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBar+.swift"; sourceTree = "<group>"; };
+		0EF94C3A2A62874600557CD8 /* HiddenTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenTabBar.swift; sourceTree = "<group>"; };
+		0EF94C3C2A62878700557CD8 /* ShowTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTabBar.swift; sourceTree = "<group>"; };
 		131C136F5F1EDBF40127D035 /* Pods-Grouping.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grouping.debug.xcconfig"; path = "Target Support Files/Pods-Grouping/Pods-Grouping.debug.xcconfig"; sourceTree = "<group>"; };
 		3DA3BB0D1585E6F5FBDAB73B /* Pods_Grouping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Grouping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A1BBE5FB9020C2134FAE514 /* Pods-Grouping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grouping.release.xcconfig"; path = "Target Support Files/Pods-Grouping/Pods-Grouping.release.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +157,7 @@
 		0E6CC3202A5AA09000BE97AD /* Grouping */ = {
 			isa = PBXGroup;
 			children = (
+				0EF94C392A62873700557CD8 /* ViewModifiers */,
 				0E309FC32A5D795E00191B3B /* Manager */,
 				0E6CC34A2A5ACB4F00BE97AD /* Model */,
 				0E6CC3452A5AC1BA00BE97AD /* Application */,
@@ -182,8 +191,8 @@
 		0E6CC33F2A5AC08300BE97AD /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				0EF94C362A6286A600557CD8 /* UIKit */,
 				0E6CC3402A5AC08900BE97AD /* View+.swift */,
-				0E90B8742A5C1BA9006725B1 /* UIColor+.swift */,
 				0E90B8762A5C1BBC006725B1 /* Color+.swift */,
 			);
 			path = Extension;
@@ -285,6 +294,25 @@
 				0EF94C322A627FD800557CD8 /* SelectImageView.swift */,
 			);
 			path = UploadPost;
+			sourceTree = "<group>";
+		};
+		0EF94C362A6286A600557CD8 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				0E90B8742A5C1BA9006725B1 /* UIColor+.swift */,
+				0EF94C342A62865900557CD8 /* UIView+.swift */,
+				0EF94C372A6286B800557CD8 /* UITabBar+.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		0EF94C392A62873700557CD8 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				0EF94C3A2A62874600557CD8 /* HiddenTabBar.swift */,
+				0EF94C3C2A62878700557CD8 /* ShowTabBar.swift */,
+			);
+			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
 		97FCB75F1562CA337CFE90BC /* Frameworks */ = {
@@ -424,6 +452,7 @@
 				0E6CC3502A5ACD8100BE97AD /* PostView.swift in Sources */,
 				0E90B8772A5C1BBC006725B1 /* Color+.swift in Sources */,
 				0EF94C282A601C9F00557CD8 /* PostManagementManager.swift in Sources */,
+				0EF94C382A6286B800557CD8 /* UITabBar+.swift in Sources */,
 				0E309FD82A5DA75E00191B3B /* EmailSignInView.swift in Sources */,
 				0EF94C332A627FD800557CD8 /* SelectImageView.swift in Sources */,
 				0E6CC34F2A5ACCD800BE97AD /* Post.swift in Sources */,
@@ -432,6 +461,7 @@
 				0EF94C2F2A6279DD00557CD8 /* MainTabView.swift in Sources */,
 				0EF94C2B2A615ECA00557CD8 /* GroupManagementManager.swift in Sources */,
 				0E90B8752A5C1BA9006725B1 /* UIColor+.swift in Sources */,
+				0EF94C3B2A62874600557CD8 /* HiddenTabBar.swift in Sources */,
 				0EF94C2D2A615F4100557CD8 /* Group.swift in Sources */,
 				0E6CC3242A5AA09000BE97AD /* ContentView.swift in Sources */,
 				0E309FDA2A5DA77500191B3B /* EmailLoginViewModel.swift in Sources */,
@@ -441,8 +471,10 @@
 				0E309FD02A5DA71E00191B3B /* LoginMainView.swift in Sources */,
 				0E309FDD2A5DA7F900191B3B /* UserAuthManager.swift in Sources */,
 				0E309FD42A5DA73500191B3B /* EmailSignUpView.swift in Sources */,
+				0EF94C3D2A62878700557CD8 /* ShowTabBar.swift in Sources */,
 				0E309FD62A5DA74A00191B3B /* LoginButton.swift in Sources */,
 				0E6CC3472A5AC1CF00BE97AD /* Constant.swift in Sources */,
+				0EF94C352A62865900557CD8 /* UIView+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

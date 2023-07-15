@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct SelectImageView: View {
-    @Environment(\.presentationMode) private var dissmiss
+    @Binding var tabSelectionIndex: Int
+    private var previousTab: Int
+    
+    init(tabSelectionIndex: Binding<Int>, previousTab: Int) {
+        self._tabSelectionIndex = tabSelectionIndex
+        self.previousTab = previousTab
+    }
     
     var body: some View {
         NavigationView {
@@ -18,7 +24,7 @@ struct SelectImageView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button {
-                            dissmiss.wrappedValue.dismiss()
+                            tabSelectionIndex = previousTab
                         } label: {
                             Image(systemName: "xmark")
                                 .foregroundColor(.primary)
@@ -26,9 +32,7 @@ struct SelectImageView: View {
                     }
                 }
         }
-        .onAppear {
-            
-        }
+        .hideTabBar()
     }
 }
 

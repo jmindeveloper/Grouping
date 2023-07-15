@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State private var selection = 0 {
-        didSet {
-            print("beforeSelection --> ", oldValue)
-        }
-    }
+    @State private var selection = 0
+    @State var previousTab: Int = 0
     
     var body: some View {
         TabView(selection: $selection) {
@@ -22,30 +19,42 @@ struct MainTabView: View {
                         .padding(.vertical, 4)
                 }
             }
+            .onAppear {
+                UITabBar.showTabBar(animated: true)
+            }
             .tabItem {
                 Image(systemName: "house")
             }
             .tag(0)
             
             Text("Map")
+                .onAppear {
+                    UITabBar.showTabBar(animated: true)
+                }
                 .tabItem {
                     Image(systemName: "map")
                 }
                 .tag(1)
             
-            SelectImageView()
+            SelectImageView(tabSelectionIndex: $selection, previousTab: previousTab)
                 .tabItem {
                     Image(systemName: "plus.circle")
                 }
                 .tag(2)
             
             Text("Search")
+                .onAppear {
+                    UITabBar.showTabBar(animated: true)
+                }
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                 }
                 .tag(3)
             
             Text("Profile")
+                .onAppear {
+                    UITabBar.showTabBar(animated: true)
+                }
                 .tabItem {
                     Image(systemName: "person")
                 }
@@ -53,8 +62,8 @@ struct MainTabView: View {
         }
         .accentColor(.primary)
         .onChange(of: selection) { index in
-            if index == 2 {
-                print("dkdkdkddkdkdk")
+            if index != 2 {
+                previousTab = index
             }
         }
     }
