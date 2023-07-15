@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import Combine
+import Photos
 
 protocol SelectImageViewModelInterface: ObservableObject {
     var images: [String] { get set }
+    var assets: [PHAsset] { get set }
     var selectedImageIndexes: [(index: Int, number: Int)] { get set }
     
     func select(index: Int)
@@ -16,6 +19,8 @@ protocol SelectImageViewModelInterface: ObservableObject {
 }
 
 final class SelectImageViewModel: SelectImageViewModelInterface {
+    private let library = PhotoLibrary()
+    
     @Published var images: [String] = [
         "test_image_1",
         "test_image_2",
@@ -24,6 +29,8 @@ final class SelectImageViewModel: SelectImageViewModelInterface {
         "test_image_5",
         "test_image_6",
     ]
+    
+    @Published var assets: [PHAsset] = []
     @Published var selectedImageIndexes: [(index: Int, number: Int)] = [] {
         didSet {
             if selectedImageIndexes.count > 5 {
@@ -34,8 +41,21 @@ final class SelectImageViewModel: SelectImageViewModelInterface {
     }
     private var lastNumber: Int = 0
     
+    private var subscriptions = Set<AnyCancellable>()
+    
+    init() {
+        binding()
+    }
+    
     deinit {
         print("SelectImageViewModel", #function)
+    }
+    
+    private func binding() {
+        library.getAssetsPublisher
+            .sink { [weak self] result in
+                self?.assets = result?.assets ?? []
+            }.store(in: &subscriptions)
     }
     
     func select(index: Int) {

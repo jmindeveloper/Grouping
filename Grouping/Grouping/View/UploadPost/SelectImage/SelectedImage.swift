@@ -6,20 +6,53 @@
 //
 
 import SwiftUI
+import Photos
 
 struct SelectedImage: View {
-    var imageName: String
-    var selected: Bool = false
-    var selectedIndex: Int = 0
+    private var imageName: String
+    private var selected: Bool = false
+    private var selectedIndex: Int = 0
+    private var asset: PHAsset? = nil
+    @State var image: UIImage? = nil
+    
+    init(imageName: String) {
+        self.init(imageName: imageName, selected: false, selectedIndex: -1)
+    }
+    
+    init(asset: PHAsset) {
+        self.init(imageName: "", selected: false, selectedIndex: -1, asset: asset)
+    }
+    
+    private init(imageName: String, selected: Bool, selectedIndex: Int, asset: PHAsset? = nil) {
+        self.imageName = imageName
+        self.selected = selected
+        self.selectedIndex = selectedIndex
+        self.asset = asset
+        self.image = image
+    }
     
     var body: some View {
         ZStack {
             GeometryReader { proxy in
-                Image(imageName)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: proxy.size.width, height: proxy.size.height)
-                    .clipped()
+                if let image = image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: proxy.size.width, height: proxy.size.height)
+                        .clipped()
+                } else {
+                    Image(imageName)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: proxy.size.width, height: proxy.size.height)
+                        .clipped()
+                }
+            }
+            .background(Color.gray)
+            .onAppear {
+                PhotoLibrary.requestImage(with: asset) { image in
+                    self.image = image
+                }
             }
             
             if selected {
@@ -50,9 +83,10 @@ struct SelectedImage: View {
     
     func select(index: Int?) -> SelectedImage {
         SelectedImage(
-            imageName: self.imageName,
+            imageName: imageName,
             selected: index == nil ? false : true,
-            selectedIndex: index ?? -1
+            selectedIndex: index ?? -1,
+            asset: asset
         )
     }
 }

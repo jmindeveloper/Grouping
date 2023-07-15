@@ -31,8 +31,8 @@ struct SelectImageView<VM>: View where VM: SelectImageViewModelInterface {
             
             ScrollView {
                 LazyVGrid(columns: columns, alignment: .leading, spacing: 2, pinnedViews: .sectionFooters) {
-                    ForEach(0..<viewModel.images.count, id: \.self) { index in
-                        SelectedImage(imageName: viewModel.images[index])
+                    ForEach(0..<viewModel.assets.count, id: \.self) { index in
+                        SelectedImage(asset: viewModel.assets[index])
                             .select(index: viewModel.getSelectImageNumbers(index: index))
                             .frame(width: (Constant.screenWidth - 4) / 3, height: (Constant.screenWidth - 4) / 3)
                             .onTapGesture {
@@ -40,6 +40,9 @@ struct SelectImageView<VM>: View where VM: SelectImageViewModelInterface {
                             }
                             .clipped()
                             .tag(index)
+                            .onDisappear {
+                                print("disAppear")
+                            }
                     }
                 }
             }
