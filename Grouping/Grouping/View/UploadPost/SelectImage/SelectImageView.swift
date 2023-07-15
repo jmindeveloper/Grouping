@@ -35,14 +35,11 @@ struct SelectImageView<VM>: View where VM: SelectImageViewModelInterface {
                         SelectedImage(asset: viewModel.assets[index])
                             .select(index: viewModel.getSelectImageNumbers(index: index))
                             .frame(width: (Constant.screenWidth - 4) / 3, height: (Constant.screenWidth - 4) / 3)
+                            .contentShape(Rectangle())
                             .onTapGesture {
                                 viewModel.select(index: index)
                             }
-                            .clipped()
                             .tag(index)
-                            .onDisappear {
-                                print("disAppear")
-                            }
                     }
                 }
             }

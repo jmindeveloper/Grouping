@@ -13,7 +13,8 @@ struct SelectedImage: View {
     private var selected: Bool = false
     private var selectedIndex: Int = 0
     private var asset: PHAsset? = nil
-    @State var image: UIImage? = nil
+    @State private var image: UIImage? = nil
+    @State private var isDisAppear: Bool = false
     
     init(imageName: String) {
         self.init(imageName: imageName, selected: false, selectedIndex: -1)
@@ -28,7 +29,6 @@ struct SelectedImage: View {
         self.selected = selected
         self.selectedIndex = selectedIndex
         self.asset = asset
-        self.image = image
     }
     
     var body: some View {
@@ -50,9 +50,18 @@ struct SelectedImage: View {
             }
             .background(Color.gray)
             .onAppear {
+                isDisAppear = false
                 PhotoLibrary.requestImage(with: asset) { image in
-                    self.image = image
+                    if !isDisAppear {
+                        self.image = image
+                    } else {
+                        self.image = nil
+                    }
                 }
+            }
+            .onDisappear {
+                image = nil
+                isDisAppear = true
             }
             
             if selected {
