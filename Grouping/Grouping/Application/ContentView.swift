@@ -11,12 +11,8 @@ struct ContentView: View {
     @State var showLoginVC: Bool = false
     
     var body: some View {
-        ScrollView {
-            ForEach(dummyPostData, id: \.self) { post in
-                PostView(post: post)
-                    .padding(.vertical, 4)
-            }
-        }
+        
+        MainTabView()
         .fullScreenCover(isPresented: $showLoginVC) {
             LoginMainView()
         }
