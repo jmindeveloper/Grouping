@@ -11,9 +11,10 @@ struct SelectImageView: View {
     @Binding var tabSelectionIndex: Int
     private var previousTab: Int
     
-    var rows = Array(
+    var columns = Array(
         repeating: GridItem(
-            .flexible()
+            .flexible(),
+            spacing: 0
         ),
         count: 3
     )
@@ -27,12 +28,10 @@ struct SelectImageView: View {
         NavigationView {
             
             ScrollView {
-                LazyVGrid(columns: rows) {
+                LazyVGrid(columns: columns, alignment: .leading, spacing: 2, pinnedViews: .sectionFooters) {
                     ForEach(1..<7, id: \.self) { index in
-                        Image("test_image_\(index)")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: Constant.screenWidth / 3 - 2, height: Constant.screenWidth / 3 - 2)
+                        SelectedImage(imageName: "test_image_\(index)")
+                            .frame(width: (Constant.screenWidth - 4) / 3, height: (Constant.screenWidth - 4) / 3)
                             .clipped()
                     }
                 }

@@ -38,6 +38,7 @@
 		0EF94C382A6286B800557CD8 /* UITabBar+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C372A6286B800557CD8 /* UITabBar+.swift */; };
 		0EF94C3B2A62874600557CD8 /* HiddenTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C3A2A62874600557CD8 /* HiddenTabBar.swift */; };
 		0EF94C3D2A62878700557CD8 /* ShowTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C3C2A62878700557CD8 /* ShowTabBar.swift */; };
+		0EF94C402A629C4C00557CD8 /* SelectedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C3F2A629C4C00557CD8 /* SelectedImage.swift */; };
 		EE3CB0E3416E552B5ED21608 /* Pods_Grouping.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA3BB0D1585E6F5FBDAB73B /* Pods_Grouping.framework */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		0EF94C372A6286B800557CD8 /* UITabBar+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBar+.swift"; sourceTree = "<group>"; };
 		0EF94C3A2A62874600557CD8 /* HiddenTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenTabBar.swift; sourceTree = "<group>"; };
 		0EF94C3C2A62878700557CD8 /* ShowTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTabBar.swift; sourceTree = "<group>"; };
+		0EF94C3F2A629C4C00557CD8 /* SelectedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedImage.swift; sourceTree = "<group>"; };
 		131C136F5F1EDBF40127D035 /* Pods-Grouping.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grouping.debug.xcconfig"; path = "Target Support Files/Pods-Grouping/Pods-Grouping.debug.xcconfig"; sourceTree = "<group>"; };
 		3DA3BB0D1585E6F5FBDAB73B /* Pods_Grouping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Grouping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A1BBE5FB9020C2134FAE514 /* Pods-Grouping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grouping.release.xcconfig"; path = "Target Support Files/Pods-Grouping/Pods-Grouping.release.xcconfig"; sourceTree = "<group>"; };
@@ -291,7 +293,7 @@
 		0EF94C312A627F8000557CD8 /* UploadPost */ = {
 			isa = PBXGroup;
 			children = (
-				0EF94C322A627FD800557CD8 /* SelectImageView.swift */,
+				0EF94C3E2A629C3400557CD8 /* SelectImage */,
 			);
 			path = UploadPost;
 			sourceTree = "<group>";
@@ -313,6 +315,15 @@
 				0EF94C3C2A62878700557CD8 /* ShowTabBar.swift */,
 			);
 			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
+		0EF94C3E2A629C3400557CD8 /* SelectImage */ = {
+			isa = PBXGroup;
+			children = (
+				0EF94C322A627FD800557CD8 /* SelectImageView.swift */,
+				0EF94C3F2A629C4C00557CD8 /* SelectedImage.swift */,
+			);
+			path = SelectImage;
 			sourceTree = "<group>";
 		};
 		97FCB75F1562CA337CFE90BC /* Frameworks */ = {
@@ -450,6 +461,7 @@
 				0E309FD22A5DA72A00191B3B /* EmailTextField.swift in Sources */,
 				0E309FDF2A5EEF7E00191B3B /* FollowManagementManager.swift in Sources */,
 				0E6CC3502A5ACD8100BE97AD /* PostView.swift in Sources */,
+				0EF94C402A629C4C00557CD8 /* SelectedImage.swift in Sources */,
 				0E90B8772A5C1BBC006725B1 /* Color+.swift in Sources */,
 				0EF94C282A601C9F00557CD8 /* PostManagementManager.swift in Sources */,
 				0EF94C382A6286B800557CD8 /* UITabBar+.swift in Sources */,
