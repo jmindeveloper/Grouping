@@ -97,6 +97,36 @@ final class PhotoLibrary {
         return result
     }
     
+    func getImageDate(
+        with assets: [PHAsset],
+        quality: CGFloat,
+        completion: (([Data]) -> Void)? = nil
+    ) {
+        var inputCount: Int = 0
+        var datas: [Data] = []
+        
+        for asset in assets {
+            inputCount += 1
+            asset.requestContentEditingInput (with: PHContentEditingInputRequestOptions()) { input, info in
+                if let input = input, let url = input.fullSizeImageURL {
+                    do {
+                        let data = try Data(contentsOf: url)
+                        guard let image = UIImage(data: data),
+                              let data = image.jpegData(compressionQuality: quality) else {
+                            return
+                        }
+                        datas.append(data)
+                        if inputCount == datas.count {
+                            completion?(datas)
+                        }
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+        }
+    }
+    
     static func requestImage(with asset: PHAsset?, completion: ((UIImage?) -> Void)? = nil) {
         guard let asset = asset else {
             completion?(nil)
