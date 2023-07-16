@@ -41,6 +41,8 @@
 		0EF94C402A629C4C00557CD8 /* SelectedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C3F2A629C4C00557CD8 /* SelectedImage.swift */; };
 		0EF94C422A62A0D800557CD8 /* SelectImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C412A62A0D800557CD8 /* SelectImageViewModel.swift */; };
 		0EF94C442A62B18B00557CD8 /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C432A62B18B00557CD8 /* PhotoLibrary.swift */; };
+		0EF94C472A63B99500557CD8 /* PostContentWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C462A63B99500557CD8 /* PostContentWriteView.swift */; };
+		0EF94C4A2A63BE1500557CD8 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C492A63BE1500557CD8 /* TextView.swift */; };
 		EE3CB0E3416E552B5ED21608 /* Pods_Grouping.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA3BB0D1585E6F5FBDAB73B /* Pods_Grouping.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +83,8 @@
 		0EF94C412A62A0D800557CD8 /* SelectImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageViewModel.swift; sourceTree = "<group>"; };
 		0EF94C432A62B18B00557CD8 /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
 		0EF94C452A62B2CC00557CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0EF94C462A63B99500557CD8 /* PostContentWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostContentWriteView.swift; sourceTree = "<group>"; };
+		0EF94C492A63BE1500557CD8 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		131C136F5F1EDBF40127D035 /* Pods-Grouping.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grouping.debug.xcconfig"; path = "Target Support Files/Pods-Grouping/Pods-Grouping.debug.xcconfig"; sourceTree = "<group>"; };
 		3DA3BB0D1585E6F5FBDAB73B /* Pods_Grouping.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Grouping.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A1BBE5FB9020C2134FAE514 /* Pods-Grouping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grouping.release.xcconfig"; path = "Target Support Files/Pods-Grouping/Pods-Grouping.release.xcconfig"; sourceTree = "<group>"; };
@@ -188,6 +192,7 @@
 		0E6CC33C2A5AAA6200BE97AD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0EF94C482A63BE0500557CD8 /* UIKitView */,
 				0EF94C312A627F8000557CD8 /* UploadPost */,
 				0EF94C302A6279DF00557CD8 /* Tab */,
 				0E90B86D2A5C19CE006725B1 /* Lgoin */,
@@ -301,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				0EF94C3E2A629C3400557CD8 /* SelectImage */,
+				0EF94C462A63B99500557CD8 /* PostContentWriteView.swift */,
 			);
 			path = UploadPost;
 			sourceTree = "<group>";
@@ -332,6 +338,14 @@
 				0EF94C412A62A0D800557CD8 /* SelectImageViewModel.swift */,
 			);
 			path = SelectImage;
+			sourceTree = "<group>";
+		};
+		0EF94C482A63BE0500557CD8 /* UIKitView */ = {
+			isa = PBXGroup;
+			children = (
+				0EF94C492A63BE1500557CD8 /* TextView.swift */,
+			);
+			path = UIKitView;
 			sourceTree = "<group>";
 		};
 		97FCB75F1562CA337CFE90BC /* Frameworks */ = {
@@ -470,6 +484,7 @@
 				0E309FD22A5DA72A00191B3B /* EmailTextField.swift in Sources */,
 				0E309FDF2A5EEF7E00191B3B /* FollowManagementManager.swift in Sources */,
 				0E6CC3502A5ACD8100BE97AD /* PostView.swift in Sources */,
+				0EF94C472A63B99500557CD8 /* PostContentWriteView.swift in Sources */,
 				0EF94C402A629C4C00557CD8 /* SelectedImage.swift in Sources */,
 				0EF94C422A62A0D800557CD8 /* SelectImageViewModel.swift in Sources */,
 				0E90B8772A5C1BBC006725B1 /* Color+.swift in Sources */,
@@ -478,6 +493,7 @@
 				0E309FD82A5DA75E00191B3B /* EmailSignInView.swift in Sources */,
 				0EF94C332A627FD800557CD8 /* SelectImageView.swift in Sources */,
 				0E6CC34F2A5ACCD800BE97AD /* Post.swift in Sources */,
+				0EF94C4A2A63BE1500557CD8 /* TextView.swift in Sources */,
 				0E6CC3412A5AC08900BE97AD /* View+.swift in Sources */,
 				0E6CC3442A5AC0B900BE97AD /* RoundedCorner.swift in Sources */,
 				0EF94C2F2A6279DD00557CD8 /* MainTabView.swift in Sources */,

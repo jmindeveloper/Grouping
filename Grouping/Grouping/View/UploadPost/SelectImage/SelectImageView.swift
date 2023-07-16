@@ -57,7 +57,7 @@ struct SelectImageView<VM>: View where VM: SelectImageViewModelInterface {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink {
-                        Text("post content")
+                        PostContentWriteView()
                     } label: {
                         Text("다음")
                             .foregroundColor(.primary)
