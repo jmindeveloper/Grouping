@@ -27,4 +27,8 @@ extension View {
             return AnyView(showTabBar(animated: animated))
         }
     }
+    
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }
