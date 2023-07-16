@@ -52,7 +52,7 @@ struct MainTabView: View {
                 }
                 .tag(3)
             
-            Text("Profile")
+            ProfileView(viewModel: ProfileViewModel())
                 .onAppear {
                     UITabBar.showTabBar(animated: true)
                 }

@@ -53,6 +53,7 @@ final class UserAuthManager {
                 self?.db.document(user.id).collection(FBFieldName.starPost).document(FBFieldName.starPost).setData([FBFieldName.userStarPost: Array<String>()])
                 self?.db.document(user.id).collection(FBFieldName.starGroup).document(FBFieldName.starGroup).setData([FBFieldName.userStarGroup: Array<String>()])
                 
+                NotificationCenter.default.post(name: .userLogin, object: nil)
                 completion?()
             }
         } catch {
@@ -81,6 +82,7 @@ final class UserAuthManager {
                 }
                 
                 self?.user = user
+                NotificationCenter.default.post(name: .userLogin, object: nil)
                 completion?(true)
             } catch {
                 print(error.localizedDescription)
