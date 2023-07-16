@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct SelectImageView<VM>: View where VM: SelectImageViewModelInterface {
+struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
     @Binding var tabSelectionIndex: Int
     private var previousTab: Int
-    @ObservedObject var viewModel: VM
+    @EnvironmentObject var viewModel: VM
     
     var columns = Array(
         repeating: GridItem(
@@ -20,10 +20,9 @@ struct SelectImageView<VM>: View where VM: SelectImageViewModelInterface {
         count: 3
     )
     
-    init(tabSelectionIndex: Binding<Int>, previousTab: Int, viewModel: VM) {
+    init(tabSelectionIndex: Binding<Int>, previousTab: Int) {
         self._tabSelectionIndex = tabSelectionIndex
         self.previousTab = previousTab
-        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -57,7 +56,7 @@ struct SelectImageView<VM>: View where VM: SelectImageViewModelInterface {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink {
-                        PostContentWriteView()
+                        PostContentWriteView<PostUploadViewModel>()
                     } label: {
                         Text("다음")
                             .foregroundColor(.primary)
@@ -138,6 +137,6 @@ struct SelectImageView<VM>: View where VM: SelectImageViewModelInterface {
 
 struct SelectImageView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectImageView(tabSelectionIndex: .constant(1), previousTab: 1, viewModel: SelectImageViewModel())
+        SelectImageView<PostUploadViewModel>(tabSelectionIndex: .constant(1), previousTab: 1)
     }
 }

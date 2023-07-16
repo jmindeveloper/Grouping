@@ -36,7 +36,8 @@ struct MainTabView: View {
                 }
                 .tag(1)
             
-            SelectImageView(tabSelectionIndex: $selection, previousTab: previousTab, viewModel: SelectImageViewModel())
+            SelectImageView<PostUploadViewModel>(tabSelectionIndex: $selection, previousTab: previousTab)
+                .environmentObject(PostUploadViewModel())
                 .tabItem {
                     Image(systemName: "plus.circle")
                 }

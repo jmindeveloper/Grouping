@@ -1,5 +1,5 @@
 //
-//  SelectImageViewModel.swift
+//  PostUploadViewModel.swift
 //  Grouping
 //
 //  Created by J_Min on 2023/07/15.
@@ -11,7 +11,7 @@ import Photos
 
 extension PHAsset: Identifiable { }
 
-protocol SelectImageViewModelInterface: ObservableObject {
+protocol PostUploadViewModelInterface: ObservableObject {
     var images: [String] { get set }
     var assets: [PHAsset] { get set }
     var selectedImageIndexes: [(index: Int, number: Int, asset: PHAsset)] { get set }
@@ -25,7 +25,7 @@ protocol SelectImageViewModelInterface: ObservableObject {
     func selectCollection(_ index: Int)
 }
 
-final class SelectImageViewModel: SelectImageViewModelInterface {
+final class PostUploadViewModel: PostUploadViewModelInterface {
     private let library = PhotoLibrary()
     
     @Published var images: [String] = [

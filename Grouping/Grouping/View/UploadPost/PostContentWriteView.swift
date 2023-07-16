@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct PostContentWriteView: View {
+struct PostContentWriteView<VM>: View where VM: PostUploadViewModelInterface {
     @State var contentText: String = ""
+    @EnvironmentObject var viewModel: VM
     
     var body: some View {
         ScrollView {
@@ -75,6 +76,6 @@ struct PostContentWriteView: View {
 
 struct PostContentWriteView_Previews: PreviewProvider {
     static var previews: some View {
-        PostContentWriteView()
+        PostContentWriteView<PostUploadViewModel>()
     }
 }
