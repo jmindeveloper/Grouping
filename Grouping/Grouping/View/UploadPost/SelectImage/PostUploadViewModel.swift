@@ -1,5 +1,5 @@
 //
-//  SelectImageViewModel.swift
+//  PostUploadViewModel.swift
 //  Grouping
 //
 //  Created by J_Min on 2023/07/15.
@@ -11,32 +11,32 @@ import Photos
 
 extension PHAsset: Identifiable { }
 
-protocol SelectImageViewModelInterface: ObservableObject {
-    var images: [String] { get set }
+protocol PostUploadViewModelInterface: ObservableObject {
     var assets: [PHAsset] { get set }
     var selectedImageIndexes: [(index: Int, number: Int, asset: PHAsset)] { get set }
     var collections: [PHAssetCollection] { get }
     var currentCollectionTitle: String { get }
+    var tags: [String] { get set }
+    var contentText: String { get set }
+    var selectedGroupId: String? { get set }
     
     func select(index: Int)
     func select(asset: PHAsset)
     func getSelectImageNumbers(index: Int) -> Int?
     func getSelectImageNumbers(asset: PHAsset) -> Int?
     func selectCollection(_ index: Int)
+    func appendTag(_ tag: String)
+    func removeTag(_ tag: String)
+    func upload()
 }
 
-final class SelectImageViewModel: SelectImageViewModelInterface {
+final class PostUploadViewModel: PostUploadViewModelInterface {
     private let library = PhotoLibrary()
+    private let postManager: PostManagementManagerInterface = PostManagementManager()
     
-    @Published var images: [String] = [
-        "test_image_1",
-        "test_image_2",
-        "test_image_3",
-        "test_image_4",
-        "test_image_5",
-        "test_image_6",
-    ]
-    
+    @Published var tags: [String] = []
+    @Published var contentText: String = ""
+    @Published var selectedGroupId: String? = nil
     @Published var assets: [PHAsset] = []
     @Published var selectedImageIndexes: [(index: Int, number: Int, asset: PHAsset)] = [] {
         didSet {
@@ -175,5 +175,34 @@ final class SelectImageViewModel: SelectImageViewModelInterface {
     private func resetSelectedAsset() {
         selectedImageIndexes.removeAll()
         lastNumber = 0
+    }
+    
+    func appendTag(_ tag: String) {
+        if !tags.contains(tag) {
+            tags.append(tag)
+        }
+    }
+    
+    func removeTag(_ tag: String) {
+        if let index = tags.firstIndex(of: tag) {
+            tags.remove(at: index)
+        }
+    }
+    
+    func upload() {
+        let selectAssets = selectedImageIndexes.map { $0.asset }
+        
+        library.getImageDate(with: selectAssets, quality: 0.3) { [weak self] data in
+            guard let self = self else {
+                return
+            }
+            self.postManager.upload(
+                images: data,
+                content: self.contentText,
+                location: nil,
+                tags: tags) { post in
+                    
+                }
+        }
     }
 }
