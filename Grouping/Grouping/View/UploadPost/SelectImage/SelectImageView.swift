@@ -54,6 +54,18 @@ struct SelectImageView<VM>: View where VM: SelectImageViewModelInterface {
                     }
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink {
+                        Text("post content")
+                    } label: {
+                        Text("다음")
+                            .foregroundColor(.primary)
+                            .opacity(viewModel.selectedImageIndexes.isEmpty ? 0.6 : 1)
+                    }
+                    .disabled(viewModel.selectedImageIndexes.isEmpty)
+                }
+            }
         }
         .hideTabBar()
     }
