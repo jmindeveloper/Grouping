@@ -31,6 +31,8 @@
 		0E8DBF242A6419A000D374DF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DBF232A6419A000D374DF /* ProfileView.swift */; };
 		0E8DBF262A6419D600D374DF /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DBF252A6419D600D374DF /* ProfileViewModel.swift */; };
 		0E8DBF282A641C0D00D374DF /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DBF272A641C0D00D374DF /* Notification.Name+.swift */; };
+		0E8DBF2B2A64297100D374DF /* PostFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DBF2A2A64297100D374DF /* PostFeedView.swift */; };
+		0E8DBF2D2A6429CB00D374DF /* PostFeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DBF2C2A6429CB00D374DF /* PostFeedViewModel.swift */; };
 		0E90B8752A5C1BA9006725B1 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E90B8742A5C1BA9006725B1 /* UIColor+.swift */; };
 		0E90B8772A5C1BBC006725B1 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E90B8762A5C1BBC006725B1 /* Color+.swift */; };
 		0E90B8802A5C4674006725B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E90B87F2A5C4674006725B1 /* GoogleService-Info.plist */; };
@@ -78,6 +80,8 @@
 		0E8DBF232A6419A000D374DF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		0E8DBF252A6419D600D374DF /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		0E8DBF272A641C0D00D374DF /* Notification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
+		0E8DBF2A2A64297100D374DF /* PostFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFeedView.swift; sourceTree = "<group>"; };
+		0E8DBF2C2A6429CB00D374DF /* PostFeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFeedViewModel.swift; sourceTree = "<group>"; };
 		0E90B8742A5C1BA9006725B1 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		0E90B8762A5C1BBC006725B1 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		0E90B87F2A5C4674006725B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -204,6 +208,7 @@
 		0E6CC33C2A5AAA6200BE97AD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0E8DBF292A64296700D374DF /* Feed */,
 				0E8DBF222A64199800D374DF /* Profile */,
 				0EF94C482A63BE0500557CD8 /* UIKitView */,
 				0EF94C312A627F8000557CD8 /* UploadPost */,
@@ -265,6 +270,15 @@
 				0E8DBF252A6419D600D374DF /* ProfileViewModel.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		0E8DBF292A64296700D374DF /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				0E8DBF2A2A64297100D374DF /* PostFeedView.swift */,
+				0E8DBF2C2A6429CB00D374DF /* PostFeedViewModel.swift */,
+			);
+			path = Feed;
 			sourceTree = "<group>";
 		};
 		0E90B86D2A5C19CE006725B1 /* Lgoin */ = {
@@ -509,6 +523,7 @@
 			files = (
 				0E309FD22A5DA72A00191B3B /* EmailTextField.swift in Sources */,
 				0E8DBF282A641C0D00D374DF /* Notification.Name+.swift in Sources */,
+				0E8DBF2B2A64297100D374DF /* PostFeedView.swift in Sources */,
 				0E309FDF2A5EEF7E00191B3B /* FollowManagementManager.swift in Sources */,
 				0E6CC3502A5ACD8100BE97AD /* PostView.swift in Sources */,
 				0EF94C472A63B99500557CD8 /* PostContentWriteView.swift in Sources */,
@@ -529,6 +544,7 @@
 				0EF94C2B2A615ECA00557CD8 /* GroupManagementManager.swift in Sources */,
 				0E8DBF262A6419D600D374DF /* ProfileViewModel.swift in Sources */,
 				0EF94C4D2A63CA4C00557CD8 /* TagView.swift in Sources */,
+				0E8DBF2D2A6429CB00D374DF /* PostFeedViewModel.swift in Sources */,
 				0E90B8752A5C1BA9006725B1 /* UIColor+.swift in Sources */,
 				0EF94C3B2A62874600557CD8 /* HiddenTabBar.swift in Sources */,
 				0EF94C2D2A615F4100557CD8 /* Group.swift in Sources */,

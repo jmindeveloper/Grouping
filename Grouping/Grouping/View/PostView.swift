@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct PostView: View {
     @State var showFullText: Bool = false
@@ -18,8 +19,9 @@ struct PostView: View {
             
             // post image main
             TabView {
-                ForEach(post.images, id: \.self) { imageName in
-                    Image(imageName)
+                ForEach(post.images, id: \.self) { url in
+                    WebImage(url: URL(string: url))
+                        .placeholder(Image(url).resizable())
                         .resizable()
                         .scaledToFill()
                         .frame(width: Constant.screenWidth, height: Constant.screenWidth * 1.1)
