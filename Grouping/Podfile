@@ -11,5 +11,6 @@ target 'Grouping' do
   pod 'FirebaseFirestore'
   pod 'FirebaseFirestoreSwift'
   pod 'FirebaseStorage'
+  pod 'SDWebImageSwiftUI'
 
 end
