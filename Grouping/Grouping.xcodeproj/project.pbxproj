@@ -26,6 +26,8 @@
 		0E6CC34E2A5ACB5B00BE97AD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6CC34C2A5ACB5B00BE97AD /* User.swift */; };
 		0E6CC34F2A5ACCD800BE97AD /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6CC34B2A5ACB5B00BE97AD /* Post.swift */; };
 		0E6CC3502A5ACD8100BE97AD /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6CC33D2A5AAA7000BE97AD /* PostView.swift */; };
+		0E8DBF1F2A64112F00D374DF /* UserPostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DBF1E2A64112F00D374DF /* UserPostManager.swift */; };
+		0E8DBF212A64138B00D374DF /* Publisher+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DBF202A64138B00D374DF /* Publisher+.swift */; };
 		0E90B8752A5C1BA9006725B1 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E90B8742A5C1BA9006725B1 /* UIColor+.swift */; };
 		0E90B8772A5C1BBC006725B1 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E90B8762A5C1BBC006725B1 /* Color+.swift */; };
 		0E90B8802A5C4674006725B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E90B87F2A5C4674006725B1 /* GoogleService-Info.plist */; };
@@ -68,6 +70,8 @@
 		0E6CC3462A5AC1CF00BE97AD /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		0E6CC34B2A5ACB5B00BE97AD /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		0E6CC34C2A5ACB5B00BE97AD /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0E8DBF1E2A64112F00D374DF /* UserPostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostManager.swift; sourceTree = "<group>"; };
+		0E8DBF202A64138B00D374DF /* Publisher+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+.swift"; sourceTree = "<group>"; };
 		0E90B8742A5C1BA9006725B1 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		0E90B8762A5C1BBC006725B1 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		0E90B87F2A5C4674006725B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -210,6 +214,7 @@
 				0EF94C362A6286A600557CD8 /* UIKit */,
 				0E6CC3402A5AC08900BE97AD /* View+.swift */,
 				0E90B8762A5C1BBC006725B1 /* Color+.swift */,
+				0E8DBF202A64138B00D374DF /* Publisher+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -285,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				0EF94C272A601C9F00557CD8 /* PostManagementManager.swift */,
+				0E8DBF1E2A64112F00D374DF /* UserPostManager.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -492,6 +498,7 @@
 				0EF94C422A62A0D800557CD8 /* PostUploadViewModel.swift in Sources */,
 				0E90B8772A5C1BBC006725B1 /* Color+.swift in Sources */,
 				0EF94C282A601C9F00557CD8 /* PostManagementManager.swift in Sources */,
+				0E8DBF212A64138B00D374DF /* Publisher+.swift in Sources */,
 				0EF94C382A6286B800557CD8 /* UITabBar+.swift in Sources */,
 				0E309FD82A5DA75E00191B3B /* EmailSignInView.swift in Sources */,
 				0EF94C332A627FD800557CD8 /* SelectImageView.swift in Sources */,
@@ -513,6 +520,7 @@
 				0E6CC3222A5AA09000BE97AD /* GroupingApp.swift in Sources */,
 				0E309FD02A5DA71E00191B3B /* LoginMainView.swift in Sources */,
 				0E309FDD2A5DA7F900191B3B /* UserAuthManager.swift in Sources */,
+				0E8DBF1F2A64112F00D374DF /* UserPostManager.swift in Sources */,
 				0E309FD42A5DA73500191B3B /* EmailSignUpView.swift in Sources */,
 				0EF94C3D2A62878700557CD8 /* ShowTabBar.swift in Sources */,
 				0E309FD62A5DA74A00191B3B /* LoginButton.swift in Sources */,
