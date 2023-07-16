@@ -27,11 +27,12 @@ protocol PostUploadViewModelInterface: ObservableObject {
     func selectCollection(_ index: Int)
     func appendTag(_ tag: String)
     func removeTag(_ tag: String)
+    func upload()
 }
 
 final class PostUploadViewModel: PostUploadViewModelInterface {
     private let library = PhotoLibrary()
-    
+    private let postManager: PostManagementManagerInterface = PostManagementManager()
     
     @Published var tags: [String] = []
     @Published var contentText: String = ""
@@ -185,6 +186,23 @@ final class PostUploadViewModel: PostUploadViewModelInterface {
     func removeTag(_ tag: String) {
         if let index = tags.firstIndex(of: tag) {
             tags.remove(at: index)
+        }
+    }
+    
+    func upload() {
+        let selectAssets = selectedImageIndexes.map { $0.asset }
+        
+        library.getImageDate(with: selectAssets, quality: 0.3) { [weak self] data in
+            guard let self = self else {
+                return
+            }
+            self.postManager.upload(
+                images: data,
+                content: self.contentText,
+                location: nil,
+                tags: tags) { post in
+                    
+                }
         }
     }
 }

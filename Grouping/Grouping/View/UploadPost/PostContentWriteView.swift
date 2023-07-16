@@ -43,6 +43,16 @@ struct PostContentWriteView<VM>: View where VM: PostUploadViewModelInterface {
             .onTapGesture {
                 hideKeyboard()
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        viewModel.upload()
+                    } label: {
+                        Text("업로드")
+                            .foregroundColor(.primary)
+                    }
+                }
+            }
         }
     }
     

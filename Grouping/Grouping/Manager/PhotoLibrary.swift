@@ -105,9 +105,12 @@ final class PhotoLibrary {
         var inputCount: Int = 0
         var datas: [Data] = []
         
+        let options = PHContentEditingInputRequestOptions()
+        options.isNetworkAccessAllowed = true
+        
         for asset in assets {
             inputCount += 1
-            asset.requestContentEditingInput (with: PHContentEditingInputRequestOptions()) { input, info in
+            asset.requestContentEditingInput (with: options) { input, info in
                 if let input = input, let url = input.fullSizeImageURL {
                     do {
                         let data = try Data(contentsOf: url)
@@ -122,6 +125,8 @@ final class PhotoLibrary {
                     } catch {
                         print(error.localizedDescription)
                     }
+                } else {
+                    fatalError()
                 }
             }
         }
