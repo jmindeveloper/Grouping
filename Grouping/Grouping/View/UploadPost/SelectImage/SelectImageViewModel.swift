@@ -9,13 +9,20 @@ import Foundation
 import Combine
 import Photos
 
+extension PHAsset: Identifiable { }
+
 protocol SelectImageViewModelInterface: ObservableObject {
     var images: [String] { get set }
     var assets: [PHAsset] { get set }
-    var selectedImageIndexes: [(index: Int, number: Int)] { get set }
+    var selectedImageIndexes: [(index: Int, number: Int, asset: PHAsset)] { get set }
+    var collections: [PHAssetCollection] { get }
+    var currentCollectionTitle: String { get }
     
     func select(index: Int)
+    func select(asset: PHAsset)
     func getSelectImageNumbers(index: Int) -> Int?
+    func getSelectImageNumbers(asset: PHAsset) -> Int?
+    func selectCollection(_ index: Int)
 }
 
 final class SelectImageViewModel: SelectImageViewModelInterface {
@@ -31,7 +38,7 @@ final class SelectImageViewModel: SelectImageViewModelInterface {
     ]
     
     @Published var assets: [PHAsset] = []
-    @Published var selectedImageIndexes: [(index: Int, number: Int)] = [] {
+    @Published var selectedImageIndexes: [(index: Int, number: Int, asset: PHAsset)] = [] {
         didSet {
             if selectedImageIndexes.count > 5 {
                 selectedImageIndexes.removeLast()
@@ -39,6 +46,15 @@ final class SelectImageViewModel: SelectImageViewModelInterface {
             }
         }
     }
+    
+    var collections: [PHAssetCollection] {
+        library.collections
+    }
+    
+    var currentCollectionTitle: String {
+        library.currentCollection.localizedTitle ?? ""
+    }
+    
     private var lastNumber: Int = 0
     
     private var subscriptions = Set<AnyCancellable>()
@@ -55,6 +71,7 @@ final class SelectImageViewModel: SelectImageViewModelInterface {
         library.getAssetsPublisher
             .sink { [weak self] result in
                 self?.assets = result?.assets ?? []
+                self?.objectWillChange.send()
             }.store(in: &subscriptions)
     }
     
@@ -64,17 +81,33 @@ final class SelectImageViewModel: SelectImageViewModelInterface {
         }
         if isContains {
             // TODO: - 제거
-            deSelect(index: index)
+            deSelect(assetIndex: index)
         } else {
             // TODO: - 추가
-            selectedImageIndexes.append((index, lastNumber + 1))
+            selectedImageIndexes.append((index, lastNumber + 1, assets[index]))
             lastNumber += 1
         }
     }
     
-    private func deSelect(index: Int) {
+    func select(asset: PHAsset) {
+        let index = selectedImageIndexes.firstIndex {
+            $0.asset == asset
+        }
+        
+        if let index = index {
+            // TODO: - 제거
+            deSelect(selectedImageIndex: index)
+        } else {
+            // TODO: - 추가
+            let index = assets.firstIndex(of: asset) ?? -1
+            selectedImageIndexes.append((index, lastNumber + 1, assets[index]))
+            lastNumber += 1
+        }
+    }
+    
+    private func deSelect(assetIndex: Int) {
         let arrayIndex = selectedImageIndexes.firstIndex {
-            $0.index == index
+            $0.index == assetIndex
         }
         guard let arrayIndex = arrayIndex else {
             return
@@ -90,9 +123,35 @@ final class SelectImageViewModel: SelectImageViewModelInterface {
         
         selectedImageIndexes.replaceSubrange(range, with: numberChangeImages)
         selectedImageIndexes.removeAll {
-            $0.index == index
+            $0.index == assetIndex
         }
         lastNumber -= 1
+    }
+    
+    private func deSelect(selectedImageIndex: Int) {
+        let range: ClosedRange<Int> = selectedImageIndex...selectedImageIndexes.count - 1
+        let numberChangeImages = selectedImageIndexes[range]
+            .map {
+                var v = $0
+                v.number -= 1
+                return v
+            }
+        
+        selectedImageIndexes.replaceSubrange(range, with: numberChangeImages)
+        selectedImageIndexes.remove(at: selectedImageIndex)
+        lastNumber -= 1
+    }
+    
+    func getSelectImageNumbers(asset: PHAsset) -> Int? {
+        let index = selectedImageIndexes.firstIndex {
+            asset == $0.asset
+        }
+        
+        if index == nil {
+            return nil
+        } else {
+            return selectedImageIndexes[index!].number
+        }
     }
     
     func getSelectImageNumbers(index: Int) -> Int? {
@@ -105,5 +164,16 @@ final class SelectImageViewModel: SelectImageViewModelInterface {
         } else {
             return selectedImageIndexes[index!].number
         }
+    }
+    
+    func selectCollection(_ index: Int) {
+        assets.removeAll()
+        resetSelectedAsset()
+        library.currentCollection = collections[index]
+    }
+    
+    private func resetSelectedAsset() {
+        selectedImageIndexes.removeAll()
+        lastNumber = 0
     }
 }

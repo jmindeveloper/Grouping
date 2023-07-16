@@ -15,8 +15,12 @@ final class PhotoLibrary {
     private let phothAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
     
     private var assets: FetchAssetResult?
-    private var collections: [PHAssetCollection] = []
-    private var currentCollection: PHAssetCollection
+    var collections: [PHAssetCollection] = []
+    var currentCollection: PHAssetCollection {
+        didSet {
+            assets = getAssets(with: currentCollection, isDescendingOrderOfDate: false)
+        }
+    }
     
     let getAssetsPublisher = CurrentValueSubject<FetchAssetResult?, Never>(nil)
     
@@ -27,7 +31,7 @@ final class PhotoLibrary {
             print("collectionName --> ", $0.localizedTitle)
         }
         self.currentCollection = collections.filter {
-            $0.localizedTitle == "Recents"
+            $0.localizedTitle == "최근 항목"
         }.first ?? PHAssetCollection()
         
         self.assets = getAssets(with: currentCollection, isDescendingOrderOfDate: false)

@@ -31,21 +31,9 @@ struct SelectImageView<VM>: View where VM: SelectImageViewModelInterface {
             VStack {
                 GeometryReader { proxy in
                     ZStack {
-                        ScrollView {
-                            LazyVGrid(columns: columns, alignment: .leading, spacing: 2, pinnedViews: .sectionFooters) {
-                                ForEach(0..<viewModel.assets.count, id: \.self) { index in
-                                    SelectedImage(asset: viewModel.assets[index])
-                                        .select(index: viewModel.getSelectImageNumbers(index: index))
-                                        .frame(width: (Constant.screenWidth - 4) / 3, height: (Constant.screenWidth - 4) / 3)
-                                        .contentShape(Rectangle())
-                                        .onTapGesture {
-                                            viewModel.select(index: index)
-                                        }
-                                        .tag(index)
-                                }
-                            }
-                        }
-                        .padding(.top, 37)
+                        
+                        albumGrid()
+                            .padding(.top, 37)
                         
                         VStack {
                             selectAlbumCollectionView()
@@ -77,7 +65,7 @@ struct SelectImageView<VM>: View where VM: SelectImageViewModelInterface {
         GeometryReader { proxy in
             VStack(spacing: 0) {
                 HStack {
-                    Text("최근 항목 ▾")
+                    Text("\(viewModel.currentCollectionTitle) ▾")
                         .padding(.leading, 16)
                         .frame(height: 34)
                         .onTapGesture {
@@ -90,11 +78,49 @@ struct SelectImageView<VM>: View where VM: SelectImageViewModelInterface {
                 }
                 .background(Color(uc: .systemGray6).frame(height: 34))
                 
-                Rectangle()
-                    .fill(.red)
-                    .frame(height: showAlbumCollection ? proxy.size.height - 34 + (Constant.safeAreaInsets?.bottom ?? 0) : 0)
+                albumCollectionList()
+                    .frame(height: showAlbumCollection ? 300 : 0)
             }
         }
+    }
+    
+    @ViewBuilder
+    private func albumGrid() -> some View {
+        ScrollView {
+            LazyVGrid(columns: columns, alignment: .leading, spacing: 2, pinnedViews: .sectionFooters) {
+                ForEach(viewModel.assets) { asset in
+                    SelectedImage(asset: asset)
+                        .select(index: viewModel.getSelectImageNumbers(asset: asset))
+                        .frame(width: (Constant.screenWidth - 4) / 3, height: (Constant.screenWidth - 4) / 3)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            viewModel.select(asset: asset)
+                        }
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func albumCollectionList() -> some View {
+        ScrollView {
+            VStack {
+                ForEach(0..<viewModel.collections.count, id: \.self) { index in
+                    VStack {
+                        Text("\(viewModel.collections[index].localizedTitle ?? "")")
+                            .background(
+                                Color.primary.colorInvert().frame(width: Constant.screenWidth)
+                            )
+                            .onTapGesture {
+                                viewModel.selectCollection(index)
+                                showAlbumCollection = false
+                            }
+                        Divider()
+                    }
+                }
+            }
+        }
+        .background(Color.primary.colorInvert())
     }
 }
 
