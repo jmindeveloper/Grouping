@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct PostContentWriteView<VM>: View where VM: PostUploadViewModelInterface {
-    @State var contentText: String = ""
     @EnvironmentObject var viewModel: VM
     
     var body: some View {
@@ -39,7 +38,7 @@ struct PostContentWriteView<VM>: View where VM: PostUploadViewModelInterface {
     @ViewBuilder
     private func contentTextView() -> some View {
         ZStack {
-            TextView(text: $contentText, placeHolder: "입력.....")
+            TextView(text: $viewModel.contentText, placeHolder: "입력.....")
                 .font(.systemFont(ofSize: 20))
                 .border(Color.primary, width: 1)
             
@@ -49,7 +48,7 @@ struct PostContentWriteView<VM>: View where VM: PostUploadViewModelInterface {
                 HStack {
                     Spacer()
                     
-                    Text("\(contentText.count)/500")
+                    Text("\(viewModel.contentText.count)/500")
                 }
                 .padding(.trailing, 10)
             }

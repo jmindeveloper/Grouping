@@ -21,10 +21,15 @@ struct TextView: UIViewRepresentable {
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
         
-        if let placeHolder = placeHolder {
-            textView.text = placeHolder
-            textView.textColor = .systemGray6
+        if text.isEmpty {
+            if let placeHolder = placeHolder {
+                textView.text = placeHolder
+                textView.textColor = .systemGray6
+            } else {
+                textView.textColor = .label
+            }
         } else {
+            textView.text = text
             textView.textColor = .label
         }
         
