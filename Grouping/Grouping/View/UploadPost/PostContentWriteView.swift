@@ -9,23 +9,34 @@ import SwiftUI
 
 struct PostContentWriteView<VM>: View where VM: PostUploadViewModelInterface {
     @EnvironmentObject var viewModel: VM
+    @State var tagFieldText: String = ""
     
     var body: some View {
         ScrollView {
             VStack {
                 contentTextView()
                     .frame(height: 300)
-                    .padding(.horizontal, 15)
+                    .padding(.horizontal, 16)
                     .padding(.top, 6)
                 
                 selectGroupButton()
                     .padding(.top, 10)
+                    .padding(.horizontal, 16)
                 
                 Spacer()
                 
-                TagView(tag: "일본여행") {
-                    print("tap!!!")
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(viewModel.tags, id: \.self) { tag in
+                            TagView(tag: tag) {
+                                viewModel.removeTag(tag)
+                            }
+                        }
+                    }
                 }
+                
+                appendTagView()
+                    .padding(.horizontal, 16)
                 
             }
             .contentShape(Rectangle())
@@ -56,13 +67,13 @@ struct PostContentWriteView<VM>: View where VM: PostUploadViewModelInterface {
         }
     }
     
+    @ViewBuilder
     private func selectGroupButton() -> some View {
         Button {
             
         } label: {
             Text("그룹선택")
                 .foregroundColor(.primary)
-                .padding(.horizontal, 16)
                 .frame(width: Constant.screenWidth - 32, height: 56)
                 .background(
                     RoundedRectangle(cornerRadius: 8)
@@ -71,10 +82,27 @@ struct PostContentWriteView<VM>: View where VM: PostUploadViewModelInterface {
         }
         .buttonStyle(.plain)
     }
+    
+    @ViewBuilder
+    private func appendTagView() -> some View {
+        HStack {
+            TextField("tag", text: $tagFieldText)
+                .textFieldStyle(.roundedBorder)
+            
+            Button {
+                viewModel.appendTag(tagFieldText)
+                tagFieldText.removeAll()
+            } label: {
+                Text("저장")
+                    .foregroundColor(.primary)
+            }
+        }
+    }
 }
 
 struct PostContentWriteView_Previews: PreviewProvider {
     static var previews: some View {
         PostContentWriteView<PostUploadViewModel>()
+            .environmentObject(PostUploadViewModel())
     }
 }
