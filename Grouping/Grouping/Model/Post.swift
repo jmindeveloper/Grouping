@@ -43,7 +43,7 @@ let dummyPostData: [Post] = [
     Post(
         id: UUID().uuidString,
         createUserId: "4721",
-        images: ["test_image_1"],
+        images: ["test_image_1", "test_image_3", "test_image_2", "test_image_4"],
         content: "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요",
         createdAt: Date(),
         heartCount: 3,
@@ -54,7 +54,7 @@ let dummyPostData: [Post] = [
     Post(
         id: UUID().uuidString,
         createUserId: "2356",
-        images: ["test_image_2"],
+        images: ["test_image_2", "test_image_1"],
         content: "안녕하세요은ㅇ라ㅣㅁㄴ;어라ㅣㄴ어라ㅣㅓㄴ아ㅣ;혼아ㅣ;멀;ㅏㅣㄴ어ㅣ;ㅁ런아ㅣㅓㅣㅏ처티프쿠프, ㅜㅁ;나ㅣ얼댜",
         createdAt: Date(),
         heartCount: 3,
@@ -65,7 +65,7 @@ let dummyPostData: [Post] = [
     Post(
         id: UUID().uuidString,
         createUserId: "1438",
-        images: ["test_image_3"],
+        images: ["test_image_3", "test_image_5"],
         content: "안녕하세요3ㄷ2324356ㅁㄷㅇㄹㅎㅁ아ㅣ;ㅓ리'ㅏ;ㅁㄴ어라ㅣ",
         createdAt: Date(),
         heartCount: 3,
@@ -76,7 +76,7 @@ let dummyPostData: [Post] = [
     Post(
         id: UUID().uuidString,
         createUserId: "34352",
-        images: ["test_image_4"],
+        images: ["test_image_4", "test_image_2"],
         content: "안녕하세요",
         createdAt: Date(),
         heartCount: 3,
@@ -87,7 +87,7 @@ let dummyPostData: [Post] = [
     Post(
         id: UUID().uuidString,
         createUserId: "6533",
-        images: ["test_image_5"],
+        images: ["test_image_5", "test_image_6"],
         content: "안녕하세요",
         createdAt: Date(),
         heartCount: 3,
@@ -98,7 +98,7 @@ let dummyPostData: [Post] = [
     Post(
         id: UUID().uuidString,
         createUserId: "254753",
-        images: ["test_image_6"],
+        images: ["test_image_6", "test_image_3"],
         content: "안녕하세요",
         createdAt: Date(),
         heartCount: 3,

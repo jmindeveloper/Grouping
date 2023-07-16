@@ -17,15 +17,22 @@ struct PostView: View {
                 .padding(.horizontal, 16)
             
             // post image main
-            Image(post.images.first!)
-                .resizable()
-                .scaledToFill()
-                .frame(width: Constant.screenWidth, height: Constant.screenWidth * 1.1)
-                .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
-                .shadow(radius: 5, x: 0, y: 5)
-                .onTapGesture(count: 2) {
-                    print("doubleTap!!!")
+            TabView {
+                ForEach(post.images, id: \.self) { imageName in
+                    Image(imageName)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: Constant.screenWidth, height: Constant.screenWidth * 1.1)
+                        .clipped()
                 }
+            }
+            .tabViewStyle(.page)
+            .frame(width: Constant.screenWidth, height: Constant.screenWidth * 1.1)
+            .cornerRadius(20, corners: [.bottomLeft, .bottomRight])
+            .shadow(radius: 5, x: 0, y: 5)
+            .onTapGesture(count: 2) {
+                print("doubleTap!!!")
+            }
             
             postInteractionView()
                 .padding(.horizontal, 16)
