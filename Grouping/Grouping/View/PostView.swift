@@ -39,6 +39,19 @@ struct PostView: View {
                 .padding(.vertical, 6)
                 .padding(.bottom, 2)
             
+            if !post.tags.isEmpty {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(post.tags, id: \.self) { tag in
+                            TagView(tag: tag, showXMark: false) {
+                                print("태그 검색 이동!!!!!!!!!")
+                            }
+                        }
+                    }
+                }
+                .padding(.horizontal, 16)
+            }
+            
             HStack {
                 Text(post.content)
                     .multilineTextAlignment(.leading)

@@ -49,7 +49,7 @@ let dummyPostData: [Post] = [
         heartCount: 3,
         heartUsers: ["3939, 5322, 0532"],
         commentCount: 0,
-        tags: [""]
+        tags: ["배고프다", "힘들다", "어렵다"]
     ),
     Post(
         id: UUID().uuidString,
@@ -60,7 +60,7 @@ let dummyPostData: [Post] = [
         heartCount: 3,
         heartUsers: ["3939, 5322, 0532"],
         commentCount: 0,
-        tags: [""]
+        tags: ["배고프다", "힘들다", "어렵다", "배고프다", "힘들다", "어렵다"]
     ),
     Post(
         id: UUID().uuidString,
@@ -71,7 +71,7 @@ let dummyPostData: [Post] = [
         heartCount: 3,
         heartUsers: ["3939, 5322, 0532"],
         commentCount: 0,
-        tags: [""]
+        tags: ["배고프다", "힘들다", "어렵다", "배고프다", "힘들다", "어렵다"]
     ),
     Post(
         id: UUID().uuidString,
@@ -82,7 +82,7 @@ let dummyPostData: [Post] = [
         heartCount: 3,
         heartUsers: ["3939, 5322, 0532"],
         commentCount: 0,
-        tags: [""]
+        tags: []
     ),
     Post(
         id: UUID().uuidString,
@@ -93,7 +93,7 @@ let dummyPostData: [Post] = [
         heartCount: 3,
         heartUsers: ["3939, 5322, 0532"],
         commentCount: 0,
-        tags: [""]
+        tags: ["배고프다", "힘들다", "어렵다", "힘들다", "어렵다"]
     ),
     Post(
         id: UUID().uuidString,
@@ -104,6 +104,6 @@ let dummyPostData: [Post] = [
         heartCount: 3,
         heartUsers: ["3939, 5322, 0532"],
         commentCount: 0,
-        tags: [""]
+        tags: []
     )
 ]

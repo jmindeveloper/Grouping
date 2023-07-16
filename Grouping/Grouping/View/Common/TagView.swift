@@ -9,25 +9,28 @@ import SwiftUI
 
 struct TagView: View {
     var tag: String
-    var tapAction: (() -> Void)
+    var showXMark: Bool = true
+    var tapAction: (() -> Void)? = nil
     
     var body: some View {
         HStack(spacing: 0) {
             Text(tag)
-                .foregroundColor(.primary)
+                .foregroundColor(.white)
                 .font(.system(size: 17, weight: .semibold))
             
-            Image(systemName: "xmark")
-                .resizable()
-                .frame(width: 8, height: 8)
-                .foregroundColor(.primary)
-                .padding(.leading, 5)
+            if showXMark {
+                Image(systemName: "xmark")
+                    .resizable()
+                    .frame(width: 8, height: 8)
+                    .foregroundColor(.white)
+                    .padding(.leading, 5)
+            }
         }
         .padding(.vertical, 3)
         .padding(.horizontal, 7)
         .background(Capsule().fill(Color(uc: .systemGreen)))
         .onTapGesture {
-            tapAction()
+            tapAction?()
         }
     }
 }
