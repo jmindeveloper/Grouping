@@ -11,21 +11,18 @@ struct MainTabView: View {
     @State private var selection = 0
     @State private var previousTab: Int = 0
     
+    @StateObject private var currentUserProfileViewModel = ProfileViewModel()
+    
     var body: some View {
         TabView(selection: $selection) {
-            ScrollView {
-                ForEach(dummyPostData, id: \.self) { post in
-                    PostView(post: post)
-                        .padding(.vertical, 4)
+            PostFeedView(viewModel: PostFeedViewModel())
+                .onAppear {
+                    UITabBar.showTabBar(animated: true)
                 }
-            }
-            .onAppear {
-                UITabBar.showTabBar(animated: true)
-            }
-            .tabItem {
-                Image(systemName: "house")
-            }
-            .tag(0)
+                .tabItem {
+                    Image(systemName: "house")
+                }
+                .tag(0)
             
             Text("Map")
                 .onAppear {
@@ -52,7 +49,9 @@ struct MainTabView: View {
                 }
                 .tag(3)
             
-            Text("Profile")
+            NavigationView {
+                ProfileView(viewModel: currentUserProfileViewModel)
+            }
                 .onAppear {
                     UITabBar.showTabBar(animated: true)
                 }
