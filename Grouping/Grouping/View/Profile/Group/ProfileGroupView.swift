@@ -14,7 +14,7 @@ struct ProfileGroupView: View {
     var body: some View {
         Text("Group")
             .fullScreenCover(isPresented: $createGroup) {
-                CreateGroupView()
+                CreateGroupView(viewModel: CreateGroupViewModel())
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
