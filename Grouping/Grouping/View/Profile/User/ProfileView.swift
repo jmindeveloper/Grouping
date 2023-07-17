@@ -24,6 +24,15 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
         }
         .navigationTitle(viewModel.user?.nickName ?? "Profile")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink {
+                    ProfileGroupView()
+                } label: {
+                    Text("Group")
+                }
+            }
+        }
     }
     
     @ViewBuilder
