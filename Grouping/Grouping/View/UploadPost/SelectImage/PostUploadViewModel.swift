@@ -200,9 +200,11 @@ final class PostUploadViewModel: PostUploadViewModelInterface {
                 images: data,
                 content: self.contentText,
                 location: nil,
-                tags: tags) { post in
-                    
-                }
+                tags: tags,
+                groupId: self.selectedGroup?.groupId
+            ) { post in
+                
+            }
         }
     }
 }

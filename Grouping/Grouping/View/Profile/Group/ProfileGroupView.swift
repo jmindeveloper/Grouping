@@ -21,6 +21,9 @@ struct ProfileGroupView<VM>: View where VM: ProfileViewModelInterface {
             VStack {
                 ForEach(viewModel.groups, id: \.groupId) { group in
                     Text(group.groupName)
+                        .onTapGesture {
+                            groupSelectAction?(group)
+                        }
                 }
             }
         }
