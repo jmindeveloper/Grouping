@@ -7,22 +7,32 @@
 
 import SwiftUI
 
-struct ProfileGroupView: View {
+struct ProfileGroupView<VM>: View where VM: ProfileViewModelInterface {
     @State var createGroup: Bool = false
+    @EnvironmentObject var viewModel: VM
     
     var body: some View {
-        Text("Group")
-            .fullScreenCover(isPresented: $createGroup) {
-                CreateGroupView(viewModel: CreateGroupViewModel())
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        createGroup = true
-                    } label: {
-                        Image(systemName: "plus")
-                    }
+        ScrollView {
+            VStack {
+                ForEach(viewModel.groups, id: \.groupId) { group in
+                    Text(group.groupName)
                 }
             }
+        }
+        .fullScreenCover(isPresented: $createGroup) {
+            CreateGroupView(viewModel: CreateGroupViewModel())
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    createGroup = true
+                } label: {
+                    Image(systemName: "plus")
+                }
+            }
+        }
+        .onAppear {
+            viewModel.getUserGroups()
+        }
     }
 }

@@ -50,15 +50,16 @@ struct MainTabView: View {
                 .tag(3)
             
             NavigationView {
-                ProfileView(viewModel: currentUserProfileViewModel)
+                ProfileView<ProfileViewModel>()
             }
-                .onAppear {
-                    UITabBar.showTabBar(animated: true)
-                }
-                .tabItem {
-                    Image(systemName: "person")
-                }
-                .tag(4)
+            .environmentObject(currentUserProfileViewModel)
+            .onAppear {
+                UITabBar.showTabBar(animated: true)
+            }
+            .tabItem {
+                Image(systemName: "person")
+            }
+            .tag(4)
         }
         .accentColor(.primary)
         .onChange(of: selection) { index in

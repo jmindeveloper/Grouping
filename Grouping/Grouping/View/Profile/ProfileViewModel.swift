@@ -11,12 +11,17 @@ import Combine
 protocol ProfileViewModelInterface: ObservableObject {
     var user: User? { get set }
     var posts: [Post] { get set }
+    var groups: [Group] { get set }
+    
+    func getUserGroups()
 }
 
 final class ProfileViewModel: ProfileViewModelInterface {
     private var fetchPostManager: FetchPostManagerInterface?
+    private var fetchGroupManager: FetchGroupManagerInterface?
     @Published var user: User?
     @Published var posts: [Post] = []
+    @Published var groups: [Group] = []
     private var userIsMe: Bool
     
     private var subscriptions = Set<AnyCancellable>()
@@ -25,6 +30,7 @@ final class ProfileViewModel: ProfileViewModelInterface {
         userIsMe = true
         if let user = UserAuthManager.shared.user {
             self.fetchPostManager = FetchPostManager(user: user)
+            self.fetchGroupManager = FetchGroupManager(user: user)
             self.user = user
             getUserPosts()
         }
@@ -34,6 +40,7 @@ final class ProfileViewModel: ProfileViewModelInterface {
     init(user: User) {
         userIsMe = false
         self.fetchPostManager = FetchPostManager(user: user)
+        self.fetchGroupManager = FetchGroupManager(user: user)
         self.user = user
         getUserPosts()
         binding()
@@ -45,6 +52,7 @@ final class ProfileViewModel: ProfileViewModelInterface {
                 if self?.userIsMe == true {
                     if let user = UserAuthManager.shared.user {
                         self?.fetchPostManager = FetchPostManager(user: user)
+                        self?.fetchGroupManager = FetchGroupManager(user: user)
                         self?.user = user
                         self?.getUserPosts()
                     }
@@ -56,6 +64,13 @@ final class ProfileViewModel: ProfileViewModelInterface {
         fetchPostManager?.getUserPosts { [weak self] posts in
             self?.posts = posts
             print("getPost --> ", posts.count)
+        }
+    }
+    
+    func getUserGroups() {
+        fetchGroupManager?.getUserGroups { [weak self] groups in
+            self?.groups = groups
+            print(groups)
         }
     }
 }
