@@ -64,7 +64,7 @@ final class FetchPostManager: FetchPostManagerInterface {
                 .collect()
                 .map { posts in
                     let posts = posts.compactMap { $0 }
-                    return posts.sorted { $0.createdAt < $1.createdAt }
+                    return posts.sorted { $0.createdAt > $1.createdAt }
                 }
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] posts in

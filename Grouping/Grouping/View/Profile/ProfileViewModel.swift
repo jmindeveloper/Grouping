@@ -54,7 +54,7 @@ final class ProfileViewModel: ProfileViewModelInterface {
     
     private func getUserPosts() {
         fetchPostManager?.getUserPosts { [weak self] posts in
-            self?.posts = posts.reversed()
+            self?.posts = posts
             print("getPost --> ", posts.count)
         }
     }
