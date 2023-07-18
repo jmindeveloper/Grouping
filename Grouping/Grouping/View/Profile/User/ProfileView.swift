@@ -9,7 +9,8 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
-    @ObservedObject var viewModel: VM
+    @EnvironmentObject var viewModel: VM
+    
     var columns = Array(
         repeating: GridItem(
             .flexible(),
@@ -27,7 +28,7 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
-                    ProfileGroupView()
+                    ProfileGroupView<ProfileViewModel>()
                 } label: {
                     Text("Group")
                 }

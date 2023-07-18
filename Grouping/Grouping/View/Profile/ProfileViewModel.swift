@@ -11,12 +11,17 @@ import Combine
 protocol ProfileViewModelInterface: ObservableObject {
     var user: User? { get set }
     var posts: [Post] { get set }
+    var groups: [Group] { get set }
+    
+    func getUserGroups()
 }
 
 final class ProfileViewModel: ProfileViewModelInterface {
-    private var userPostManager: UserPostManager?
+    private var fetchPostManager: FetchPostManagerInterface?
+    private var fetchGroupManager: FetchGroupManagerInterface?
     @Published var user: User?
     @Published var posts: [Post] = []
+    @Published var groups: [Group] = []
     private var userIsMe: Bool
     
     private var subscriptions = Set<AnyCancellable>()
@@ -24,7 +29,8 @@ final class ProfileViewModel: ProfileViewModelInterface {
     init() {
         userIsMe = true
         if let user = UserAuthManager.shared.user {
-            self.userPostManager = UserPostManager(user: user)
+            self.fetchPostManager = FetchPostManager(user: user)
+            self.fetchGroupManager = FetchGroupManager(user: user)
             self.user = user
             getUserPosts()
         }
@@ -33,7 +39,8 @@ final class ProfileViewModel: ProfileViewModelInterface {
     
     init(user: User) {
         userIsMe = false
-        self.userPostManager = UserPostManager(user: user)
+        self.fetchPostManager = FetchPostManager(user: user)
+        self.fetchGroupManager = FetchGroupManager(user: user)
         self.user = user
         getUserPosts()
         binding()
@@ -44,7 +51,8 @@ final class ProfileViewModel: ProfileViewModelInterface {
             .sink { [weak self] _ in
                 if self?.userIsMe == true {
                     if let user = UserAuthManager.shared.user {
-                        self?.userPostManager = UserPostManager(user: user)
+                        self?.fetchPostManager = FetchPostManager(user: user)
+                        self?.fetchGroupManager = FetchGroupManager(user: user)
                         self?.user = user
                         self?.getUserPosts()
                     }
@@ -53,9 +61,16 @@ final class ProfileViewModel: ProfileViewModelInterface {
     }
     
     private func getUserPosts() {
-        userPostManager?.getUserPosts { [weak self] posts in
-            self?.posts = posts.reversed()
+        fetchPostManager?.getUserPosts { [weak self] posts in
+            self?.posts = posts
             print("getPost --> ", posts.count)
+        }
+    }
+    
+    func getUserGroups() {
+        fetchGroupManager?.getUserGroups { [weak self] groups in
+            self?.groups = groups
+            print(groups)
         }
     }
 }

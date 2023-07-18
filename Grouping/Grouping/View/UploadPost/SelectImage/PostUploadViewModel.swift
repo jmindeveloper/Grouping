@@ -18,7 +18,7 @@ protocol PostUploadViewModelInterface: ObservableObject {
     var currentCollectionTitle: String { get }
     var tags: [String] { get set }
     var contentText: String { get set }
-    var selectedGroupId: String? { get set }
+    var selectedGroup: Group? { get set }
     
     func select(index: Int)
     func select(asset: PHAsset)
@@ -36,7 +36,7 @@ final class PostUploadViewModel: PostUploadViewModelInterface {
     
     @Published var tags: [String] = []
     @Published var contentText: String = ""
-    @Published var selectedGroupId: String? = nil
+    @Published var selectedGroup: Group? = nil
     @Published var assets: [PHAsset] = []
     @Published var selectedImageIndexes: [(index: Int, number: Int, asset: PHAsset)] = [] {
         didSet {
@@ -200,9 +200,11 @@ final class PostUploadViewModel: PostUploadViewModelInterface {
                 images: data,
                 content: self.contentText,
                 location: nil,
-                tags: tags) { post in
-                    
-                }
+                tags: tags,
+                groupId: self.selectedGroup?.groupId
+            ) { post in
+                
+            }
         }
     }
 }

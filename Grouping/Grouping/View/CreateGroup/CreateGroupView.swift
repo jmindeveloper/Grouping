@@ -10,6 +10,7 @@ import SwiftUI
 struct CreateGroupView<VM>: View where VM: CreateGroupViewModelInterface {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: VM
+    @State var showAlbum: Bool = false
     
     var body: some View {
         NavigationView {
@@ -26,7 +27,7 @@ struct CreateGroupView<VM>: View where VM: CreateGroupViewModelInterface {
                         .padding(.top, 6)
                     
                     Button {
-                        
+                        showAlbum = true
                     } label: {
                         Text("이미지 선택")
                             .frame(width: Constant.screenWidth - 32, height: 56)
@@ -39,6 +40,9 @@ struct CreateGroupView<VM>: View where VM: CreateGroupViewModelInterface {
             }
             .navigationTitle("그룹 생성")
             .navigationBarTitleDisplayMode(.inline)
+            .sheet(isPresented: $showAlbum) {
+                
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {

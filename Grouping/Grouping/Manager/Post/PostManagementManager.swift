@@ -10,8 +10,8 @@ import FirebaseFirestore
 import FirebaseStorage
 
 protocol PostManagementManagerInterface {
-    func upload(images: [Data], content: String, location: Location?, tags: [String], completion: ((_ post: Post) -> Void)?)
-    func update(post: Post, content: String, location: Location?, tags: [String], completion: ((_ post: Post) -> Void)?)
+    func upload(images: [Data], content: String, location: Location?, tags: [String], groupId: String?, completion: ((_ post: Post) -> Void)?)
+    func update(post: Post, content: String, location: Location?, tags: [String],  groupId: String?, completion: ((_ post: Post) -> Void)?)
     func delete(post: Post, completion: ((_ isSuccess: Bool) -> Void)?)
 }
 
@@ -25,6 +25,7 @@ final class PostManagementManager: PostManagementManagerInterface {
         content: String,
         location: Location?,
         tags: [String],
+        groupId: String?,
         completion: ((_ post: Post) -> Void)? = nil
     ) {
         guard let user = UserAuthManager.shared.user else {
@@ -46,7 +47,8 @@ final class PostManagementManager: PostManagementManagerInterface {
                 heartCount: 0,
                 heartUsers: [],
                 commentCount: 0,
-                tags: tags
+                tags: tags,
+                groupId: groupId
             )
             
             do {
@@ -66,7 +68,20 @@ final class PostManagementManager: PostManagementManagerInterface {
                                     print(error!.localizedDescription)
                                     return
                                 }
-                                completion?(post)
+                                if groupId == nil {
+                                    completion?(post)
+                                } else {
+                                    Firestore.firestore()
+                                        .collection(FBFieldName.group)
+                                        .document(groupId!)
+                                        .updateData(["posts": FieldValue.arrayUnion([post.id])]) { error in
+                                            guard error == nil else {
+                                                print(error!.localizedDescription)
+                                                return
+                                            }
+                                            completion?(post)
+                                        }
+                                }
                             }
                     }
             } catch {
@@ -80,6 +95,7 @@ final class PostManagementManager: PostManagementManagerInterface {
         content: String,
         location: Location?,
         tags: [String],
+        groupId: String?,
         completion: ((_ post: Post) -> Void)? = nil
     ) {
         guard let user = UserAuthManager.shared.user,
@@ -98,7 +114,8 @@ final class PostManagementManager: PostManagementManagerInterface {
             heartCount: post.heartCount,
             heartUsers: post.heartUsers,
             commentCount: post.commentCount,
-            tags: tags
+            tags: tags,
+            groupId: groupId ?? post.groupId
         )
         
         do {
