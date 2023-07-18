@@ -10,7 +10,6 @@ import SwiftUI
 struct ProfileGroupView: View {
     @State var createGroup: Bool = false
     
-    
     var body: some View {
         Text("Group")
             .fullScreenCover(isPresented: $createGroup) {

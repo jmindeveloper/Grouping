@@ -1,5 +1,5 @@
 //
-//  UserPostManager.swift
+//  FetchPostManager.swift
 //  Grouping
 //
 //  Created by J_Min on 2023/07/16.
@@ -9,13 +9,13 @@ import Foundation
 import Combine
 import FirebaseFirestore
 
-protocol UserPostManagerInterface {
+protocol FetchPostManagerInterface {
     init(user: User)
     
     func getUserPosts(completion: (([Post]) -> Void)?)
 }
 
-final class UserPostManager: UserPostManagerInterface {
+final class FetchPostManager: FetchPostManagerInterface {
     private let user: User
     private let postDB = Firestore.firestore().collection(FBFieldName.post)
     private let userPostDB: DocumentReference
