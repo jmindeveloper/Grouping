@@ -68,7 +68,20 @@ final class PostManagementManager: PostManagementManagerInterface {
                                     print(error!.localizedDescription)
                                     return
                                 }
-                                completion?(post)
+                                if groupId == nil {
+                                    completion?(post)
+                                } else {
+                                    Firestore.firestore()
+                                        .collection(FBFieldName.group)
+                                        .document(groupId!)
+                                        .updateData(["posts": FieldValue.arrayUnion([post.id])]) { error in
+                                            guard error == nil else {
+                                                print(error!.localizedDescription)
+                                                return
+                                            }
+                                            completion?(post)
+                                        }
+                                }
                             }
                     }
             } catch {
