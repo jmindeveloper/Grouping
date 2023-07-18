@@ -10,6 +10,11 @@ import SwiftUI
 struct ProfileGroupView<VM>: View where VM: ProfileViewModelInterface {
     @State var createGroup: Bool = false
     @EnvironmentObject var viewModel: VM
+    private var groupSelectAction: ((Group) -> Void)?
+    
+    init(groupSelectAction: ((Group) -> Void)? = nil) {
+        self.groupSelectAction = groupSelectAction
+    }
     
     var body: some View {
         ScrollView {

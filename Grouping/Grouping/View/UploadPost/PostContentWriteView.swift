@@ -10,6 +10,7 @@ import SwiftUI
 struct PostContentWriteView<VM>: View where VM: PostUploadViewModelInterface {
     @EnvironmentObject var viewModel: VM
     @State var tagFieldText: String = ""
+    @State var showGroupSelectView: Bool = false
     
     var body: some View {
         ScrollView {
@@ -53,6 +54,12 @@ struct PostContentWriteView<VM>: View where VM: PostUploadViewModelInterface {
                     }
                 }
             }
+            .sheet(isPresented: $showGroupSelectView) {
+                ProfileGroupView<ProfileViewModel> { group in
+                    
+                }
+                .environmentObject(ProfileViewModel())
+            }
         }
     }
     
@@ -80,7 +87,7 @@ struct PostContentWriteView<VM>: View where VM: PostUploadViewModelInterface {
     @ViewBuilder
     private func selectGroupButton() -> some View {
         Button {
-            
+            showGroupSelectView = true
         } label: {
             Text("그룹선택")
                 .foregroundColor(.primary)
