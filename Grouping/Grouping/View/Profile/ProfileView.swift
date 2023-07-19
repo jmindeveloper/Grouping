@@ -55,14 +55,15 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
                 Spacer()
             }
             
-            Button {
-                
+            NavigationLink {
+                ProfileEditView()
             } label: {
                 Text("프로필 편집")
                     .foregroundColor(.white)
+                    .frame(width: Constant.screenWidth - 32, height: 35)
+                    .background(RoundedRectangle(cornerRadius: 14).fill(Color(uc: .systemGray2)))
             }
-            .frame(width: Constant.screenWidth - 32, height: 35)
-            .background(RoundedRectangle(cornerRadius: 14).fill(Color(uc: .systemGray2)))
+            .contentShape(Rectangle())
             .padding(.top)
             
             ValueChangeToggleView(toggle: $isShowPost, lineColor: .red, leftTitle: "게시물", rightTitle: "그룹")
