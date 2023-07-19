@@ -34,7 +34,6 @@
 		0E6CC3502A5ACD8100BE97AD /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6CC33D2A5AAA7000BE97AD /* PostView.swift */; };
 		0E8DBF1F2A64112F00D374DF /* FetchPostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DBF1E2A64112F00D374DF /* FetchPostManager.swift */; };
 		0E8DBF212A64138B00D374DF /* Publisher+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DBF202A64138B00D374DF /* Publisher+.swift */; };
-		0E8DBF242A6419A000D374DF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DBF232A6419A000D374DF /* ProfileView.swift */; };
 		0E8DBF262A6419D600D374DF /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DBF252A6419D600D374DF /* ProfileViewModel.swift */; };
 		0E8DBF282A641C0D00D374DF /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DBF272A641C0D00D374DF /* Notification.Name+.swift */; };
 		0E8DBF2B2A64297100D374DF /* PostFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DBF2A2A64297100D374DF /* PostFeedView.swift */; };
@@ -42,6 +41,8 @@
 		0E90B8752A5C1BA9006725B1 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E90B8742A5C1BA9006725B1 /* UIColor+.swift */; };
 		0E90B8772A5C1BBC006725B1 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E90B8762A5C1BBC006725B1 /* Color+.swift */; };
 		0E90B8802A5C4674006725B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E90B87F2A5C4674006725B1 /* GoogleService-Info.plist */; };
+		0EAAD3502A681D020069ECC8 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAAD34F2A681D020069ECC8 /* ProfileView.swift */; };
+		0EF0C6E02A681B2F009F48BB /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF0C6DF2A681B2F009F48BB /* ProfileEditView.swift */; };
 		0EF94C282A601C9F00557CD8 /* PostManagementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C272A601C9F00557CD8 /* PostManagementManager.swift */; };
 		0EF94C2B2A615ECA00557CD8 /* GroupManagementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C2A2A615ECA00557CD8 /* GroupManagementManager.swift */; };
 		0EF94C2D2A615F4100557CD8 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C2C2A615F4100557CD8 /* Group.swift */; };
@@ -89,7 +90,6 @@
 		0E6CC34C2A5ACB5B00BE97AD /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0E8DBF1E2A64112F00D374DF /* FetchPostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPostManager.swift; sourceTree = "<group>"; };
 		0E8DBF202A64138B00D374DF /* Publisher+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+.swift"; sourceTree = "<group>"; };
-		0E8DBF232A6419A000D374DF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		0E8DBF252A6419D600D374DF /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		0E8DBF272A641C0D00D374DF /* Notification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
 		0E8DBF2A2A64297100D374DF /* PostFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFeedView.swift; sourceTree = "<group>"; };
@@ -97,6 +97,8 @@
 		0E90B8742A5C1BA9006725B1 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		0E90B8762A5C1BBC006725B1 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		0E90B87F2A5C4674006725B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0EAAD34F2A681D020069ECC8 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		0EF0C6DF2A681B2F009F48BB /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		0EF94C272A601C9F00557CD8 /* PostManagementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManagementManager.swift; sourceTree = "<group>"; };
 		0EF94C2A2A615ECA00557CD8 /* GroupManagementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagementManager.swift; sourceTree = "<group>"; };
 		0EF94C2C2A615F4100557CD8 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -179,7 +181,7 @@
 		0E6C5F912A655993006FECEE /* User */ = {
 			isa = PBXGroup;
 			children = (
-				0E8DBF232A6419A000D374DF /* ProfileView.swift */,
+				0EAAD34F2A681D020069ECC8 /* ProfileView.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -308,6 +310,7 @@
 			children = (
 				0E6C5F922A65599A006FECEE /* Group */,
 				0E6C5F912A655993006FECEE /* User */,
+				0EF0C6DE2A681B23009F48BB /* ProfileEdit */,
 				0E8DBF252A6419D600D374DF /* ProfileViewModel.swift */,
 			);
 			path = Profile;
@@ -356,6 +359,14 @@
 				0E309FD12A5DA72A00191B3B /* EmailTextField.swift */,
 			);
 			path = CommonView;
+			sourceTree = "<group>";
+		};
+		0EF0C6DE2A681B23009F48BB /* ProfileEdit */ = {
+			isa = PBXGroup;
+			children = (
+				0EF0C6DF2A681B2F009F48BB /* ProfileEditView.swift */,
+			);
+			path = ProfileEdit;
 			sourceTree = "<group>";
 		};
 		0EF94C262A601C8F00557CD8 /* Post */ = {
@@ -572,7 +583,6 @@
 				0E03F99B2A66DD6F006E8FCD /* PHAsset+.swift in Sources */,
 				0EF94C402A629C4C00557CD8 /* SelectedImage.swift in Sources */,
 				0EF94C422A62A0D800557CD8 /* PostUploadViewModel.swift in Sources */,
-				0E8DBF242A6419A000D374DF /* ProfileView.swift in Sources */,
 				0E90B8772A5C1BBC006725B1 /* Color+.swift in Sources */,
 				0E6C5F992A655D30006FECEE /* CreateGroupViewModel.swift in Sources */,
 				0EF94C282A601C9F00557CD8 /* PostManagementManager.swift in Sources */,
@@ -604,9 +614,11 @@
 				0E309FD02A5DA71E00191B3B /* LoginMainView.swift in Sources */,
 				0E309FDD2A5DA7F900191B3B /* UserAuthManager.swift in Sources */,
 				0E8DBF1F2A64112F00D374DF /* FetchPostManager.swift in Sources */,
+				0EAAD3502A681D020069ECC8 /* ProfileView.swift in Sources */,
 				0E6C5F972A655B95006FECEE /* CreateGroupView.swift in Sources */,
 				0E309FD42A5DA73500191B3B /* EmailSignUpView.swift in Sources */,
 				0EF94C3D2A62878700557CD8 /* ShowTabBar.swift in Sources */,
+				0EF0C6E02A681B2F009F48BB /* ProfileEditView.swift in Sources */,
 				0E309FD62A5DA74A00191B3B /* LoginButton.swift in Sources */,
 				0E6CC3472A5AC1CF00BE97AD /* Constant.swift in Sources */,
 				0EF94C352A62865900557CD8 /* UIView+.swift in Sources */,
