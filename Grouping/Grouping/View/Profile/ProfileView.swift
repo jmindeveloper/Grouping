@@ -10,6 +10,9 @@ import SDWebImageSwiftUI
 
 struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
     @ObservedObject var viewModel: VM
+    @State var isShowPost: Bool = true
+    
+    
     var columns = Array(
         repeating: GridItem(
             .flexible(),
@@ -62,28 +65,10 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
             .background(RoundedRectangle(cornerRadius: 14).fill(Color(uc: .systemGray2)))
             .padding(.top)
             
-            HStack {
-                Button {
-                    
-                } label: {
-                    Text("프로필 편집")
-                        .foregroundColor(.white)
-                }
-                .frame(maxWidth: Constant.screenWidth - 32, minHeight: 35)
-                .background(RoundedRectangle(cornerRadius: 14).fill(Color(uc: .systemGray2)))
-                .padding(.top)
-                
-                Button {
-                    
-                } label: {
-                    Text("프로필 편집")
-                        .foregroundColor(.white)
-                }
-                .frame(maxWidth: Constant.screenWidth - 32, minHeight: 35)
-                .background(RoundedRectangle(cornerRadius: 14).fill(Color(uc: .systemGray2)))
-                .padding(.top)
-            }
-            .padding(.horizontal, 16)
+            ValueChangeToggleView(toggle: $isShowPost, lineColor: .red, leftTitle: "게시물", rightTitle: "그룹")
+                .padding(.horizontal, 16)
+                .frame(height: 35)
+                .padding(.top, 13)
             
             Divider()
                 .padding(.top, 16)
@@ -97,7 +82,9 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
     ) -> some View {
         VStack {
             Text(value)
+                .fontWeight(.semibold)
             Text(title)
+                .font(.system(size: 14))
         }
     }
     
@@ -124,5 +111,7 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(viewModel: ProfileViewModel())
+//        RealTimeArrivalInfoToggle(toggle: .constant(false), lineColor: .red, leftTitle: "게시물", rightTitle: "그룹")
+//            .frame(width: Constant.screenWidth - 32, height: 35)
     }
 }
