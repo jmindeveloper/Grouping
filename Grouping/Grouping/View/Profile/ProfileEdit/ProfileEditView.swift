@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct ProfileEditView: View {
+struct ProfileEditView<VM>: View where VM: ProfileEditViewModelInterface {
+    @ObservedObject var viewModel: VM
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -17,7 +19,8 @@ struct ProfileEditView: View {
                     .clipShape(Circle())
                     .padding(.top, 16)
                 
-                Text("김지민")
+                TextField("", text: $viewModel.nickName)
+                    .multilineTextAlignment(.center)
                     .font(.system(size: 31, weight: .semibold))
                     .padding(.top, 10)
                 
@@ -29,7 +32,7 @@ struct ProfileEditView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    
+                    viewModel.update()
                 } label: {
                     Text("완료")
                         .foregroundColor(.primary)
@@ -42,7 +45,7 @@ struct ProfileEditView: View {
 struct ProfileEditView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ProfileEditView()
+            ProfileEditView(viewModel: ProfileEditViewModel())
         }
     }
 }

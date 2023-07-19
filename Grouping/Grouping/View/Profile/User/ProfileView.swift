@@ -64,7 +64,7 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
             }
             
             NavigationLink {
-                ProfileEditView()
+                ProfileEditView(viewModel: ProfileEditViewModel())
             } label: {
                 Text("프로필 편집")
                     .foregroundColor(.white)
