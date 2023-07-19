@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension Color {
-    init(uc: UIColor) {
-        self.init(red: uc.rgba.red, green: uc.rgba.green, blue: uc.rgba.blue, opacity: uc.rgba.alpha)
+    init(uiColor: UIColor) {
+        self.init(red: uiColor.rgba.red, green: uiColor.rgba.green, blue: uiColor.rgba.blue, opacity: uiColor.rgba.alpha)
     }
 }

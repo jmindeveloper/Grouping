@@ -28,7 +28,7 @@ struct TagView: View {
         }
         .padding(.vertical, 3)
         .padding(.horizontal, 7)
-        .background(Capsule().fill(Color(uc: .systemGreen)))
+        .background(Capsule().fill(Color(uiColor: .systemGreen)))
         .onTapGesture {
             tapAction?()
         }

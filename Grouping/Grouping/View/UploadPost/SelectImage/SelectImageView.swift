@@ -87,7 +87,7 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
                         }
                     Spacer()
                 }
-                .background(Color(uc: .systemGray6).frame(height: 34))
+                .background(Color(uiColor: .systemGray6).frame(height: 34))
                 
                 albumCollectionList()
                     .frame(height: showAlbumCollection ? 300 : 0)

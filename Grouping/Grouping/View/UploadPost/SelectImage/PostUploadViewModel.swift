@@ -9,8 +9,6 @@ import Foundation
 import Combine
 import Photos
 
-extension PHAsset: Identifiable { }
-
 protocol PostUploadViewModelInterface: ObservableObject {
     var assets: [PHAsset] { get set }
     var selectedImageIndexes: [(index: Int, number: Int, asset: PHAsset)] { get set }

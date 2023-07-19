@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E03F9992A66A5F1006E8FCD /* FetchGroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E03F9982A66A5F1006E8FCD /* FetchGroupManager.swift */; };
+		0E03F99B2A66DD6F006E8FCD /* PHAsset+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E03F99A2A66DD6F006E8FCD /* PHAsset+.swift */; };
 		0E309FCE2A5DA70300191B3B /* EmailLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E309FCD2A5DA70300191B3B /* EmailLoginManager.swift */; };
 		0E309FD02A5DA71E00191B3B /* LoginMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E309FCF2A5DA71E00191B3B /* LoginMainView.swift */; };
 		0E309FD22A5DA72A00191B3B /* EmailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E309FD12A5DA72A00191B3B /* EmailTextField.swift */; };
@@ -60,6 +61,7 @@
 
 /* Begin PBXFileReference section */
 		0E03F9982A66A5F1006E8FCD /* FetchGroupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchGroupManager.swift; sourceTree = "<group>"; };
+		0E03F99A2A66DD6F006E8FCD /* PHAsset+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+.swift"; sourceTree = "<group>"; };
 		0E309FCD2A5DA70300191B3B /* EmailLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailLoginManager.swift; sourceTree = "<group>"; };
 		0E309FCF2A5DA71E00191B3B /* LoginMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginMainView.swift; sourceTree = "<group>"; };
 		0E309FD12A5DA72A00191B3B /* EmailTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailTextField.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				0E90B8762A5C1BBC006725B1 /* Color+.swift */,
 				0E8DBF202A64138B00D374DF /* Publisher+.swift */,
 				0E8DBF272A641C0D00D374DF /* Notification.Name+.swift */,
+				0E03F99A2A66DD6F006E8FCD /* PHAsset+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 				0E309FDF2A5EEF7E00191B3B /* FollowManagementManager.swift in Sources */,
 				0E6CC3502A5ACD8100BE97AD /* PostView.swift in Sources */,
 				0EF94C472A63B99500557CD8 /* PostContentWriteView.swift in Sources */,
+				0E03F99B2A66DD6F006E8FCD /* PHAsset+.swift in Sources */,
 				0EF94C402A629C4C00557CD8 /* SelectedImage.swift in Sources */,
 				0EF94C422A62A0D800557CD8 /* PostUploadViewModel.swift in Sources */,
 				0E8DBF242A6419A000D374DF /* ProfileView.swift in Sources */,

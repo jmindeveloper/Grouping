@@ -31,7 +31,7 @@ struct CreateGroupView<VM>: View where VM: CreateGroupViewModelInterface {
                     } label: {
                         Text("이미지 선택")
                             .frame(width: Constant.screenWidth - 32, height: 56)
-                            .background(RoundedRectangle(cornerRadius: 8).fill(Color(uc: .systemGray6)))
+                            .background(RoundedRectangle(cornerRadius: 8).fill(Color(uiColor: .systemGray6)))
                     }
                     .buttonStyle(.plain)
                 }
