@@ -14,7 +14,7 @@ struct PostFeedView<VM>: View where VM: PostFeedViewModelInterface {
         ScrollView {
             ScrollView {
                 ForEach(viewModel.posts, id: \.self) { post in
-                    PostView(post: post)
+                    PostView(viewModel: PostViewModel(post: post))
                         .padding(.vertical, 4)
                 }
             }

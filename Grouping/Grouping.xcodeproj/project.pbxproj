@@ -43,6 +43,8 @@
 		0E90B8802A5C4674006725B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E90B87F2A5C4674006725B1 /* GoogleService-Info.plist */; };
 		0EAAD3502A681D020069ECC8 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAAD34F2A681D020069ECC8 /* ProfileView.swift */; };
 		0EAAD3522A6827280069ECC8 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAAD3512A6827280069ECC8 /* ProfileEditViewModel.swift */; };
+		0EAAD3542A6831270069ECC8 /* PostInteractionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAAD3532A6831270069ECC8 /* PostInteractionManager.swift */; };
+		0EAAD3562A6831EF0069ECC8 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAAD3552A6831EF0069ECC8 /* PostViewModel.swift */; };
 		0EF0C6E02A681B2F009F48BB /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF0C6DF2A681B2F009F48BB /* ProfileEditView.swift */; };
 		0EF94C282A601C9F00557CD8 /* PostManagementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C272A601C9F00557CD8 /* PostManagementManager.swift */; };
 		0EF94C2B2A615ECA00557CD8 /* GroupManagementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C2A2A615ECA00557CD8 /* GroupManagementManager.swift */; };
@@ -100,6 +102,8 @@
 		0E90B87F2A5C4674006725B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0EAAD34F2A681D020069ECC8 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		0EAAD3512A6827280069ECC8 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
+		0EAAD3532A6831270069ECC8 /* PostInteractionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInteractionManager.swift; sourceTree = "<group>"; };
+		0EAAD3552A6831EF0069ECC8 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		0EF0C6DF2A681B2F009F48BB /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		0EF94C272A601C9F00557CD8 /* PostManagementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManagementManager.swift; sourceTree = "<group>"; };
 		0EF94C2A2A615ECA00557CD8 /* GroupManagementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagementManager.swift; sourceTree = "<group>"; };
@@ -258,6 +262,7 @@
 				0E90B86D2A5C19CE006725B1 /* Lgoin */,
 				0E6CC3422A5AC0A900BE97AD /* Common */,
 				0E6CC33D2A5AAA7000BE97AD /* PostView.swift */,
+				0EAAD3552A6831EF0069ECC8 /* PostViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -377,6 +382,7 @@
 			children = (
 				0EF94C272A601C9F00557CD8 /* PostManagementManager.swift */,
 				0E8DBF1E2A64112F00D374DF /* FetchPostManager.swift */,
+				0EAAD3532A6831270069ECC8 /* PostInteractionManager.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -583,6 +589,7 @@
 				0E309FDF2A5EEF7E00191B3B /* FollowManagementManager.swift in Sources */,
 				0E6CC3502A5ACD8100BE97AD /* PostView.swift in Sources */,
 				0EF94C472A63B99500557CD8 /* PostContentWriteView.swift in Sources */,
+				0EAAD3562A6831EF0069ECC8 /* PostViewModel.swift in Sources */,
 				0E03F99B2A66DD6F006E8FCD /* PHAsset+.swift in Sources */,
 				0EF94C402A629C4C00557CD8 /* SelectedImage.swift in Sources */,
 				0EF94C422A62A0D800557CD8 /* PostUploadViewModel.swift in Sources */,
@@ -623,6 +630,7 @@
 				0E309FD42A5DA73500191B3B /* EmailSignUpView.swift in Sources */,
 				0EF94C3D2A62878700557CD8 /* ShowTabBar.swift in Sources */,
 				0EF0C6E02A681B2F009F48BB /* ProfileEditView.swift in Sources */,
+				0EAAD3542A6831270069ECC8 /* PostInteractionManager.swift in Sources */,
 				0E309FD62A5DA74A00191B3B /* LoginButton.swift in Sources */,
 				0E6CC3472A5AC1CF00BE97AD /* Constant.swift in Sources */,
 				0EF94C352A62865900557CD8 /* UIView+.swift in Sources */,
