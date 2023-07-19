@@ -9,7 +9,8 @@ import Foundation
 import FirebaseFirestore
 
 protocol PostInteractionManagerInterface {
-    
+    func heart(sender userId: String, post: Post, completion: ((_ post: Post) -> Void)?)
+    func bookMark(sender userId: String, post: Post, completion: ((_ post: Post) -> Void)?)
 }
 
 final class PostInteractionManager: PostInteractionManagerInterface {

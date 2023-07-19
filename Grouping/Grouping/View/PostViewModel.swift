@@ -12,11 +12,15 @@ protocol PostViewModelInterface: ObservableObject {
     var tags: [String] { get set }
     var images: [String] { get set }
     var content: String { get set }
+    var isHeart: Bool { get }
     
     init(post: Post)
+    
+    func heart()
 }
 
 final class PostViewModel: PostViewModelInterface {
+    private let user = UserAuthManager.shared.user
     @Published var post: Post {
         didSet {
             images = post.images
@@ -27,6 +31,11 @@ final class PostViewModel: PostViewModelInterface {
     @Published var images: [String] = []
     @Published var tags: [String] = []
     @Published var content: String = ""
+    var isHeart: Bool {
+        post.heartUsers.contains(user?.id ?? "")
+    }
+    
+    let interactionManager: PostInteractionManagerInterface = PostInteractionManager()
     
     init(post: Post) {
         self.post = post
@@ -35,4 +44,10 @@ final class PostViewModel: PostViewModelInterface {
         content = post.content
     }
     
+    func heart() {
+        guard let user = user else { return }
+        interactionManager.heart(sender: user.id, post: post) { [weak self] post in
+            self?.post = post
+        }
+    }
 }

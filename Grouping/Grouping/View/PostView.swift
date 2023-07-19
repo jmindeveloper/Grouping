@@ -124,9 +124,9 @@ struct PostView<VM>: View where VM: PostViewModelInterface {
             
             HStack(spacing: 12) {
                 Button {
-                    
+                    viewModel.heart()
                 } label: {
-                    Image(systemName: "heart")
+                    Image(systemName: viewModel.isHeart ? "heart.fill" : "heart")
                         .resizable()
                         .foregroundColor(.red)
                 }

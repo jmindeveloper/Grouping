@@ -23,7 +23,6 @@ struct Post: Codable, Hashable {
     let createdAt: Date
     var updatedAt: Date?
     var location: Location?
-    var heartCount: Int
     var heartUsers: [String]
     var commentCount: Int
     var tags: [String]
@@ -46,7 +45,6 @@ let dummyPostData: [Post] = [
         images: ["test_image_1", "test_image_3", "test_image_2", "test_image_4"],
         content: "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요",
         createdAt: Date(),
-        heartCount: 3,
         heartUsers: ["3939, 5322, 0532"],
         commentCount: 0,
         tags: ["배고프다", "힘들다", "어렵다"]
@@ -57,7 +55,6 @@ let dummyPostData: [Post] = [
         images: ["test_image_2", "test_image_1"],
         content: "안녕하세요은ㅇ라ㅣㅁㄴ;어라ㅣㄴ어라ㅣㅓㄴ아ㅣ;혼아ㅣ;멀;ㅏㅣㄴ어ㅣ;ㅁ런아ㅣㅓㅣㅏ처티프쿠프, ㅜㅁ;나ㅣ얼댜",
         createdAt: Date(),
-        heartCount: 3,
         heartUsers: ["3939, 5322, 0532"],
         commentCount: 0,
         tags: ["배고프다", "힘들다", "어렵다", "배고프다", "힘들다", "어렵다"]
@@ -68,7 +65,6 @@ let dummyPostData: [Post] = [
         images: ["test_image_3", "test_image_5"],
         content: "안녕하세요3ㄷ2324356ㅁㄷㅇㄹㅎㅁ아ㅣ;ㅓ리'ㅏ;ㅁㄴ어라ㅣ",
         createdAt: Date(),
-        heartCount: 3,
         heartUsers: ["3939, 5322, 0532"],
         commentCount: 0,
         tags: ["배고프다", "힘들다", "어렵다", "배고프다", "힘들다", "어렵다"]
@@ -79,7 +75,6 @@ let dummyPostData: [Post] = [
         images: ["test_image_4", "test_image_2"],
         content: "안녕하세요",
         createdAt: Date(),
-        heartCount: 3,
         heartUsers: ["3939, 5322, 0532"],
         commentCount: 0,
         tags: []
@@ -90,7 +85,6 @@ let dummyPostData: [Post] = [
         images: ["test_image_5", "test_image_6"],
         content: "안녕하세요",
         createdAt: Date(),
-        heartCount: 3,
         heartUsers: ["3939, 5322, 0532"],
         commentCount: 0,
         tags: ["배고프다", "힘들다", "어렵다", "힘들다", "어렵다"]
@@ -101,7 +95,6 @@ let dummyPostData: [Post] = [
         images: ["test_image_6", "test_image_3"],
         content: "안녕하세요",
         createdAt: Date(),
-        heartCount: 3,
         heartUsers: ["3939, 5322, 0532"],
         commentCount: 0,
         tags: []
