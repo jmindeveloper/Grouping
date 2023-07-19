@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0E03F9992A66A5F1006E8FCD /* FetchGroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E03F9982A66A5F1006E8FCD /* FetchGroupManager.swift */; };
 		0E03F99B2A66DD6F006E8FCD /* PHAsset+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E03F99A2A66DD6F006E8FCD /* PHAsset+.swift */; };
+		0E03F99D2A6816BA006E8FCD /* ValueChangeToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E03F99C2A6816BA006E8FCD /* ValueChangeToggleView.swift */; };
 		0E309FCE2A5DA70300191B3B /* EmailLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E309FCD2A5DA70300191B3B /* EmailLoginManager.swift */; };
 		0E309FD02A5DA71E00191B3B /* LoginMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E309FCF2A5DA71E00191B3B /* LoginMainView.swift */; };
 		0E309FD22A5DA72A00191B3B /* EmailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E309FD12A5DA72A00191B3B /* EmailTextField.swift */; };
@@ -62,6 +63,7 @@
 /* Begin PBXFileReference section */
 		0E03F9982A66A5F1006E8FCD /* FetchGroupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchGroupManager.swift; sourceTree = "<group>"; };
 		0E03F99A2A66DD6F006E8FCD /* PHAsset+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+.swift"; sourceTree = "<group>"; };
+		0E03F99C2A6816BA006E8FCD /* ValueChangeToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueChangeToggleView.swift; sourceTree = "<group>"; };
 		0E309FCD2A5DA70300191B3B /* EmailLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailLoginManager.swift; sourceTree = "<group>"; };
 		0E309FCF2A5DA71E00191B3B /* LoginMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginMainView.swift; sourceTree = "<group>"; };
 		0E309FD12A5DA72A00191B3B /* EmailTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailTextField.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 			children = (
 				0E6CC3432A5AC0B900BE97AD /* RoundedCorner.swift */,
 				0EF94C4C2A63CA4C00557CD8 /* TagView.swift */,
+				0E03F99C2A6816BA006E8FCD /* ValueChangeToggleView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				0E309FD82A5DA75E00191B3B /* EmailSignInView.swift in Sources */,
 				0EF94C332A627FD800557CD8 /* SelectImageView.swift in Sources */,
 				0E6CC34F2A5ACCD800BE97AD /* Post.swift in Sources */,
+				0E03F99D2A6816BA006E8FCD /* ValueChangeToggleView.swift in Sources */,
 				0EF94C4A2A63BE1500557CD8 /* TextView.swift in Sources */,
 				0E6CC3412A5AC08900BE97AD /* View+.swift in Sources */,
 				0E6CC3442A5AC0B900BE97AD /* RoundedCorner.swift in Sources */,

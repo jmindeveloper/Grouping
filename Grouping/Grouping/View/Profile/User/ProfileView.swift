@@ -10,6 +10,7 @@ import SDWebImageSwiftUI
 
 struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
     @EnvironmentObject var viewModel: VM
+    @State var isShowPost: Bool = true
     
     var columns = Array(
         repeating: GridItem(
@@ -21,6 +22,8 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
     
     var body: some View {
         ScrollView {
+            userInfoView()
+            
             albumGrid()
         }
         .navigationTitle(viewModel.user?.nickName ?? "Profile")
@@ -33,6 +36,63 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
                     Text("Group")
                 }
             }
+        }
+    }
+    
+    @ViewBuilder
+    private func userInfoView() -> some View {
+        VStack(spacing: 0) {
+            HStack {
+                Image("test_image_5")
+                    .resizable()
+                    .frame(width: 90, height: 90)
+                    .clipShape(Circle())
+                    .padding(.leading, 16)
+                
+                Spacer()
+                
+                HStack {
+                    bottomTitleTopValueView(title: "게시물", value: "56")
+                        .padding(.horizontal, 6)
+                    bottomTitleTopValueView(title: "팔로워", value: "282")
+                        .padding(.horizontal, 6)
+                    bottomTitleTopValueView(title: "팔로잉", value: "455")
+                        .padding(.horizontal, 6)
+                }
+                
+                Spacer()
+            }
+            
+            Button {
+                
+            } label: {
+                Text("프로필 편집")
+                    .foregroundColor(.white)
+            }
+            .frame(width: Constant.screenWidth - 32, height: 35)
+            .background(RoundedRectangle(cornerRadius: 14).fill(Color(uiColor: .systemGray2)))
+            .padding(.top)
+            
+            ValueChangeToggleView(toggle: $isShowPost, lineColor: .red, leftTitle: "게시물", rightTitle: "그룹")
+                .padding(.horizontal, 16)
+                .frame(height: 35)
+                .padding(.top, 13)
+            
+            Divider()
+                .padding(.top, 16)
+        }
+    }
+    
+    @ViewBuilder
+    private func bottomTitleTopValueView(
+        title: String,
+        value: String
+    ) -> some View {
+        VStack {
+            Text(value)
+                .fontWeight(.semibold)
+            Text(title)
+                .font(.system(size: 14))
         }
     }
     
@@ -53,5 +113,12 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
                 .buttonStyle(.plain)
             }
         }
+    }
+}
+
+struct ProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileView<ProfileViewModel>()
+            .environmentObject(ProfileViewModel())
     }
 }
