@@ -12,6 +12,9 @@ protocol ProfileViewModelInterface: ObservableObject {
     var user: User? { get set }
     var posts: [Post] { get set }
     var groups: [Group] { get set }
+    var postCount: Int { get }
+    var followerCount: Int { get }
+    var followingCount: Int { get }
     
     func getUserGroups()
 }
@@ -25,6 +28,18 @@ final class ProfileViewModel: ProfileViewModelInterface {
     private var userIsMe: Bool
     
     private var subscriptions = Set<AnyCancellable>()
+    
+    var postCount: Int {
+        posts.count
+    }
+    
+    var followerCount: Int {
+        return user?.followers.count ?? 0
+    }
+    
+    var followingCount: Int {
+        return user?.following.count ?? 0
+    }
     
     init() {
         userIsMe = true
