@@ -58,6 +58,13 @@ final class ProfileViewModel: ProfileViewModelInterface {
                     }
                 }
             }.store(in: &subscriptions)
+        
+        NotificationCenter.default.publisher(for: .userUpdate)
+            .sink { [weak self] _ in
+            if self?.userIsMe == true {
+                self?.user = UserAuthManager.shared.user
+            }
+        }.store(in: &subscriptions)
     }
     
     private func getUserPosts() {

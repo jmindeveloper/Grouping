@@ -61,6 +61,23 @@ final class UserAuthManager {
         }
     }
     
+    func updateUser(user: User, completion: (() -> Void)? = nil) {
+        do {
+            try db.document(user.id).setData(from: user) { [weak self] error in
+                guard error == nil else {
+                    print(error!.localizedDescription)
+                    return
+                }
+                self?.user = user
+                
+                NotificationCenter.default.post(name: .userUpdate, object: nil)
+                completion?()
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     /// 유저 가져오기
     func getUser(completion: ((_ isSuccess: Bool) -> Void)? = nil) {
         guard let id = currentUserId else {
