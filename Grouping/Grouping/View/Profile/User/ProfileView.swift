@@ -52,11 +52,11 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
                 Spacer()
                 
                 HStack {
-                    bottomTitleTopValueView(title: "게시물", value: "56")
+                    bottomTitleTopValueView(title: "게시물", value: "\(viewModel.postCount)")
                         .padding(.horizontal, 6)
-                    bottomTitleTopValueView(title: "팔로워", value: "282")
+                    bottomTitleTopValueView(title: "팔로워", value: "\(viewModel.followerCount)")
                         .padding(.horizontal, 6)
-                    bottomTitleTopValueView(title: "팔로잉", value: "455")
+                    bottomTitleTopValueView(title: "팔로잉", value: "\(viewModel.followingCount)")
                         .padding(.horizontal, 6)
                 }
                 
