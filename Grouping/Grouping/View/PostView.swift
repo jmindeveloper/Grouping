@@ -136,7 +136,7 @@ struct PostView<VM>: View where VM: PostViewModelInterface {
                 Button {
                     viewModel.bookMark()
                 } label: {
-                    Image(systemName: "bookmark")
+                    Image(systemName: viewModel.userBookMarkContains ? "bookmark.fill" : "bookmark")
                         .resizable()
                         .foregroundColor(.yellow)
                 }

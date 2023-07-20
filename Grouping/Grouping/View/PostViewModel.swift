@@ -14,6 +14,7 @@ protocol PostViewModelInterface: ObservableObject {
     var images: [String] { get set }
     var content: String { get set }
     var isHeart: Bool { get }
+    var userBookMarkContains: Bool { get set }
     
     init(post: Post)
     
@@ -34,6 +35,7 @@ final class PostViewModel: PostViewModelInterface {
     @Published var images: [String] = []
     @Published var tags: [String] = []
     @Published var content: String = ""
+    @Published var userBookMarkContains: Bool
     var isHeart: Bool {
         post.heartUsers.contains(user?.id ?? "")
     }
@@ -43,6 +45,7 @@ final class PostViewModel: PostViewModelInterface {
     
     init(post: Post) {
         self.post = post
+        self.userBookMarkContains = userFetchManager.starPostIds.contains(post.id)
         images = post.images
         tags = post.tags
         content = post.content
@@ -60,9 +63,9 @@ final class PostViewModel: PostViewModelInterface {
     }
     
     func bookMark() {
-        guard let user = user else { return }
-        interactionManager.bookMark(post: post) { post in
-            
+        interactionManager.bookMark(post: post) { [weak self] ids in
+            guard let self = self else { return }
+            self.userBookMarkContains = ids.contains(self.post.id)
         }
     }
 }
