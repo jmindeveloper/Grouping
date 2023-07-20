@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Photos
 
 struct LocalAlbumGridView<VM>: View where VM: LocalAlbumInterface {
     private var columns = Array(
@@ -40,9 +39,8 @@ struct LocalAlbumGridView<VM>: View where VM: LocalAlbumInterface {
     }
 }
 
-protocol LocalAlbumInterface: ObservableObject {
-    var assets: [PHAsset] { get set }
-    var tapAction: ((_ asset: PHAsset) -> Void) { get set }
-    
-    func getSelectImageNumbers(asset: PHAsset) -> Int?
+struct LocalAlbumGridView_Previews: PreviewProvider {
+    static var previews: some View {
+        LocalAlbumGridView(viewModel: LocalAlbumGridDefaultViewModel())
+    }
 }

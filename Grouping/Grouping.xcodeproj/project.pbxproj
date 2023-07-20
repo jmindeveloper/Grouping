@@ -47,6 +47,7 @@
 		0EAAD3562A6831EF0069ECC8 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAAD3552A6831EF0069ECC8 /* PostViewModel.swift */; };
 		0EAAD3582A6953720069ECC8 /* FetchUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAAD3572A6953720069ECC8 /* FetchUserManager.swift */; };
 		0EAAD35A2A697B300069ECC8 /* LocalAlbumGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAAD3592A697B300069ECC8 /* LocalAlbumGridView.swift */; };
+		0EAAD35D2A6989070069ECC8 /* LocalAlbumGridDefaultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAAD35C2A6989070069ECC8 /* LocalAlbumGridDefaultViewModel.swift */; };
 		0EF0C6E02A681B2F009F48BB /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF0C6DF2A681B2F009F48BB /* ProfileEditView.swift */; };
 		0EF94C282A601C9F00557CD8 /* PostManagementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C272A601C9F00557CD8 /* PostManagementManager.swift */; };
 		0EF94C2B2A615ECA00557CD8 /* GroupManagementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C2A2A615ECA00557CD8 /* GroupManagementManager.swift */; };
@@ -108,6 +109,7 @@
 		0EAAD3552A6831EF0069ECC8 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		0EAAD3572A6953720069ECC8 /* FetchUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserManager.swift; sourceTree = "<group>"; };
 		0EAAD3592A697B300069ECC8 /* LocalAlbumGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumGridView.swift; sourceTree = "<group>"; };
+		0EAAD35C2A6989070069ECC8 /* LocalAlbumGridDefaultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumGridDefaultViewModel.swift; sourceTree = "<group>"; };
 		0EF0C6DF2A681B2F009F48BB /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		0EF94C272A601C9F00557CD8 /* PostManagementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManagementManager.swift; sourceTree = "<group>"; };
 		0EF94C2A2A615ECA00557CD8 /* GroupManagementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagementManager.swift; sourceTree = "<group>"; };
@@ -288,10 +290,10 @@
 		0E6CC3422A5AC0A900BE97AD /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				0EAAD35B2A6988190069ECC8 /* LocalAlbum */,
 				0E6CC3432A5AC0B900BE97AD /* RoundedCorner.swift */,
 				0EF94C4C2A63CA4C00557CD8 /* TagView.swift */,
 				0E03F99C2A6816BA006E8FCD /* ValueChangeToggleView.swift */,
-				0EAAD3592A697B300069ECC8 /* LocalAlbumGridView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -372,6 +374,15 @@
 				0E309FD12A5DA72A00191B3B /* EmailTextField.swift */,
 			);
 			path = CommonView;
+			sourceTree = "<group>";
+		};
+		0EAAD35B2A6988190069ECC8 /* LocalAlbum */ = {
+			isa = PBXGroup;
+			children = (
+				0EAAD3592A697B300069ECC8 /* LocalAlbumGridView.swift */,
+				0EAAD35C2A6989070069ECC8 /* LocalAlbumGridDefaultViewModel.swift */,
+			);
+			path = LocalAlbum;
 			sourceTree = "<group>";
 		};
 		0EF0C6DE2A681B23009F48BB /* ProfileEdit */ = {
@@ -629,6 +640,7 @@
 				0E6CC34E2A5ACB5B00BE97AD /* User.swift in Sources */,
 				0EF94C442A62B18B00557CD8 /* PhotoLibrary.swift in Sources */,
 				0E6CC3222A5AA09000BE97AD /* GroupingApp.swift in Sources */,
+				0EAAD35D2A6989070069ECC8 /* LocalAlbumGridDefaultViewModel.swift in Sources */,
 				0E03F9992A66A5F1006E8FCD /* FetchGroupManager.swift in Sources */,
 				0E309FD02A5DA71E00191B3B /* LoginMainView.swift in Sources */,
 				0E309FDD2A5DA7F900191B3B /* UserAuthManager.swift in Sources */,

@@ -11,8 +11,6 @@ import Photos
 
 protocol PostUploadViewModelInterface: LocalAlbumInterface {
     var selectedImageIndexes: [(index: Int, number: Int, asset: PHAsset)] { get set }
-    var collections: [PHAssetCollection] { get }
-    var currentCollectionTitle: String { get }
     var tags: [String] { get set }
     var contentText: String { get set }
     var selectedGroup: Group? { get set }
@@ -26,16 +24,19 @@ protocol PostUploadViewModelInterface: LocalAlbumInterface {
     func upload()
 }
 
-final class PostUploadViewModel: PostUploadViewModelInterface {
-    private let library = PhotoLibrary()
+final class PostUploadViewModel: LocalAlbumGridDefaultViewModel, PostUploadViewModelInterface {
     private let postManager: PostManagementManagerInterface = PostManagementManager()
     
-    lazy var tapAction: ((_ asset: PHAsset) -> Void) = select(asset:)
+    override var tapAction: ((_ asset: PHAsset) -> Void) {
+        get {
+            select(asset:)
+        }
+        set { }
+    }
     @Published var tags: [String] = []
     @Published var contentText: String = ""
     @Published var selectedGroup: Group? = nil
-    @Published var assets: [PHAsset] = []
-    @Published var selectedImageIndexes: [(index: Int, number: Int, asset: PHAsset)] = [] {
+    override var selectedImageIndexes: [(index: Int, number: Int, asset: PHAsset)] {
         didSet {
             if selectedImageIndexes.count > 5 {
                 selectedImageIndexes.removeLast()
@@ -44,21 +45,9 @@ final class PostUploadViewModel: PostUploadViewModelInterface {
         }
     }
     
-    var collections: [PHAssetCollection] {
-        library.collections
-    }
-    
-    var currentCollectionTitle: String {
-        library.currentCollection.localizedTitle ?? ""
-    }
-    
     private var lastNumber: Int = 0
     
     private var subscriptions = Set<AnyCancellable>()
-    
-    init() {
-        binding()
-    }
     
     deinit {
         print("SelectImageViewModel", #function)
@@ -137,18 +126,6 @@ final class PostUploadViewModel: PostUploadViewModelInterface {
         selectedImageIndexes.replaceSubrange(range, with: numberChangeImages)
         selectedImageIndexes.remove(at: selectedImageIndex)
         lastNumber -= 1
-    }
-    
-    func getSelectImageNumbers(asset: PHAsset) -> Int? {
-        let index = selectedImageIndexes.firstIndex {
-            asset == $0.asset
-        }
-        
-        if index == nil {
-            return nil
-        } else {
-            return selectedImageIndexes[index!].number
-        }
     }
     
     func getSelectImageNumbers(index: Int) -> Int? {
