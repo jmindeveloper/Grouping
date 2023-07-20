@@ -34,3 +34,9 @@ class User: Codable {
         self.email = email
     }
 }
+
+struct UserSimpleInfo: Codable {
+    var id: String
+    var nickName: String
+    var profileImagePath: String?
+}

@@ -70,6 +70,9 @@ final class FetchGroupManager: FetchGroupManagerInterface {
                 .sink { [weak self] groups in
                     completion?(groups)
                     self?.userGroupsPublisher.send(groups)
+                    if self?.user.id == UserAuthManager.shared.user?.id {
+                        FetchGroupManager.loginUserGroup = groups
+                    }
                 }.store(in: &subscriptions)
         }
     }
@@ -82,6 +85,21 @@ final class FetchGroupManager: FetchGroupManagerInterface {
         } catch {
             print(error.localizedDescription)
             return nil
+        }
+    }
+    
+    static var loginUserGroup: [Group]? = nil
+    
+    static func getLoginUserGroup(completion: @escaping (([Group]) -> Void)) {
+        if loginUserGroup != nil {
+            completion(loginUserGroup!)
+        } else {
+            guard let user = UserAuthManager.shared.user else { return }
+            let manager = FetchGroupManager(user: user)
+            manager.getUserGroups { group in
+                loginUserGroup = group
+                completion(group)
+            }
         }
     }
 }

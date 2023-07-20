@@ -8,9 +8,9 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct PostView: View {
+struct PostView<VM>: View where VM: PostViewModelInterface {
     @State var showFullText: Bool = false
-    @State var post: Post
+    @ObservedObject var viewModel: VM
     
     var body: some View {
         VStack {
@@ -19,7 +19,7 @@ struct PostView: View {
             
             // post image main
             TabView {
-                ForEach(post.images, id: \.self) { url in
+                ForEach(viewModel.images, id: \.self) { url in
                     WebImage(url: URL(string: url))
                         .placeholder(Image(url).resizable())
                         .resizable()
@@ -41,10 +41,10 @@ struct PostView: View {
                 .padding(.vertical, 6)
                 .padding(.bottom, 2)
             
-            if !post.tags.isEmpty {
+            if !viewModel.tags.isEmpty {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        ForEach(post.tags, id: \.self) { tag in
+                        ForEach(viewModel.tags, id: \.self) { tag in
                             TagView(tag: tag, showXMark: false) {
                                 print("태그 검색 이동!!!!!!!!!")
                             }
@@ -55,7 +55,7 @@ struct PostView: View {
             }
             
             HStack {
-                Text(post.content)
+                Text(viewModel.content)
                     .multilineTextAlignment(.leading)
                     .lineLimit(showFullText ? nil : 3)
                     .padding(.horizontal, 16)
@@ -89,7 +89,8 @@ struct PostView: View {
     @ViewBuilder
     private func postUserView() -> some View {
         HStack {
-            Image(systemName: "person.fill")
+            WebImage(url: URL(string: viewModel.userInfo?.profileImagePath ?? ""))
+                .placeholder(Image(systemName: "person.fill"))
                 .resizable()
                 .frame(width: 30, height: 30)
                 .clipShape(Circle())
@@ -97,7 +98,7 @@ struct PostView: View {
                     
                 }
             
-            Text(post.createUserId)
+            Text(viewModel.userInfo?.nickName ?? "nkne")
             
             Spacer()
             
@@ -124,18 +125,18 @@ struct PostView: View {
             
             HStack(spacing: 12) {
                 Button {
-                    
+                    viewModel.heart()
                 } label: {
-                    Image(systemName: "heart")
+                    Image(systemName: viewModel.isHeart ? "heart.fill" : "heart")
                         .resizable()
                         .foregroundColor(.red)
                 }
                 .frame(width: 20, height: 20)
                 
                 Button {
-                    
+                    viewModel.bookMark()
                 } label: {
-                    Image(systemName: "bookmark")
+                    Image(systemName: viewModel.userBookMarkContains ? "bookmark.fill" : "bookmark")
                         .resizable()
                         .foregroundColor(.yellow)
                 }
@@ -156,6 +157,6 @@ struct PostView: View {
 
 struct PostView_Preview: PreviewProvider {
     static var previews: some View {
-        PostView(post: dummyPostData.first!)
+        PostView(viewModel: PostViewModel(post: dummyPostData.first!))
     }
 }
