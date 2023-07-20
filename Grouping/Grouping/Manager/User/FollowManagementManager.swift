@@ -11,7 +11,6 @@ import FirebaseFirestoreSwift
 
 protocol FollowManagementManagerInterface {
     func follow(subjectUser: User, completion: (() -> Void)?)
-    func deleteFollow(subjectId: String, completion: (() -> Void)?)
 }
 
 final class FollowManagementManager: FollowManagementManagerInterface {
@@ -26,10 +25,6 @@ final class FollowManagementManager: FollowManagementManagerInterface {
                 completion?()
             }
         }
-    }
-    
-    func deleteFollow(subjectId: String, completion: (() -> Void)?) {
-        
     }
     
     private func followUpdate(subjectId: String, completion: (() -> Void)? = nil) {

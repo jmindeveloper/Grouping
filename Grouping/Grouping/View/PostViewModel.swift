@@ -39,7 +39,7 @@ final class PostViewModel: PostViewModelInterface {
     }
     
     let interactionManager: PostInteractionManagerInterface = PostInteractionManager()
-    let userFetchManager: FetchUserManagerInterface = FetchUserManager()
+    let userFetchManager: FetchUserManagerInterface = FetchUserManager.default
     
     init(post: Post) {
         self.post = post
@@ -61,6 +61,8 @@ final class PostViewModel: PostViewModelInterface {
     
     func bookMark() {
         guard let user = user else { return }
-        interactionManager.bookMark(sender: user.id, post: post, completion: nil)
+        interactionManager.bookMark(post: post) { post in
+            
+        }
     }
 }

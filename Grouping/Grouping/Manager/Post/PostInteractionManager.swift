@@ -10,11 +10,13 @@ import FirebaseFirestore
 
 protocol PostInteractionManagerInterface {
     func heart(sender userId: String, post: Post, completion: ((_ post: Post) -> Void)?)
-    func bookMark(sender userId: String, post: Post, completion: ((_ post: Post) -> Void)?)
+    func bookMark(post: Post, completion: ((_ post: Post) -> Void)?)
 }
 
 final class PostInteractionManager: PostInteractionManagerInterface {
     private let postDB = Firestore.firestore().collection(FBFieldName.post)
+    private var fetchUserManager: FetchUserManagerInterface = FetchUserManager.default
+    private let userFetchManager: FetchUserManagerInterface = FetchUserManager.default
     
     func heart(sender userId: String, post: Post, completion: ((_ post: Post) -> Void)? = nil) {
         var post = post
@@ -33,9 +35,14 @@ final class PostInteractionManager: PostInteractionManagerInterface {
         }
     }
     
-    func bookMark(sender userId: String, post: Post, completion: ((_ post: Post) -> Void)? = nil) {
-        FetchGroupManager.getLoginUserGroup { group in
-            print(group)
+    /// currentLoginUser의 startPosts에 post의 id 추가
+    func bookMark(post: Post, completion: ((_ post: Post) -> Void)? = nil) {
+        if let index = fetchUserManager.starPostIds.firstIndex(of: post.id) {
+            fetchUserManager.starPostIds.remove(at: index)
+            fetchUserManager.updateUserStartPost(completion: nil)
+        } else {
+            fetchUserManager.starPostIds.append(post.id)
+            fetchUserManager.updateUserStartPost(completion: nil)
         }
     }
 }
