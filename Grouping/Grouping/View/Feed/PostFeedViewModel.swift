@@ -18,6 +18,7 @@ final class PostFeedViewModel: PostFeedViewModelInterface {
         self.posts = posts
     }
     
+    /// dummy post
     init() {
         self.posts = dummyPostData
     }

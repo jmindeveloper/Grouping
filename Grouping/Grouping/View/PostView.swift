@@ -133,7 +133,7 @@ struct PostView<VM>: View where VM: PostViewModelInterface {
                 .frame(width: 20, height: 20)
                 
                 Button {
-                    
+                    viewModel.bookMark()
                 } label: {
                     Image(systemName: "bookmark")
                         .resizable()

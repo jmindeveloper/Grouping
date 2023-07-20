@@ -17,6 +17,7 @@ protocol PostViewModelInterface: ObservableObject {
     init(post: Post)
     
     func heart()
+    func bookMark()
 }
 
 final class PostViewModel: PostViewModelInterface {
@@ -49,5 +50,10 @@ final class PostViewModel: PostViewModelInterface {
         interactionManager.heart(sender: user.id, post: post) { [weak self] post in
             self?.post = post
         }
+    }
+    
+    func bookMark() {
+        guard let user = user else { return }
+        interactionManager.bookMark(sender: user.id, post: post, completion: nil)
     }
 }

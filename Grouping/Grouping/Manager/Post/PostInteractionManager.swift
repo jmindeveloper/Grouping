@@ -34,6 +34,8 @@ final class PostInteractionManager: PostInteractionManagerInterface {
     }
     
     func bookMark(sender userId: String, post: Post, completion: ((_ post: Post) -> Void)? = nil) {
-        
+        FetchGroupManager.getLoginUserGroup { group in
+            print(group)
+        }
     }
 }
