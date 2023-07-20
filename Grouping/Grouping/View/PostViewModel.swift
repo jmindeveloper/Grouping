@@ -9,6 +9,7 @@ import Foundation
 
 protocol PostViewModelInterface: ObservableObject {
     var post: Post { get set }
+    var userInfo: UserSimpleInfo? { get set }
     var tags: [String] { get set }
     var images: [String] { get set }
     var content: String { get set }
@@ -22,6 +23,7 @@ protocol PostViewModelInterface: ObservableObject {
 
 final class PostViewModel: PostViewModelInterface {
     private let user = UserAuthManager.shared.user
+    @Published var userInfo: UserSimpleInfo? = nil
     @Published var post: Post {
         didSet {
             images = post.images
@@ -37,12 +39,17 @@ final class PostViewModel: PostViewModelInterface {
     }
     
     let interactionManager: PostInteractionManagerInterface = PostInteractionManager()
+    let userFetchManager: FetchUserManagerInterface = FetchUserManager()
     
     init(post: Post) {
         self.post = post
         images = post.images
         tags = post.tags
         content = post.content
+        
+        userFetchManager.getUserSimpleInfo(userId: post.createUserId) { [weak self] user in
+            self?.userInfo = user
+        }
     }
     
     func heart() {

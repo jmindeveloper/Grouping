@@ -89,7 +89,8 @@ struct PostView<VM>: View where VM: PostViewModelInterface {
     @ViewBuilder
     private func postUserView() -> some View {
         HStack {
-            Image(systemName: "person.fill")
+            WebImage(url: URL(string: viewModel.userInfo?.profileImagePath ?? ""))
+                .placeholder(Image(systemName: "person.fill"))
                 .resizable()
                 .frame(width: 30, height: 30)
                 .clipShape(Circle())
@@ -97,7 +98,7 @@ struct PostView<VM>: View where VM: PostViewModelInterface {
                     
                 }
             
-            Text(viewModel.post.createUserId)
+            Text(viewModel.userInfo?.nickName ?? "nkne")
             
             Spacer()
             
