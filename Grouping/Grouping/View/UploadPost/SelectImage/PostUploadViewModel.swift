@@ -9,8 +9,7 @@ import Foundation
 import Combine
 import Photos
 
-protocol PostUploadViewModelInterface: ObservableObject {
-    var assets: [PHAsset] { get set }
+protocol PostUploadViewModelInterface: LocalAlbumInterface {
     var selectedImageIndexes: [(index: Int, number: Int, asset: PHAsset)] { get set }
     var collections: [PHAssetCollection] { get }
     var currentCollectionTitle: String { get }
@@ -21,7 +20,6 @@ protocol PostUploadViewModelInterface: ObservableObject {
     func select(index: Int)
     func select(asset: PHAsset)
     func getSelectImageNumbers(index: Int) -> Int?
-    func getSelectImageNumbers(asset: PHAsset) -> Int?
     func selectCollection(_ index: Int)
     func appendTag(_ tag: String)
     func removeTag(_ tag: String)
@@ -32,6 +30,7 @@ final class PostUploadViewModel: PostUploadViewModelInterface {
     private let library = PhotoLibrary()
     private let postManager: PostManagementManagerInterface = PostManagementManager()
     
+    lazy var tapAction: ((_ asset: PHAsset) -> Void) = select(asset:)
     @Published var tags: [String] = []
     @Published var contentText: String = ""
     @Published var selectedGroup: Group? = nil
