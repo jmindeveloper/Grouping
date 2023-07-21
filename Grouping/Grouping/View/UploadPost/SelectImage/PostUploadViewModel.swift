@@ -15,9 +15,6 @@ protocol PostUploadViewModelInterface: LocalAlbumInterface {
     var contentText: String { get set }
     var selectedGroup: Group? { get set }
     
-    func select(index: Int)
-    func select(asset: PHAsset)
-    func getSelectImageNumbers(index: Int) -> Int?
     func selectCollection(_ index: Int)
     func appendTag(_ tag: String)
     func removeTag(_ tag: String)
@@ -27,11 +24,6 @@ protocol PostUploadViewModelInterface: LocalAlbumInterface {
 final class PostUploadViewModel: LocalAlbumGridDefaultViewModel, PostUploadViewModelInterface {
     private let postManager: PostManagementManagerInterface = PostManagementManager()
     
-    override var tapAction: ((_ asset: PHAsset) -> Void) {
-        get {
-            select(asset:)
-        }
-    }
     @Published var tags: [String] = []
     @Published var contentText: String = ""
     @Published var selectedGroup: Group? = nil
@@ -58,85 +50,6 @@ final class PostUploadViewModel: LocalAlbumGridDefaultViewModel, PostUploadViewM
                 self?.assets = result?.assets ?? []
                 self?.objectWillChange.send()
             }.store(in: &subscriptions)
-    }
-    
-    func select(index: Int) {
-        let isContains = selectedImageIndexes.contains {
-            $0.index == index
-        }
-        if isContains {
-            // TODO: - 제거
-            deSelect(assetIndex: index)
-        } else {
-            // TODO: - 추가
-            selectedImageIndexes.append((index, lastNumber + 1, assets[index]))
-            lastNumber += 1
-        }
-    }
-    
-    func select(asset: PHAsset) {
-        let index = selectedImageIndexes.firstIndex {
-            $0.asset == asset
-        }
-        
-        if let index = index {
-            // TODO: - 제거
-            deSelect(selectedImageIndex: index)
-        } else {
-            // TODO: - 추가
-            let index = assets.firstIndex(of: asset) ?? -1
-            selectedImageIndexes.append((index, lastNumber + 1, assets[index]))
-            lastNumber += 1
-        }
-    }
-    
-    private func deSelect(assetIndex: Int) {
-        let arrayIndex = selectedImageIndexes.firstIndex {
-            $0.index == assetIndex
-        }
-        guard let arrayIndex = arrayIndex else {
-            return
-        }
-        
-        let range: ClosedRange<Int> = arrayIndex...selectedImageIndexes.count - 1
-        let numberChangeImages = selectedImageIndexes[range]
-            .map {
-                var v = $0
-                v.number -= 1
-                return v
-            }
-        
-        selectedImageIndexes.replaceSubrange(range, with: numberChangeImages)
-        selectedImageIndexes.removeAll {
-            $0.index == assetIndex
-        }
-        lastNumber -= 1
-    }
-    
-    private func deSelect(selectedImageIndex: Int) {
-        let range: ClosedRange<Int> = selectedImageIndex...selectedImageIndexes.count - 1
-        let numberChangeImages = selectedImageIndexes[range]
-            .map {
-                var v = $0
-                v.number -= 1
-                return v
-            }
-        
-        selectedImageIndexes.replaceSubrange(range, with: numberChangeImages)
-        selectedImageIndexes.remove(at: selectedImageIndex)
-        lastNumber -= 1
-    }
-    
-    func getSelectImageNumbers(index: Int) -> Int? {
-        let index = selectedImageIndexes.firstIndex {
-            index == $0.index
-        }
-        
-        if index == nil {
-            return nil
-        } else {
-            return selectedImageIndexes[index!].number
-        }
     }
     
     func selectCollection(_ index: Int) {
