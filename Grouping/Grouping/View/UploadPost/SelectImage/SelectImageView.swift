@@ -31,7 +31,7 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
                 GeometryReader { proxy in
                     ZStack {
                         
-                        albumGrid()
+                        LocalAlbumGridView(viewModel: viewModel)
                             .padding(.top, 37)
                         
                         VStack {
@@ -91,23 +91,6 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
                 
                 albumCollectionList()
                     .frame(height: showAlbumCollection ? 300 : 0)
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private func albumGrid() -> some View {
-        ScrollView {
-            LazyVGrid(columns: columns, alignment: .leading, spacing: 2, pinnedViews: .sectionFooters) {
-                ForEach(viewModel.assets) { asset in
-                    SelectedImage(asset: asset)
-                        .select(index: viewModel.getSelectImageNumbers(asset: asset))
-                        .frame(width: (Constant.screenWidth - 4) / 3, height: (Constant.screenWidth - 4) / 3)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            viewModel.select(asset: asset)
-                        }
-                }
             }
         }
     }

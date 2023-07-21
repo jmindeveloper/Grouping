@@ -97,9 +97,9 @@ final class PhotoLibrary {
         return result
     }
     
-    func getImageDate(
+    func getImageData(
         with assets: [PHAsset],
-        quality: CGFloat,
+        quality: CGFloat = 0.3,
         completion: (([Data]) -> Void)? = nil
     ) {
         var inputCount: Int = 0

@@ -9,11 +9,8 @@ import Foundation
 import Combine
 import Photos
 
-protocol PostUploadViewModelInterface: ObservableObject {
-    var assets: [PHAsset] { get set }
+protocol PostUploadViewModelInterface: LocalAlbumInterface {
     var selectedImageIndexes: [(index: Int, number: Int, asset: PHAsset)] { get set }
-    var collections: [PHAssetCollection] { get }
-    var currentCollectionTitle: String { get }
     var tags: [String] { get set }
     var contentText: String { get set }
     var selectedGroup: Group? { get set }
@@ -21,22 +18,24 @@ protocol PostUploadViewModelInterface: ObservableObject {
     func select(index: Int)
     func select(asset: PHAsset)
     func getSelectImageNumbers(index: Int) -> Int?
-    func getSelectImageNumbers(asset: PHAsset) -> Int?
     func selectCollection(_ index: Int)
     func appendTag(_ tag: String)
     func removeTag(_ tag: String)
     func upload()
 }
 
-final class PostUploadViewModel: PostUploadViewModelInterface {
-    private let library = PhotoLibrary()
+final class PostUploadViewModel: LocalAlbumGridDefaultViewModel, PostUploadViewModelInterface {
     private let postManager: PostManagementManagerInterface = PostManagementManager()
     
+    override var tapAction: ((_ asset: PHAsset) -> Void) {
+        get {
+            select(asset:)
+        }
+    }
     @Published var tags: [String] = []
     @Published var contentText: String = ""
     @Published var selectedGroup: Group? = nil
-    @Published var assets: [PHAsset] = []
-    @Published var selectedImageIndexes: [(index: Int, number: Int, asset: PHAsset)] = [] {
+    override var selectedImageIndexes: [(index: Int, number: Int, asset: PHAsset)] {
         didSet {
             if selectedImageIndexes.count > 5 {
                 selectedImageIndexes.removeLast()
@@ -45,21 +44,9 @@ final class PostUploadViewModel: PostUploadViewModelInterface {
         }
     }
     
-    var collections: [PHAssetCollection] {
-        library.collections
-    }
-    
-    var currentCollectionTitle: String {
-        library.currentCollection.localizedTitle ?? ""
-    }
-    
     private var lastNumber: Int = 0
     
     private var subscriptions = Set<AnyCancellable>()
-    
-    init() {
-        binding()
-    }
     
     deinit {
         print("SelectImageViewModel", #function)
@@ -140,18 +127,6 @@ final class PostUploadViewModel: PostUploadViewModelInterface {
         lastNumber -= 1
     }
     
-    func getSelectImageNumbers(asset: PHAsset) -> Int? {
-        let index = selectedImageIndexes.firstIndex {
-            asset == $0.asset
-        }
-        
-        if index == nil {
-            return nil
-        } else {
-            return selectedImageIndexes[index!].number
-        }
-    }
-    
     func getSelectImageNumbers(index: Int) -> Int? {
         let index = selectedImageIndexes.firstIndex {
             index == $0.index
@@ -190,7 +165,7 @@ final class PostUploadViewModel: PostUploadViewModelInterface {
     func upload() {
         let selectAssets = selectedImageIndexes.map { $0.asset }
         
-        library.getImageDate(with: selectAssets, quality: 0.3) { [weak self] data in
+        library.getImageData(with: selectAssets, quality: 0.3) { [weak self] data in
             guard let self = self else {
                 return
             }

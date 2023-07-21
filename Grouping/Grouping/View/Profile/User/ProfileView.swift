@@ -43,8 +43,10 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
     private func userInfoView() -> some View {
         VStack(spacing: 0) {
             HStack {
-                Image("test_image_5")
+                WebImage(url: URL(string: viewModel.user?.profileImagePath ?? ""))
+                    .placeholder(Image(systemName: "person.fill"))
                     .resizable()
+                    .scaledToFill()
                     .frame(width: 90, height: 90)
                     .clipShape(Circle())
                     .padding(.leading, 16)
