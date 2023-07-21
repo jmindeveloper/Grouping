@@ -15,6 +15,7 @@ protocol PostViewModelInterface: ObservableObject {
     var content: String { get set }
     var isHeart: Bool { get }
     var userBookMarkContains: Bool { get set }
+    var isMyPost: Bool { get }
     
     init(post: Post)
     
@@ -36,6 +37,13 @@ final class PostViewModel: PostViewModelInterface {
     @Published var tags: [String] = []
     @Published var content: String = ""
     @Published var userBookMarkContains: Bool
+    var isMyPost: Bool {
+        if (user?.id ?? "") == post.createUserId {
+            return true
+        } else {
+            return false
+        }
+    }
     var isHeart: Bool {
         post.heartUsers.contains(user?.id ?? "")
     }
