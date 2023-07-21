@@ -31,7 +31,6 @@ final class PostUploadViewModel: LocalAlbumGridDefaultViewModel, PostUploadViewM
         get {
             select(asset:)
         }
-        set { }
     }
     @Published var tags: [String] = []
     @Published var contentText: String = ""
@@ -166,7 +165,7 @@ final class PostUploadViewModel: LocalAlbumGridDefaultViewModel, PostUploadViewM
     func upload() {
         let selectAssets = selectedImageIndexes.map { $0.asset }
         
-        library.getImageDate(with: selectAssets, quality: 0.3) { [weak self] data in
+        library.getImageData(with: selectAssets, quality: 0.3) { [weak self] data in
             guard let self = self else {
                 return
             }

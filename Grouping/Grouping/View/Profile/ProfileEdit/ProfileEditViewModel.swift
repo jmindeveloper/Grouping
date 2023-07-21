@@ -7,15 +7,20 @@
 
 import Foundation
 import Combine
+import Photos
+import FirebaseStorage
 
-protocol ProfileEditViewModelInterface: ObservableObject {
+protocol ProfileEditViewModelInterface: LocalAlbumInterface {
     var user: User? { get set }
     var nickName: String { get set }
+    var profileImageLocalData: Data? { get set }
     
     func update()
 }
 
-final class ProfileEditViewModel: ProfileEditViewModelInterface {
+final class ProfileEditViewModel: LocalAlbumGridDefaultViewModel, ProfileEditViewModelInterface {
+    
+    @Published var profileImageLocalData: Data? = nil
     var user: User? {
         didSet {
             nickName = user?.nickName ?? ""
@@ -25,7 +30,12 @@ final class ProfileEditViewModel: ProfileEditViewModelInterface {
     
     private var subscriptions = Set<AnyCancellable>()
     
-    init() {
+    override var tapAction: ((PHAsset) -> Void) {
+        selectProfileImage(asset:)
+    }
+    
+    override init() {
+        super.init()
         user = UserAuthManager.shared.user
         nickName = user?.nickName ?? ""
         
@@ -41,10 +51,53 @@ final class ProfileEditViewModel: ProfileEditViewModelInterface {
     
     func update() {
         guard let user = user else { return }
-        user.nickName = nickName
-        UserAuthManager.shared.updateUser(user: user) { [weak self] in
-            self?.user = UserAuthManager.shared.user
-            self?.objectWillChange.send()
+        
+        uploadProfileImage { [weak self] url in
+            guard let self = self else { return }
+            user.nickName = nickName
+            if url != nil {
+                user.profileImagePath = url
+            }
+            UserAuthManager.shared.updateUser(user: user) { [weak self] in
+                self?.user = UserAuthManager.shared.user
+                self?.objectWillChange.send()
+            }
         }
+    }
+    
+    func selectProfileImage(asset: PHAsset) {
+        library.getImageData(with: [asset]) { [weak self] data in
+            self?.profileImageLocalData = data.first
+        }
+    }
+    
+    private func uploadProfileImage(completion: ((_ url: String?) -> Void)? = nil) {
+        guard let user = user else {
+            return
+        }
+        guard let data = profileImageLocalData else {
+            completion?(nil)
+            return
+        }
+        
+        let ref = Storage.storage().reference()
+            .child("Users/\(user.id)/ProfileImage/\(UUID().uuidString).jpg")
+        
+        ref.putData(data) { meta, error in
+                guard error == nil else {
+                    print(error!.localizedDescription)
+                    completion?(nil)
+                    return
+                }
+                
+                ref.downloadURL { url, error in
+                    guard error == nil else {
+                        print(error!.localizedDescription)
+                        completion?(nil)
+                        return
+                    }
+                    completion?(url?.absoluteString)
+                }
+            }
     }
 }

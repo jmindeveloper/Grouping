@@ -11,7 +11,7 @@ import Combine
 
 protocol LocalAlbumInterface: ObservableObject {
     var assets: [PHAsset] { get set }
-    var tapAction: ((_ asset: PHAsset) -> Void) { get set }
+    var tapAction: ((_ asset: PHAsset) -> Void) { get }
     var collections: [PHAssetCollection] { get }
     var currentCollectionTitle: String { get }
     
@@ -38,7 +38,6 @@ class LocalAlbumGridDefaultViewModel: LocalAlbumInterface {
         get {
             { _ in }
         }
-        set { }
     }
     
     private var subscriptions = Set<AnyCancellable>()

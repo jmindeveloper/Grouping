@@ -46,6 +46,7 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
                 WebImage(url: URL(string: viewModel.user?.profileImagePath ?? ""))
                     .placeholder(Image(systemName: "person.fill"))
                     .resizable()
+                    .scaledToFill()
                     .frame(width: 90, height: 90)
                     .clipShape(Circle())
                     .padding(.leading, 16)

@@ -92,6 +92,7 @@ struct PostView<VM>: View where VM: PostViewModelInterface {
             WebImage(url: URL(string: viewModel.userInfo?.profileImagePath ?? ""))
                 .placeholder(Image(systemName: "person.fill"))
                 .resizable()
+                .scaledToFill()
                 .frame(width: 30, height: 30)
                 .clipShape(Circle())
                 .onTapGesture {
