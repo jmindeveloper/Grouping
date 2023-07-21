@@ -61,6 +61,7 @@ struct ProfileEditView<VM>: View where VM: ProfileEditViewModelInterface {
         .fullScreenCover(isPresented: $showSelectImageView) {
             NavigationView {
                 LocalAlbumGridView(viewModel: viewModel)
+                    .multiSelect(false)
                     .navigationTitle("프로필 이미지 선택")
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
