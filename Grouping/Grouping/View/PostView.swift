@@ -112,7 +112,7 @@ struct PostView<VM>: View where VM: PostViewModelInterface {
                                 print("수정")
                             }
                             .addAction(actionTitle: "삭제", style: .destructive) { _ in
-                                print("삭제")
+                                viewModel.deletePost()
                             }
                             .addAction(actionTitle: "취소", style: .cancel) { _ in
                                 print("취소")
