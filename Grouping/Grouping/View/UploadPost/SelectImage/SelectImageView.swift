@@ -32,6 +32,7 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
                     ZStack {
                         
                         LocalAlbumGridView(viewModel: viewModel)
+                            .multiSelect(true)
                             .padding(.top, 37)
                         
                         VStack {

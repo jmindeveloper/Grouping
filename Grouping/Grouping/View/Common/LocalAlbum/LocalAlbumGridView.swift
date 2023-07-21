@@ -18,8 +18,16 @@ struct LocalAlbumGridView<VM>: View where VM: LocalAlbumInterface {
     
     @ObservedObject var viewModel: VM
     
+    private var multiSelect: Bool
+    
     init(viewModel: VM) {
+        self.init(viewModel: viewModel, multiSelect: true)
+    }
+    
+    private init(viewModel: VM, multiSelect: Bool) {
         self.viewModel = viewModel
+        self.multiSelect = multiSelect
+        self.viewModel.multiSelect = multiSelect
     }
     
     var body: some View {
@@ -36,6 +44,10 @@ struct LocalAlbumGridView<VM>: View where VM: LocalAlbumInterface {
                 }
             }
         }
+    }
+    
+    func multiSelect(_ on: Bool) -> LocalAlbumGridView {
+        .init(viewModel: viewModel, multiSelect: on)
     }
 }
 

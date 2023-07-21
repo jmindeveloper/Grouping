@@ -73,7 +73,7 @@ struct SelectedImage: View {
                     HStack(spacing: 0) {
                         Spacer()
                         
-                        Text("\(selectedIndex)")
+                        Text(selectedIndex > 0 ? "\(selectedIndex)" : "")
                             .foregroundColor(.white)
                             .font(.system(size: 14 ,weight: .semibold))
                             .background(
