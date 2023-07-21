@@ -36,8 +36,6 @@ final class PostUploadViewModel: LocalAlbumGridDefaultViewModel, PostUploadViewM
         }
     }
     
-    private var lastNumber: Int = 0
-    
     private var subscriptions = Set<AnyCancellable>()
     
     deinit {

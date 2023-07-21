@@ -38,7 +38,7 @@ class LocalAlbumGridDefaultViewModel: LocalAlbumInterface {
     
     var multiSelect: Bool = true
     
-    private var lastNumber: Int = 0
+    var lastNumber: Int = 0
     var tapAction: ((PHAsset) -> Void) {
         get {
             if multiSelect {
