@@ -15,11 +15,13 @@ protocol PostViewModelInterface: ObservableObject {
     var content: String { get set }
     var isHeart: Bool { get }
     var userBookMarkContains: Bool { get set }
+    var isMyPost: Bool { get }
     
     init(post: Post)
     
     func heart()
     func bookMark()
+    func deletePost()
 }
 
 final class PostViewModel: PostViewModelInterface {
@@ -36,12 +38,20 @@ final class PostViewModel: PostViewModelInterface {
     @Published var tags: [String] = []
     @Published var content: String = ""
     @Published var userBookMarkContains: Bool
+    var isMyPost: Bool {
+        if (user?.id ?? "") == post.createUserId {
+            return true
+        } else {
+            return false
+        }
+    }
     var isHeart: Bool {
         post.heartUsers.contains(user?.id ?? "")
     }
     
-    let interactionManager: PostInteractionManagerInterface = PostInteractionManager()
-    let userFetchManager: FetchUserManagerInterface = FetchUserManager.default
+    private let interactionManager: PostInteractionManagerInterface = PostInteractionManager()
+    private let userFetchManager: FetchUserManagerInterface = FetchUserManager.default
+    private let postManagementManager: PostManagementManagerInterface = PostManagementManager()
     
     init(post: Post) {
         self.post = post
@@ -66,6 +76,12 @@ final class PostViewModel: PostViewModelInterface {
         interactionManager.bookMark(post: post) { [weak self] ids in
             guard let self = self else { return }
             self.userBookMarkContains = ids.contains(self.post.id)
+        }
+    }
+    
+    func deletePost() {
+        postManagementManager.delete(post: post) { isSuccess in
+            
         }
     }
 }

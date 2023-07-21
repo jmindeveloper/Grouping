@@ -104,8 +104,27 @@ struct PostView<VM>: View where VM: PostViewModelInterface {
             Spacer()
             
             Image(systemName: "ellipsis")
+                .clipShape(Rectangle())
                 .onTapGesture {
-                    
+                    if viewModel.isMyPost {
+                        AlertManager(style: .actionSheet)
+                            .addAction(actionTitle: "수정", style: .default) { _ in
+                                print("수정")
+                            }
+                            .addAction(actionTitle: "삭제", style: .destructive) { _ in
+                                viewModel.deletePost()
+                            }
+                            .addAction(actionTitle: "취소", style: .cancel) { _ in
+                                print("취소")
+                            }
+                            .present()
+                    } else {
+                        AlertManager(style: .actionSheet)
+                            .addAction(actionTitle: "취소", style: .cancel) { _ in
+                                print("취소")
+                            }
+                            .present()
+                    }
                 }
         }
     }
