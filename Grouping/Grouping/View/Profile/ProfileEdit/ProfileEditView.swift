@@ -78,6 +78,7 @@ struct ProfileEditView<VM>: View where VM: ProfileEditViewModelInterface {
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button {
+                                viewModel.selectProfileImage()
                                 showSelectImageView.toggle()
                             } label: {
                                 Text("완료")

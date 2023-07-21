@@ -16,6 +16,7 @@ protocol ProfileEditViewModelInterface: LocalAlbumInterface {
     var profileImageLocalData: Data? { get set }
     
     func update()
+    func selectProfileImage()
 }
 
 final class ProfileEditViewModel: LocalAlbumGridDefaultViewModel, ProfileEditViewModelInterface {
@@ -29,10 +30,6 @@ final class ProfileEditViewModel: LocalAlbumGridDefaultViewModel, ProfileEditVie
     @Published var nickName: String = ""
     
     private var subscriptions = Set<AnyCancellable>()
-    
-    override var tapAction: ((PHAsset) -> Void) {
-        selectProfileImage(asset:)
-    }
     
     override init() {
         super.init()
@@ -65,8 +62,8 @@ final class ProfileEditViewModel: LocalAlbumGridDefaultViewModel, ProfileEditVie
         }
     }
     
-    func selectProfileImage(asset: PHAsset) {
-        library.getImageData(with: [asset]) { [weak self] data in
+    func selectProfileImage() {
+        library.getImageData(with: selectedImageIndexes.map { $0.asset }) { [weak self] data in
             self?.profileImageLocalData = data.first
         }
     }
