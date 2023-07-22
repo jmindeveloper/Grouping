@@ -31,8 +31,9 @@ final class PostManagementManager: PostManagementManagerInterface {
         guard let user = UserAuthManager.shared.user else {
             return
         }
+        let postId = UUID().uuidString
         
-        uploadImages(images: images) { totalCount, doneCount in
+        uploadImages(id: postId, images: images) { totalCount, doneCount in
             print("uploadCount --> ", totalCount, doneCount)
         } completion: { [weak self] urlStrings in
             guard let self = self else { return }
@@ -160,6 +161,7 @@ final class PostManagementManager: PostManagementManagerInterface {
     }
     
     private func uploadImages(
+        id: String,
         images: [Data],
         uploadDoneCount: ((_ totalCount: Int, _ doneCount: Int) -> Void)? = nil,
         completion: ((_ urlStrings: [String]) -> Void)? = nil
@@ -170,7 +172,7 @@ final class PostManagementManager: PostManagementManagerInterface {
         var doneCount = 0
         var urlStrings: [String] = []
         
-        let ref = ref.child("Users/\(user.id)/post/images")
+        let ref = ref.child("Post/\(id)/images")
         for image in images {
             let ref = ref.child(UUID().uuidString + ".jpg")
             ref.putData(image) { meta, error in
