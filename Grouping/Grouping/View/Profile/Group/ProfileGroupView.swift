@@ -18,12 +18,11 @@ struct ProfileGroupView<VM>: View where VM: ProfileViewModelInterface {
     
     var body: some View {
         ScrollView {
-            VStack {
+            VStack(spacing: 0) {
                 ForEach(viewModel.groups, id: \.groupId) { group in
-                    Text(group.groupName)
-                        .onTapGesture {
-                            groupSelectAction?(group)
-                        }
+                    ProfileGroupCell(group: group)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 3)
                 }
             }
         }
