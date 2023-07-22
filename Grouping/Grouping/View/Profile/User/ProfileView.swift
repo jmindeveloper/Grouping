@@ -11,6 +11,7 @@ import SDWebImageSwiftUI
 struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
     @EnvironmentObject var viewModel: VM
     @State var isShowPost: Bool = true
+    @State var createGroup: Bool = false
     
     var columns = Array(
         repeating: GridItem(
@@ -24,18 +25,16 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
         ScrollView {
             userInfoView()
             
-            albumGrid()
+            if isShowPost {
+                albumGrid()
+            } else {
+                ProfileGroupView<ProfileViewModel>()
+            }
         }
         .navigationTitle(viewModel.user?.nickName ?? "Profile")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink {
-                    ProfileGroupView<ProfileViewModel>()
-                } label: {
-                    Text("Group")
-                }
-            }
+        .fullScreenCover(isPresented: $createGroup) {
+            CreateGroupView(viewModel: CreateGroupViewModel())
         }
     }
     
@@ -44,7 +43,7 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
         VStack(spacing: 0) {
             HStack {
                 WebImage(url: URL(string: viewModel.user?.profileImagePath ?? ""))
-                    .placeholder(Image(systemName: "person.fill"))
+                    .placeholder(Image(systemName: "person.fill").resizable())
                     .resizable()
                     .scaledToFill()
                     .frame(width: 90, height: 90)
