@@ -41,6 +41,12 @@ struct PostView<VM>: View where VM: PostViewModelInterface {
                 .padding(.vertical, 6)
                 .padding(.bottom, 2)
             
+            if viewModel.post.groupId != nil {
+                groupView()
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 3)
+            }
+            
             if !viewModel.tags.isEmpty {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
@@ -172,6 +178,23 @@ struct PostView<VM>: View where VM: PostViewModelInterface {
                 .frame(width: 20, height: 20)
             }
         }
+    }
+    
+    @ViewBuilder
+    private func groupView() -> some View {
+        HStack {
+            Text("그룹 이름")
+                .lineLimit(1)
+                .font(.system(size: 21, weight: .semibold))
+            
+            Spacer()
+            
+            Image(systemName: "chevron.right")
+        }
+        .padding(.vertical, 6)
+        .padding(.horizontal, 16)
+        .background(Color(uiColor: .systemGray3))
+        .clipShape(RoundedRectangle(cornerRadius: 6))
     }
 }
 
