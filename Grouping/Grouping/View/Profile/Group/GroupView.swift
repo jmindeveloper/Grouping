@@ -20,10 +20,23 @@ struct GroupView: View {
         }
     }
     
+    @State var imageScale: CGFloat = 1 {
+        didSet {
+            if imageScale < 1 {
+                imageScale = 1
+            }
+        }
+    }
+    
     var body: some View {
         ZStack {
-            ScrollView {
+            
+            ScrollOffsetView { offset in
+                print(offset)
+                imageScale = 1 + (offset / (Constant.screenWidth / 2))
+            } content: {
                 imageHeader()
+                    .scaleEffect(CGSize(width: imageScale, height: imageScale))
                 
                 EmptyView()
                     .frame(height: 10000)
