@@ -41,7 +41,11 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
             CreateGroupView(viewModel: CreateGroupViewModel())
         }
         .fullScreenCover(item: $selectedGroup) { group in
-            GroupView()
+            NavigationView {
+                GroupView(group: group)
+                    .navigationBarHidden(true)
+            }
+            
         }
     }
     
