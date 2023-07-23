@@ -10,6 +10,7 @@ import SDWebImageSwiftUI
 
 struct PostView<VM>: View where VM: PostViewModelInterface {
     @State var showFullText: Bool = false
+    @State var showGroupView: Bool = false
     @ObservedObject var viewModel: VM
     
     var body: some View {
@@ -43,8 +44,12 @@ struct PostView<VM>: View where VM: PostViewModelInterface {
             
             if viewModel.post.groupId != nil {
                 groupView()
+                    .contentShape(Rectangle())
                     .padding(.horizontal, 16)
                     .padding(.bottom, 3)
+                    .onTapGesture {
+                        showGroupView = true
+                    }
             }
             
             if !viewModel.tags.isEmpty {
@@ -89,6 +94,13 @@ struct PostView<VM>: View where VM: PostViewModelInterface {
             }
             .padding(.horizontal, 16)
             .padding(.top, 3)
+        }
+        .fullScreenCover(isPresented: $showGroupView) {
+            NavigationView {
+                GroupView<GroupViewModel>()
+                    .environmentObject(GroupViewModel(group: viewModel.group!))
+                    .navigationBarHidden(true)
+            }
         }
     }
     
