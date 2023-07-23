@@ -9,11 +9,22 @@ import SwiftUI
 
 struct GroupView: View {
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.colorScheme) var colorScheme
+    
+    var gradientColor: [Color] {
+        if colorScheme == .dark {
+            return [.clear, .black]
+        } else {
+            return [.clear, .white]
+        }
+    }
     
     var body: some View {
         ZStack {
             ScrollView {
-                Color.red
+                imageHeader()
+                
+                EmptyView()
                     .frame(height: 10000)
             }
             .ignoresSafeArea(edges: [.all])
@@ -42,6 +53,20 @@ struct GroupView: View {
                 Spacer()
             }
         }
+    }
+    
+    @ViewBuilder
+    private func imageHeader() -> some View {
+        ZStack {
+            Image("test_image_1")
+                .resizable()
+                .scaledToFill()
+                .clipped()
+                .overlay(
+                    LinearGradient(colors: gradientColor, startPoint: .center, endPoint: .bottom)
+                )
+        }
+        .frame(height: Constant.screenHeight / 2)
     }
 }
 
