@@ -47,7 +47,8 @@ let dummyPostData: [Post] = [
         createdAt: Date(),
         heartUsers: ["3939, 5322, 0532"],
         commentCount: 0,
-        tags: ["배고프다", "힘들다", "어렵다"]
+        tags: ["배고프다", "힘들다", "어렵다"],
+        groupId: "dkdk"
     ),
     Post(
         id: UUID().uuidString,

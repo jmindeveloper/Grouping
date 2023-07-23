@@ -10,6 +10,7 @@ import SDWebImageSwiftUI
 
 struct PostView<VM>: View where VM: PostViewModelInterface {
     @State var showFullText: Bool = false
+    @State var showGroupView: Bool = false
     @ObservedObject var viewModel: VM
     
     var body: some View {
@@ -40,6 +41,16 @@ struct PostView<VM>: View where VM: PostViewModelInterface {
                 .padding(.horizontal, 16)
                 .padding(.vertical, 6)
                 .padding(.bottom, 2)
+            
+            if viewModel.post.groupId != nil {
+                groupView()
+                    .contentShape(Rectangle())
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 3)
+                    .onTapGesture {
+                        showGroupView = true
+                    }
+            }
             
             if !viewModel.tags.isEmpty {
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -83,6 +94,13 @@ struct PostView<VM>: View where VM: PostViewModelInterface {
             }
             .padding(.horizontal, 16)
             .padding(.top, 3)
+        }
+        .fullScreenCover(isPresented: $showGroupView) {
+            NavigationView {
+                GroupView<GroupViewModel>()
+                    .environmentObject(GroupViewModel(group: viewModel.group!))
+                    .navigationBarHidden(true)
+            }
         }
     }
     
@@ -172,6 +190,23 @@ struct PostView<VM>: View where VM: PostViewModelInterface {
                 .frame(width: 20, height: 20)
             }
         }
+    }
+    
+    @ViewBuilder
+    private func groupView() -> some View {
+        HStack {
+            Text(viewModel.group?.groupName ?? "")
+                .lineLimit(1)
+                .font(.system(size: 21, weight: .semibold))
+            
+            Spacer()
+            
+            Image(systemName: "chevron.right")
+        }
+        .padding(.vertical, 6)
+        .padding(.horizontal, 16)
+        .background(Color(uiColor: .systemGray3))
+        .clipShape(RoundedRectangle(cornerRadius: 6))
     }
 }
 

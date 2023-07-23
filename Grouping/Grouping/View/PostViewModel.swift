@@ -16,6 +16,7 @@ protocol PostViewModelInterface: ObservableObject {
     var isHeart: Bool { get }
     var userBookMarkContains: Bool { get set }
     var isMyPost: Bool { get }
+    var group: Group? { get set }
     
     init(post: Post)
     
@@ -38,6 +39,7 @@ final class PostViewModel: PostViewModelInterface {
     @Published var tags: [String] = []
     @Published var content: String = ""
     @Published var userBookMarkContains: Bool
+    @Published var group: Group?
     var isMyPost: Bool {
         if (user?.id ?? "") == post.createUserId {
             return true
@@ -52,6 +54,7 @@ final class PostViewModel: PostViewModelInterface {
     private let interactionManager: PostInteractionManagerInterface = PostInteractionManager()
     private let userFetchManager: FetchUserManagerInterface = FetchUserManager.default
     private let postManagementManager: PostManagementManagerInterface = PostManagementManager()
+    private let fetchGroupManager: FetchGroupManagerInterface?
     
     init(post: Post) {
         self.post = post
@@ -59,10 +62,12 @@ final class PostViewModel: PostViewModelInterface {
         images = post.images
         tags = post.tags
         content = post.content
+        self.fetchGroupManager = FetchGroupManager(groupId: post.groupId)
         
         userFetchManager.getUserSimpleInfo(userId: post.createUserId) { [weak self] user in
             self?.userInfo = user
         }
+        getGroup()
     }
     
     func heart() {
@@ -82,6 +87,12 @@ final class PostViewModel: PostViewModelInterface {
     func deletePost() {
         postManagementManager.delete(post: post) { isSuccess in
             
+        }
+    }
+    
+    func getGroup() {
+        fetchGroupManager?.getGroup { [weak self] group in
+            self?.group = group
         }
     }
 }
