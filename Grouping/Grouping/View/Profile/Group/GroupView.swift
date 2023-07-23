@@ -13,13 +13,21 @@ struct GroupView<VM>: View where VM: GroupViewModelInterface {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var viewModel: VM
     
-    var gradientColor: [Color] {
+    private var gradientColor: [Color] {
         if colorScheme == .dark {
             return [.clear, .black]
         } else {
             return [.clear, .white]
         }
     }
+    
+    private var columns = Array(
+        repeating: GridItem(
+            .flexible(),
+            spacing: 0
+        ),
+        count: 3
+    )
     
     @State var imageScale: CGFloat = 1 {
         didSet {
@@ -37,10 +45,11 @@ struct GroupView<VM>: View where VM: GroupViewModelInterface {
                 imageScale = 1 + (offset / (Constant.screenWidth / 2))
             } content: {
                 imageHeader()
+                    .frame(maxWidth: Constant.screenWidth, minHeight: Constant.screenHeight / 2, maxHeight: Constant.screenHeight / 2)
                     .scaleEffect(CGSize(width: imageScale, height: imageScale))
                 
-                EmptyView()
-                    .frame(height: 10000)
+                albumGrid()
+                    .padding(.top, 15)
             }
             .ignoresSafeArea(edges: [.all])
             
@@ -112,6 +121,25 @@ struct GroupView<VM>: View where VM: GroupViewModelInterface {
                     .padding(.bottom, 50)
                     .padding(.trailing)
                 }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func albumGrid() -> some View {
+        LazyVGrid(columns: columns, alignment: .leading, spacing: 2, pinnedViews: .sectionFooters) {
+            ForEach(viewModel.posts, id: \.id) { post in
+                NavigationLink {
+                    PostFeedView(viewModel: PostFeedViewModel(posts: viewModel.posts))
+                } label: {
+                    WebImage(url: URL(string: post.images[0]))
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: (Constant.screenWidth - 4) / 3, height: (Constant.screenWidth - 4) / 3)
+                        .clipped()
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
             }
         }
     }

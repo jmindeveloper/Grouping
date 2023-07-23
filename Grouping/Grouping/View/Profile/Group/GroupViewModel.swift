@@ -25,8 +25,8 @@ final class GroupViewModel: GroupViewModelInterface {
     }
     
     func getPost() {
-        fetchPostManager.getPosts(ids: group.posts) { post in
-            print("dkdkdkdkddkdkdkdk", post.count)
+        fetchPostManager.getPosts(ids: group.posts) { [weak self] post in
+            self?.posts = post
         }
     }
 }

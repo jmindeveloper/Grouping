@@ -46,7 +46,6 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
                     .environmentObject(GroupViewModel(group: group))
                     .navigationBarHidden(true)
             }
-            
         }
     }
     
