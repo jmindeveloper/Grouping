@@ -13,18 +13,18 @@ protocol FetchGroupManagerInterface {
     init(user: User)
     
     func getUserGroups(completion: (([Group]) -> Void)?)
+    func getGroup(completion: ((Group?) -> Void)?)
 }
 
 final class FetchGroupManager: FetchGroupManagerInterface {
-    private let user: User
     private let groupDB = Firestore.firestore().collection(FBFieldName.group)
-    private let userGroupDB: DocumentReference
+    private let userGroupDB: DocumentReference?
     
     private let userGroupsPublisher = CurrentValueSubject<[Group], Never>([])
     private var subscriptions = Set<AnyCancellable>()
+    private var groupId: String?
     
     init(user: User) {
-        self.user = user
         self.userGroupDB = Firestore
             .firestore()
             .collection(FBFieldName.users)
@@ -33,8 +33,16 @@ final class FetchGroupManager: FetchGroupManagerInterface {
             .document(FBFieldName.group)
     }
     
+    init?(groupId: String?) {
+        if groupId == nil {
+            return nil
+        }
+        self.groupId = groupId
+        self.userGroupDB = nil
+    }
+    
     private func getUserGroupIds(completion: (([String]) -> Void)? = nil) {
-        userGroupDB.getDocument { snapshot, error in
+        userGroupDB?.getDocument { snapshot, error in
             guard error == nil else {
                 print(error!.localizedDescription)
                 return
@@ -70,10 +78,21 @@ final class FetchGroupManager: FetchGroupManagerInterface {
                 .sink { [weak self] groups in
                     completion?(groups)
                     self?.userGroupsPublisher.send(groups)
-                    if self?.user.id == UserAuthManager.shared.user?.id {
-                        FetchGroupManager.loginUserGroup = groups
-                    }
                 }.store(in: &subscriptions)
+        }
+    }
+    
+    func getGroup(completion: ((Group?) -> Void)?) {
+        guard let groupId = groupId else {
+            return
+        }
+        let ref = groupDB.document(groupId)
+        
+        Task {
+            let group = await getGroup(ref: ref)
+            DispatchQueue.main.async {
+                completion?(group)
+            }
         }
     }
     
@@ -85,21 +104,6 @@ final class FetchGroupManager: FetchGroupManagerInterface {
         } catch {
             print(error.localizedDescription)
             return nil
-        }
-    }
-    
-    static var loginUserGroup: [Group]? = nil
-    
-    static func getLoginUserGroup(completion: @escaping (([Group]) -> Void)) {
-        if loginUserGroup != nil {
-            completion(loginUserGroup!)
-        } else {
-            guard let user = UserAuthManager.shared.user else { return }
-            let manager = FetchGroupManager(user: user)
-            manager.getUserGroups { group in
-                loginUserGroup = group
-                completion(group)
-            }
         }
     }
 }

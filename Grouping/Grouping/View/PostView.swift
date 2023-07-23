@@ -183,7 +183,7 @@ struct PostView<VM>: View where VM: PostViewModelInterface {
     @ViewBuilder
     private func groupView() -> some View {
         HStack {
-            Text("그룹 이름")
+            Text(viewModel.group?.groupName ?? "")
                 .lineLimit(1)
                 .font(.system(size: 21, weight: .semibold))
             
