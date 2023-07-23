@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct Group: Codable {
+struct Group: Codable, Identifiable {
+    var id: String {
+        groupId
+    }
+    
     /// 그룹 id
     let groupId: String
     /// group name

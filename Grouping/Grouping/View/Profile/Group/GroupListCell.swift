@@ -24,11 +24,11 @@ struct ProfileGroupCell: View {
                         .lineLimit(1)
                     Spacer()
                 }
-                .padding(.top, 8)
+                .padding(.top, 3)
                 
             }
             .padding(.leading, 16)
-            .padding(.vertical, 3)
+            .padding(.vertical, 6)
             
             Image(systemName: "chevron.right")
                 .padding(.trailing, 16)

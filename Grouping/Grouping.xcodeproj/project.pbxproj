@@ -50,6 +50,7 @@
 		0EAAD35D2A6989070069ECC8 /* LocalAlbumGridDefaultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAAD35C2A6989070069ECC8 /* LocalAlbumGridDefaultViewModel.swift */; };
 		0EAAD35F2A6ABF450069ECC8 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAAD35E2A6ABF450069ECC8 /* AlertManager.swift */; };
 		0EAAD3612A6BE8660069ECC8 /* GroupListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAAD3602A6BE8660069ECC8 /* GroupListCell.swift */; };
+		0EAAD3632A6D057D0069ECC8 /* GroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAAD3622A6D057D0069ECC8 /* GroupView.swift */; };
 		0EF0C6E02A681B2F009F48BB /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF0C6DF2A681B2F009F48BB /* ProfileEditView.swift */; };
 		0EF94C282A601C9F00557CD8 /* PostManagementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C272A601C9F00557CD8 /* PostManagementManager.swift */; };
 		0EF94C2B2A615ECA00557CD8 /* GroupManagementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C2A2A615ECA00557CD8 /* GroupManagementManager.swift */; };
@@ -114,6 +115,7 @@
 		0EAAD35C2A6989070069ECC8 /* LocalAlbumGridDefaultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumGridDefaultViewModel.swift; sourceTree = "<group>"; };
 		0EAAD35E2A6ABF450069ECC8 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		0EAAD3602A6BE8660069ECC8 /* GroupListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListCell.swift; sourceTree = "<group>"; };
+		0EAAD3622A6D057D0069ECC8 /* GroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupView.swift; sourceTree = "<group>"; };
 		0EF0C6DF2A681B2F009F48BB /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		0EF94C272A601C9F00557CD8 /* PostManagementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManagementManager.swift; sourceTree = "<group>"; };
 		0EF94C2A2A615ECA00557CD8 /* GroupManagementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagementManager.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 			children = (
 				0E6C5F932A6559A4006FECEE /* ProfileGroupView.swift */,
 				0EAAD3602A6BE8660069ECC8 /* GroupListCell.swift */,
+				0EAAD3622A6D057D0069ECC8 /* GroupView.swift */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				0E6C5F992A655D30006FECEE /* CreateGroupViewModel.swift in Sources */,
 				0EF94C282A601C9F00557CD8 /* PostManagementManager.swift in Sources */,
 				0E8DBF212A64138B00D374DF /* Publisher+.swift in Sources */,
+				0EAAD3632A6D057D0069ECC8 /* GroupView.swift in Sources */,
 				0EF94C382A6286B800557CD8 /* UITabBar+.swift in Sources */,
 				0E309FD82A5DA75E00191B3B /* EmailSignInView.swift in Sources */,
 				0EAAD3582A6953720069ECC8 /* FetchUserManager.swift in Sources */,
