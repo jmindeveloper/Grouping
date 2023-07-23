@@ -13,6 +13,8 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
     @State var isShowPost: Bool = true
     @State var createGroup: Bool = false
     
+    @State var selectedGroup: Group? = nil
+    
     var columns = Array(
         repeating: GridItem(
             .flexible(),
@@ -28,13 +30,22 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
             if isShowPost {
                 albumGrid()
             } else {
-                ProfileGroupView<ProfileViewModel>()
+                ProfileGroupView<ProfileViewModel> { group in
+                    selectedGroup = group
+                }
             }
         }
         .navigationTitle(viewModel.user?.nickName ?? "Profile")
         .navigationBarTitleDisplayMode(.inline)
         .fullScreenCover(isPresented: $createGroup) {
             CreateGroupView(viewModel: CreateGroupViewModel())
+        }
+        .fullScreenCover(item: $selectedGroup) { group in
+            NavigationView {
+                GroupView<GroupViewModel>()
+                    .environmentObject(GroupViewModel(group: group))
+                    .navigationBarHidden(true)
+            }
         }
     }
     

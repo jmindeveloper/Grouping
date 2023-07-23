@@ -23,6 +23,9 @@ struct ProfileGroupView<VM>: View where VM: ProfileViewModelInterface {
                     ProfileGroupCell(group: group)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 3)
+                        .onTapGesture {
+                            groupSelectAction?(group)
+                        }
                 }
             }
         }

@@ -50,6 +50,9 @@
 		0EAAD35D2A6989070069ECC8 /* LocalAlbumGridDefaultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAAD35C2A6989070069ECC8 /* LocalAlbumGridDefaultViewModel.swift */; };
 		0EAAD35F2A6ABF450069ECC8 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAAD35E2A6ABF450069ECC8 /* AlertManager.swift */; };
 		0EAAD3612A6BE8660069ECC8 /* GroupListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAAD3602A6BE8660069ECC8 /* GroupListCell.swift */; };
+		0EAAD3632A6D057D0069ECC8 /* GroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAAD3622A6D057D0069ECC8 /* GroupView.swift */; };
+		0EAAD3652A6D19970069ECC8 /* ScrollOffsetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EAAD3642A6D19970069ECC8 /* ScrollOffsetView.swift */; };
+		0ED26E962A6D2B06008F2037 /* GroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED26E952A6D2B06008F2037 /* GroupViewModel.swift */; };
 		0EF0C6E02A681B2F009F48BB /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF0C6DF2A681B2F009F48BB /* ProfileEditView.swift */; };
 		0EF94C282A601C9F00557CD8 /* PostManagementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C272A601C9F00557CD8 /* PostManagementManager.swift */; };
 		0EF94C2B2A615ECA00557CD8 /* GroupManagementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C2A2A615ECA00557CD8 /* GroupManagementManager.swift */; };
@@ -114,6 +117,9 @@
 		0EAAD35C2A6989070069ECC8 /* LocalAlbumGridDefaultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAlbumGridDefaultViewModel.swift; sourceTree = "<group>"; };
 		0EAAD35E2A6ABF450069ECC8 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		0EAAD3602A6BE8660069ECC8 /* GroupListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListCell.swift; sourceTree = "<group>"; };
+		0EAAD3622A6D057D0069ECC8 /* GroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupView.swift; sourceTree = "<group>"; };
+		0EAAD3642A6D19970069ECC8 /* ScrollOffsetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollOffsetView.swift; sourceTree = "<group>"; };
+		0ED26E952A6D2B06008F2037 /* GroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewModel.swift; sourceTree = "<group>"; };
 		0EF0C6DF2A681B2F009F48BB /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		0EF94C272A601C9F00557CD8 /* PostManagementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManagementManager.swift; sourceTree = "<group>"; };
 		0EF94C2A2A615ECA00557CD8 /* GroupManagementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagementManager.swift; sourceTree = "<group>"; };
@@ -209,6 +215,8 @@
 			children = (
 				0E6C5F932A6559A4006FECEE /* ProfileGroupView.swift */,
 				0EAAD3602A6BE8660069ECC8 /* GroupListCell.swift */,
+				0EAAD3622A6D057D0069ECC8 /* GroupView.swift */,
+				0ED26E952A6D2B06008F2037 /* GroupViewModel.swift */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -300,6 +308,7 @@
 				0E6CC3432A5AC0B900BE97AD /* RoundedCorner.swift */,
 				0EF94C4C2A63CA4C00557CD8 /* TagView.swift */,
 				0E03F99C2A6816BA006E8FCD /* ValueChangeToggleView.swift */,
+				0EAAD3642A6D19970069ECC8 /* ScrollOffsetView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -623,6 +632,7 @@
 				0E6C5F992A655D30006FECEE /* CreateGroupViewModel.swift in Sources */,
 				0EF94C282A601C9F00557CD8 /* PostManagementManager.swift in Sources */,
 				0E8DBF212A64138B00D374DF /* Publisher+.swift in Sources */,
+				0EAAD3632A6D057D0069ECC8 /* GroupView.swift in Sources */,
 				0EF94C382A6286B800557CD8 /* UITabBar+.swift in Sources */,
 				0E309FD82A5DA75E00191B3B /* EmailSignInView.swift in Sources */,
 				0EAAD3582A6953720069ECC8 /* FetchUserManager.swift in Sources */,
@@ -635,7 +645,9 @@
 				0EF94C2F2A6279DD00557CD8 /* MainTabView.swift in Sources */,
 				0EF94C2B2A615ECA00557CD8 /* GroupManagementManager.swift in Sources */,
 				0E8DBF262A6419D600D374DF /* ProfileViewModel.swift in Sources */,
+				0EAAD3652A6D19970069ECC8 /* ScrollOffsetView.swift in Sources */,
 				0EF94C4D2A63CA4C00557CD8 /* TagView.swift in Sources */,
+				0ED26E962A6D2B06008F2037 /* GroupViewModel.swift in Sources */,
 				0E8DBF2D2A6429CB00D374DF /* PostFeedViewModel.swift in Sources */,
 				0E90B8752A5C1BA9006725B1 /* UIColor+.swift in Sources */,
 				0EF94C3B2A62874600557CD8 /* HiddenTabBar.swift in Sources */,
