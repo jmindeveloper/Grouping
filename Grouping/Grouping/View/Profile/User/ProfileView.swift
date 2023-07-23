@@ -42,7 +42,8 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
         }
         .fullScreenCover(item: $selectedGroup) { group in
             NavigationView {
-                GroupView(group: group)
+                GroupView<GroupViewModel>()
+                    .environmentObject(GroupViewModel(group: group))
                     .navigationBarHidden(true)
             }
             

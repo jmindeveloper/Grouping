@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
-struct GroupView: View {
+struct GroupView<VM>: View where VM: GroupViewModelInterface {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
-    @State var group: Group
+    @EnvironmentObject var viewModel: VM
     
     var gradientColor: [Color] {
         if colorScheme == .dark {
@@ -72,11 +73,12 @@ struct GroupView: View {
     @ViewBuilder
     private func imageHeader() -> some View {
         ZStack {
-            Image("test_image_1")
+            WebImage(url: URL(string: viewModel.group.groupThumbnailImageURL ?? ""))
                 .resizable()
                 .scaledToFill()
-                .frame(maxWidth: Constant.screenWidth)
+                .frame(maxWidth: Constant.screenWidth, minHeight: Constant.screenHeight / 2, maxHeight: Constant.screenHeight / 2)
                 .clipShape(Rectangle())
+                .background(Color.red)
                 .overlay(
                     LinearGradient(colors: gradientColor, startPoint: .center, endPoint: .bottom)
                 )
@@ -85,11 +87,11 @@ struct GroupView: View {
                 Spacer()
                 HStack(alignment: .bottom) {
                     VStack(alignment: .leading, spacing: 0) {
-                        Text(group.groupName)
+                        Text(viewModel.group.groupName)
                             .lineLimit(2)
                             .font(.system(size: 50, weight: .bold))
                         
-                        Text(group.groupDescription)
+                        Text(viewModel.group.groupDescription)
                             .lineLimit(3)
                             .padding(.top)
                     }
@@ -112,12 +114,5 @@ struct GroupView: View {
                 }
             }
         }
-        .frame(height: Constant.screenHeight / 2)
-    }
-}
-
-struct GroupView_Previews: PreviewProvider {
-    static var previews: some View {
-        GroupView(group: Group(groupId: "dkdkdk", groupName: "더미그룹1", groupDescription: "더미그룹1입니당...\naslkdfjasl;dkjf\nfkfkglksj", posts: [], createUserId: "", managementUsers: [], shareMembers: [], startUsers: [], approvalWaitingUsers: []))
     }
 }
