@@ -21,7 +21,8 @@ final class GroupViewModel: GroupViewModelInterface {
     private let fetchPostManager: FetchPostManagerInterface = FetchPostManager()
     
     init(group: Group) {
-        self.group = group; getPost()
+        self.group = group
+        getPost()
     }
     
     func getPost() {

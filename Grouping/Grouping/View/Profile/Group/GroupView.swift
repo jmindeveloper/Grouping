@@ -99,9 +99,11 @@ struct GroupView<VM>: View where VM: GroupViewModelInterface {
                         Text(viewModel.group.groupName)
                             .lineLimit(2)
                             .font(.system(size: 50, weight: .bold))
+                            .shadow(radius: 1, x: 0, y: 1)
                         
                         Text(viewModel.group.groupDescription)
                             .lineLimit(3)
+                            .shadow(radius: 1, x: 0, y: 1)
                             .padding(.top)
                     }
                     .padding([.leading])
