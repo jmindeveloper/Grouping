@@ -14,6 +14,7 @@ struct MainTabView: View {
     @StateObject private var currentUserProfileViewModel = ProfileViewModel()
     @StateObject private var postUploadViewModel = PostUploadViewModel()
     @StateObject private var postFeedViewModel = PostFeedViewModel()
+    @StateObject private var searchViewModel = SearchViewModel()
     
     var body: some View {
         TabView(selection: $selection) {
@@ -42,7 +43,7 @@ struct MainTabView: View {
                 }
                 .tag(2)
             
-            SearchView()
+            SearchView(viewModel: searchViewModel)
                 .onAppear {
                     UITabBar.showTabBar(animated: true)
                 }
