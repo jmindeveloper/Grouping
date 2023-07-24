@@ -28,7 +28,7 @@ struct SearchView: View {
                     .padding(.leading, 10)
                 
                 Button {
-                    
+                    searchText.removeAll()
                 } label: {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundColor(.init(uiColor: .systemGray3))
