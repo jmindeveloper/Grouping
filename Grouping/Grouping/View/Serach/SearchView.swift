@@ -16,24 +16,30 @@ struct SearchView<VM>: View where VM: SearchViewModelInterface {
                 searchBar()
                 if !viewModel.searchText.isEmpty {
                     Divider()
-                    searchCollectionCategory(category: "Tag로 검색하기")
-                        .onTapGesture {
-                            print("tag검색")
-                        }
+                    NavigationLink {
+                        SearchResultView()
+                    } label: {
+                        searchCollectionCategory(category: "Tag로 검색하기")
+                    }
                     Divider()
-                    searchCollectionCategory(category: "그룹에서 검색하기")
-                        .onTapGesture {
-                            print("그룹검색")
-                        }
+                    NavigationLink {
+                        SearchResultView()
+                    } label: {
+                        searchCollectionCategory(category: "그룹에서 검색하기")
+                    }
                     Divider()
-                    searchCollectionCategory(category: "유저 검색하기")
-                        .onTapGesture {
-                            print("유저검색")
-                        }
+                    NavigationLink {
+                        SearchResultView()
+                    } label: {
+                        searchCollectionCategory(category: "유저 검색하기")
+                    }
+                    
                     Divider()
                 }
                 Spacer()
             }
+            .navigationTitle("Search")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
