@@ -40,7 +40,7 @@ struct MainTabView: View {
                 }
                 .tag(2)
             
-            Text("Search")
+            SearchView()
                 .onAppear {
                     UITabBar.showTabBar(animated: true)
                 }
