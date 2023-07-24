@@ -12,10 +12,12 @@ struct MainTabView: View {
     @State private var previousTab: Int = 0
     
     @StateObject private var currentUserProfileViewModel = ProfileViewModel()
+    @StateObject private var postUploadViewModel = PostUploadViewModel()
+    @StateObject private var postFeedViewModel = PostFeedViewModel()
     
     var body: some View {
         TabView(selection: $selection) {
-            PostFeedView(viewModel: PostFeedViewModel())
+            PostFeedView(viewModel: postFeedViewModel)
                 .onAppear {
                     UITabBar.showTabBar(animated: true)
                 }
@@ -34,7 +36,7 @@ struct MainTabView: View {
                 .tag(1)
             
             SelectImageView<PostUploadViewModel>(tabSelectionIndex: $selection, previousTab: previousTab)
-                .environmentObject(PostUploadViewModel())
+                .environmentObject(postUploadViewModel)
                 .tabItem {
                     Image(systemName: "plus.circle")
                 }
