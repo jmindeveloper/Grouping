@@ -13,8 +13,8 @@ protocol ProfileViewModelInterface: ObservableObject {
     var posts: [Post] { get set }
     var groups: [Group] { get set }
     var postCount: Int { get }
-    var followerCount: Int { get }
-    var followingCount: Int { get }
+    var follower: [String] { get }
+    var following: [String] { get }
     var userIsMe: Bool { get }
     
     func getUserGroups()
@@ -36,12 +36,12 @@ final class ProfileViewModel: ProfileViewModelInterface {
         posts.count
     }
     
-    var followerCount: Int {
-        return user?.followers.count ?? 0
+    var follower: [String] {
+        return user?.followers ?? []
     }
     
-    var followingCount: Int {
-        return user?.following.count ?? 0
+    var following: [String] {
+        return user?.following ?? []
     }
     
     init() {

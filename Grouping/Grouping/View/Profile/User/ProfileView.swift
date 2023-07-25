@@ -68,18 +68,24 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
                         .padding(.horizontal, 6)
                     
                     NavigationLink {
-                        Text("follower")
+                        ScrollView {
+                            UserListView(viewModel: UserListViewModel(ids: viewModel.follower))
+                        }
+                        .navigationTitle("팔로워")
                     } label: {
-                        bottomTitleTopValueView(title: "팔로워", value: "\(viewModel.followerCount)")
+                        bottomTitleTopValueView(title: "팔로워", value: "\(viewModel.follower.count)")
                             .contentShape(Rectangle())
                             .padding(.horizontal, 6)
                     }
                     .buttonStyle(.plain)
                     
                     NavigationLink {
-                        Text("following")
+                        ScrollView {
+                            UserListView(viewModel: UserListViewModel(ids: viewModel.following))
+                        }
+                        .navigationTitle("팔로잉")
                     } label: {
-                        bottomTitleTopValueView(title: "팔로잉", value: "\(viewModel.followingCount)")
+                        bottomTitleTopValueView(title: "팔로잉", value: "\(viewModel.following.count)")
                             .contentShape(Rectangle())
                             .padding(.horizontal, 6)
                     }
