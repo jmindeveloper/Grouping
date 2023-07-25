@@ -7,8 +7,14 @@
 
 import SwiftUI
 
-struct SearchResultView: View {
+struct SearchResultView<VM>: View where VM: SearchResultViewModelInterface {
+    @ObservedObject var viewModel: VM
+    
     var body: some View {
-        Text("dkdkfjdksjaf")
+        VStack {
+            ForEach((viewModel as! UserSearchResultViewModel).users, id: \.id) { user in
+                Text(user.nickName)
+            }
+        }
     }
 }

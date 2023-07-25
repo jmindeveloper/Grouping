@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+struct LazyView<Content: View>: View {
+    let build: () -> Content
+    init(_ build: @autoclosure @escaping () -> Content) {
+        self.build = build
+    }
+    var body: Content {
+        build()
+    }
+}
+
 struct SearchView<VM>: View where VM: SearchViewModelInterface {
     @ObservedObject var viewModel: VM
     
@@ -17,19 +27,28 @@ struct SearchView<VM>: View where VM: SearchViewModelInterface {
                 if !viewModel.searchText.isEmpty {
                     Divider()
                     NavigationLink {
-                        SearchResultView()
+                        LazyView(
+                            SearchResultView(viewModel: TagSearchResultViewModel(searchText: viewModel.searchText))
+                        )
+                        
                     } label: {
-                        searchCollectionCategory(category: "Tag로 검색하기")
+                        LazyView(
+                            searchCollectionCategory(category: "Tag로 검색하기")
+                        )
                     }
                     Divider()
                     NavigationLink {
-                        SearchResultView()
+                        LazyView(
+                            SearchResultView(viewModel: GroupSearchResultViewModel(searchText: viewModel.searchText))
+                        )
                     } label: {
                         searchCollectionCategory(category: "그룹에서 검색하기")
                     }
                     Divider()
                     NavigationLink {
-                        SearchResultView()
+                        LazyView(
+                            SearchResultView(viewModel: UserSearchResultViewModel(searchText: viewModel.searchText))
+                            )
                     } label: {
                         searchCollectionCategory(category: "유저 검색하기")
                     }

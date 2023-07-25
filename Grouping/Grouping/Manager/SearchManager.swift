@@ -50,8 +50,8 @@ final class SearchManager: SearchManagerInterface {
     func searchContainsField(collection: Collection, fieldName: String, keyword: String, completion: (([QueryDocumentSnapshot]) -> Void)? = nil) {
         let query = Firestore.firestore()
             .collection(collection.fieldName)
-            .whereField(fieldName, isGreaterThan: keyword)
-            .whereField(fieldName, isLessThan: keyword + "\u{f8ff}")
+            .whereField(fieldName, isGreaterThanOrEqualTo: keyword)
+            .whereField(fieldName, isLessThanOrEqualTo: keyword + "\u{10FFFF}")
         
         query.getDocuments { snapshot, error in
             guard error == nil else {
