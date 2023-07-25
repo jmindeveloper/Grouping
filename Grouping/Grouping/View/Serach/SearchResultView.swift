@@ -27,14 +27,7 @@ struct SearchResultView<VM>: View where VM: SearchResultViewModelInterface {
     var body: some View {
         ScrollView {
             if let viewModel = viewModel as? UserSearchResultViewModel {
-                ForEach(viewModel.users, id: \.id) { user in
-                    NavigationLink {
-                        ProfileView<ProfileViewModel>()
-                            .environmentObject(ProfileViewModel(user: user))
-                    } label: {
-                        UserListCell(user: user)
-                    }
-                }
+                UserListView(viewModel: UserListViewModel(users: viewModel.users))
             } else if let viewModel = viewModel as? GroupSearchResultViewModel {
                 ForEach(viewModel.groups) { group in
                     ProfileGroupCell(group: group)
