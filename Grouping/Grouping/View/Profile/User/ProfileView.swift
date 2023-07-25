@@ -10,12 +10,12 @@ import SDWebImageSwiftUI
 
 struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
     @EnvironmentObject var viewModel: VM
-    @State var isShowPost: Bool = true
-    @State var createGroup: Bool = false
+    @State private var isShowPost: Bool = true
+    @State private var createGroup: Bool = false
     
-    @State var selectedGroup: Group? = nil
+    @State private var selectedGroup: Group? = nil
     
-    var columns = Array(
+    private var columns = Array(
         repeating: GridItem(
             .flexible(),
             spacing: 0
