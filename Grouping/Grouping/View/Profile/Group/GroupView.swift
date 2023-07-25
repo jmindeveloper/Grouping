@@ -132,7 +132,7 @@ struct GroupView<VM>: View where VM: GroupViewModelInterface {
         LazyVGrid(columns: columns, alignment: .leading, spacing: 2, pinnedViews: .sectionFooters) {
             ForEach(viewModel.posts, id: \.id) { post in
                 NavigationLink {
-                    PostFeedView(viewModel: PostFeedViewModel(posts: viewModel.posts))
+                    PostFeedView(viewModel: PostFeedViewModel(posts: viewModel.posts), scrollTag: post.id)
                 } label: {
                     WebImage(url: URL(string: post.images[0]))
                         .resizable()

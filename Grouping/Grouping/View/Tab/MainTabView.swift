@@ -18,7 +18,7 @@ struct MainTabView: View {
     
     var body: some View {
         TabView(selection: $selection) {
-            PostFeedView(viewModel: postFeedViewModel)
+            PostFeedView(viewModel: postFeedViewModel, scrollTag: "")
                 .onAppear {
                     UITabBar.showTabBar(animated: true)
                 }
