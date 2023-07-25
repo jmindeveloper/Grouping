@@ -10,6 +10,7 @@ import SDWebImageSwiftUI
 
 struct SearchResultView<VM>: View where VM: SearchResultViewModelInterface {
     @ObservedObject var viewModel: VM
+    @State private var selectedGroup: Group? = nil
     
     private var columns = Array(
         repeating: GridItem(
@@ -28,19 +29,25 @@ struct SearchResultView<VM>: View where VM: SearchResultViewModelInterface {
             if let viewModel = viewModel as? UserSearchResultViewModel {
                 ForEach(viewModel.users, id: \.id) { user in
                     NavigationLink {
-                        Text(user.nickName)
+                        ProfileView<ProfileViewModel>()
+                            .environmentObject(ProfileViewModel(user: user))
                     } label: {
                         UserListCell(user: user)
                     }
                 }
             } else if let viewModel = viewModel as? GroupSearchResultViewModel {
                 ForEach(viewModel.groups) { group in
-                    NavigationLink {
-                        Text(group.groupName)
-                    } label: {
-                        ProfileGroupCell(group: group)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 3)
+                    ProfileGroupCell(group: group)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 3)
+                        .onTapGesture {
+                            selectedGroup = group
+                        }
+                }
+                .fullScreenCover(item: $selectedGroup) { group in
+                    NavigationView {
+                        GroupView<GroupViewModel>()
+                            .environmentObject(GroupViewModel(group: group))
                     }
                 }
             } else if let viewModel = viewModel as? TagSearchResultViewModel {
