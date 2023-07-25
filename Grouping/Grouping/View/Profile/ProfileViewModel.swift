@@ -18,12 +18,13 @@ protocol ProfileViewModelInterface: ObservableObject {
     var userIsMe: Bool { get }
     
     func getUserGroups()
+    func follow()
 }
 
 final class ProfileViewModel: ProfileViewModelInterface {
     private var fetchPostManager: FetchPostManagerInterface?
     private var fetchGroupManager: FetchGroupManagerInterface?
-    private let followManager = FollowManagementManager()
+    private let followManager: FollowManagementManagerInterface = FollowManagementManager()
     @Published var user: User?
     @Published var posts: [Post] = []
     @Published var groups: [Group] = []
@@ -95,6 +96,16 @@ final class ProfileViewModel: ProfileViewModelInterface {
         fetchGroupManager?.getUserGroups { [weak self] groups in
             self?.groups = groups
             print(groups)
+        }
+    }
+    
+    func follow() {
+        guard let user = user,
+              user.id != UserAuthManager.shared.user?.id else {
+            return
+        }
+        followManager.follow(subjectUser: user) {
+            print("follow")
         }
     }
 }

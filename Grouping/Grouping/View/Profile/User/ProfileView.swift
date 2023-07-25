@@ -88,13 +88,14 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
                 .padding(.top)
             } else {
                 Button {
-                    
+                    viewModel.follow()
                 } label: {
                     Text("팔로우")
                         .foregroundColor(.white)
                         .frame(width: Constant.screenWidth - 32, height: 35)
                         .background(RoundedRectangle(cornerRadius: 14).fill(Color(uiColor: .blue)))
                 }
+                .buttonStyle(.plain)
                 .contentShape(Rectangle())
                 .padding(.top)
             }
