@@ -21,16 +21,10 @@ final class UserSearchResultViewModel: SearchResultViewModelInterface {
     
     init(searchText: String) {
         self.searchText = searchText
-        print("UserSearchResultViewModel", "init")
         fetchSearchResult()
     }
     
-    deinit {
-        print("UserSearchResultViewModel", #function)
-    }
-    
     func fetchSearchResult() {
-//        users.removeAll()
         searchManager.searchContainsField(collection: .User, fieldName: "nickName", keyword: searchText) { [weak self] snapshot in
             for doc in snapshot {
                 do {

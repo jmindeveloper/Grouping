@@ -12,11 +12,23 @@ struct SearchResultView<VM>: View where VM: SearchResultViewModelInterface {
     
     var body: some View {
         ScrollView {
-            ForEach((viewModel as! UserSearchResultViewModel).users, id: \.id) { user in
-                NavigationLink {
-                    Text(user.nickName)
-                } label: {
-                    UserListCell(user: user)
+            if let viewModel = viewModel as? UserSearchResultViewModel {
+                ForEach(viewModel.users, id: \.id) { user in
+                    NavigationLink {
+                        Text(user.nickName)
+                    } label: {
+                        UserListCell(user: user)
+                    }
+                }
+            } else if let viewModel = viewModel as? GroupSearchResultViewModel {
+                ForEach(viewModel.groups) { group in
+                    NavigationLink {
+                        Text(group.groupName)
+                    } label: {
+                        ProfileGroupCell(group: group)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 3)
+                    }
                 }
             }
         }
