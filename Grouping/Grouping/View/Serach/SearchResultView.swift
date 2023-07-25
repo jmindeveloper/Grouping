@@ -11,9 +11,13 @@ struct SearchResultView<VM>: View where VM: SearchResultViewModelInterface {
     @ObservedObject var viewModel: VM
     
     var body: some View {
-        VStack {
+        ScrollView {
             ForEach((viewModel as! UserSearchResultViewModel).users, id: \.id) { user in
-                Text(user.nickName)
+                NavigationLink {
+                    Text(user.nickName)
+                } label: {
+                    UserListCell(user: user)
+                }
             }
         }
     }

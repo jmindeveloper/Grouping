@@ -8,38 +8,33 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-protocol UserListCellViewModelInterface: ObservableObject {
-    var user: User { get set }
-}
-
-final class UserListCellViewModel: UserListCellViewModelInterface {
-    private var fetchUserManager: FetchUserManagerInterface
-    @Published var user: User
-    
-    init(user: User) {
-        self.user = user
-        fetchUserManager = FetchUserManager(userId: user.id)
-    }
-}
-
-struct UserListCell<VM>: View where VM: UserListCellViewModelInterface {
-    @ObservedObject var viewModel: VM
+struct UserListCell: View {
+    @State var user: User
     
     var body: some View {
         HStack {
-            WebImage(url: URL(string: viewModel.user.profileImagePath ?? ""))
+            WebImage(url: URL(string: user.profileImagePath ?? ""))
                 .placeholder(Image(systemName: "person.fill").resizable())
                 .resizable()
-                .frame(width: 45, height: 45)
+                .scaledToFill()
+                .frame(width: 40, height: 40)
                 .clipShape(Circle())
             
-            Text(viewModel.user.nickName)
+            Text(user.nickName)
+                .font(.system(size: 21, weight: .medium))
+                .padding(.leading, 4)
+            
+            Spacer()
+            
+            Image(systemName: "chevron.right")
         }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 6)
     }
 }
 
 struct UserListCell_Previews: PreviewProvider {
     static var previews: some View {
-        UserListCell(viewModel: UserListCellViewModel(user: User(id: "", nickName: "j_MIN_3894", email: "")))
+        UserListCell(user: User(id: "asdf", nickName: "nickName", email: "dkldfj@kdasfj.com"))
     }
 }
