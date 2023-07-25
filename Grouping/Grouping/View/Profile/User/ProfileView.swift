@@ -66,10 +66,24 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
                 HStack {
                     bottomTitleTopValueView(title: "게시물", value: "\(viewModel.postCount)")
                         .padding(.horizontal, 6)
-                    bottomTitleTopValueView(title: "팔로워", value: "\(viewModel.followerCount)")
-                        .padding(.horizontal, 6)
-                    bottomTitleTopValueView(title: "팔로잉", value: "\(viewModel.followingCount)")
-                        .padding(.horizontal, 6)
+                    
+                    NavigationLink {
+                        Text("follower")
+                    } label: {
+                        bottomTitleTopValueView(title: "팔로워", value: "\(viewModel.followerCount)")
+                            .contentShape(Rectangle())
+                            .padding(.horizontal, 6)
+                    }
+                    .buttonStyle(.plain)
+                    
+                    NavigationLink {
+                        Text("following")
+                    } label: {
+                        bottomTitleTopValueView(title: "팔로잉", value: "\(viewModel.followingCount)")
+                            .contentShape(Rectangle())
+                            .padding(.horizontal, 6)
+                    }
+                    .buttonStyle(.plain)
                 }
                 
                 Spacer()
