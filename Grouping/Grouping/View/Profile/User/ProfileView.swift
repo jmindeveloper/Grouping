@@ -66,25 +66,59 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
                 HStack {
                     bottomTitleTopValueView(title: "게시물", value: "\(viewModel.postCount)")
                         .padding(.horizontal, 6)
-                    bottomTitleTopValueView(title: "팔로워", value: "\(viewModel.followerCount)")
-                        .padding(.horizontal, 6)
-                    bottomTitleTopValueView(title: "팔로잉", value: "\(viewModel.followingCount)")
-                        .padding(.horizontal, 6)
+                    
+                    NavigationLink {
+                        ScrollView {
+                            UserListView(viewModel: UserListViewModel(ids: viewModel.follower))
+                        }
+                        .navigationTitle("팔로워")
+                    } label: {
+                        bottomTitleTopValueView(title: "팔로워", value: "\(viewModel.follower.count)")
+                            .contentShape(Rectangle())
+                            .padding(.horizontal, 6)
+                    }
+                    .buttonStyle(.plain)
+                    
+                    NavigationLink {
+                        ScrollView {
+                            UserListView(viewModel: UserListViewModel(ids: viewModel.following))
+                        }
+                        .navigationTitle("팔로잉")
+                    } label: {
+                        bottomTitleTopValueView(title: "팔로잉", value: "\(viewModel.following.count)")
+                            .contentShape(Rectangle())
+                            .padding(.horizontal, 6)
+                    }
+                    .buttonStyle(.plain)
                 }
                 
                 Spacer()
             }
             
-            NavigationLink {
-                ProfileEditView(viewModel: ProfileEditViewModel())
-            } label: {
-                Text("프로필 편집")
-                    .foregroundColor(.white)
-                    .frame(width: Constant.screenWidth - 32, height: 35)
-                    .background(RoundedRectangle(cornerRadius: 14).fill(Color(uiColor: .systemGray2)))
+            if viewModel.userIsMe {
+                NavigationLink {
+                    ProfileEditView(viewModel: ProfileEditViewModel())
+                } label: {
+                    Text("프로필 편집")
+                        .foregroundColor(.white)
+                        .frame(width: Constant.screenWidth - 32, height: 35)
+                        .background(RoundedRectangle(cornerRadius: 14).fill(Color(uiColor: .systemGray2)))
+                }
+                .contentShape(Rectangle())
+                .padding(.top)
+            } else {
+                Button {
+                    viewModel.follow()
+                } label: {
+                    Text("팔로우")
+                        .foregroundColor(.white)
+                        .frame(width: Constant.screenWidth - 32, height: 35)
+                        .background(RoundedRectangle(cornerRadius: 14).fill(Color(uiColor: .blue)))
+                }
+                .buttonStyle(.plain)
+                .contentShape(Rectangle())
+                .padding(.top)
             }
-            .contentShape(Rectangle())
-            .padding(.top)
             
             ValueChangeToggleView(toggle: $isShowPost, lineColor: .red, leftTitle: "게시물", rightTitle: "그룹")
                 .padding(.horizontal, 16)

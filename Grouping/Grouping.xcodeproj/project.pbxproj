@@ -39,6 +39,8 @@
 		0E850C5A2A6FEB65006A3837 /* UserSearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E850C592A6FEB65006A3837 /* UserSearchResultViewModel.swift */; };
 		0E850C5C2A6FEB92006A3837 /* GroupSearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E850C5B2A6FEB92006A3837 /* GroupSearchResultViewModel.swift */; };
 		0E850C5E2A6FEBA9006A3837 /* TagSearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E850C5D2A6FEBA9006A3837 /* TagSearchResultViewModel.swift */; };
+		0E850C612A70189D006A3837 /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E850C602A70189D006A3837 /* UserListView.swift */; };
+		0E850C632A7018A4006A3837 /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E850C622A7018A4006A3837 /* UserListViewModel.swift */; };
 		0E8DBF1F2A64112F00D374DF /* FetchPostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DBF1E2A64112F00D374DF /* FetchPostManager.swift */; };
 		0E8DBF212A64138B00D374DF /* Publisher+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DBF202A64138B00D374DF /* Publisher+.swift */; };
 		0E8DBF262A6419D600D374DF /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8DBF252A6419D600D374DF /* ProfileViewModel.swift */; };
@@ -114,6 +116,8 @@
 		0E850C592A6FEB65006A3837 /* UserSearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchResultViewModel.swift; sourceTree = "<group>"; };
 		0E850C5B2A6FEB92006A3837 /* GroupSearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSearchResultViewModel.swift; sourceTree = "<group>"; };
 		0E850C5D2A6FEBA9006A3837 /* TagSearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSearchResultViewModel.swift; sourceTree = "<group>"; };
+		0E850C602A70189D006A3837 /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
+		0E850C622A7018A4006A3837 /* UserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModel.swift; sourceTree = "<group>"; };
 		0E8DBF1E2A64112F00D374DF /* FetchPostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPostManager.swift; sourceTree = "<group>"; };
 		0E8DBF202A64138B00D374DF /* Publisher+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+.swift"; sourceTree = "<group>"; };
 		0E8DBF252A6419D600D374DF /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -321,6 +325,7 @@
 		0E6CC3422A5AC0A900BE97AD /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				0E850C5F2A701894006A3837 /* UserListView */,
 				0EAAD35B2A6988190069ECC8 /* LocalAlbum */,
 				0E6CC3432A5AC0B900BE97AD /* RoundedCorner.swift */,
 				0EF94C4C2A63CA4C00557CD8 /* TagView.swift */,
@@ -362,6 +367,15 @@
 				0E850C5D2A6FEBA9006A3837 /* TagSearchResultViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0E850C5F2A701894006A3837 /* UserListView */ = {
+			isa = PBXGroup;
+			children = (
+				0E850C602A70189D006A3837 /* UserListView.swift */,
+				0E850C622A7018A4006A3837 /* UserListViewModel.swift */,
+			);
+			path = UserListView;
 			sourceTree = "<group>";
 		};
 		0E8DBF222A64199800D374DF /* Profile */ = {
@@ -706,6 +720,7 @@
 				0E6CC34E2A5ACB5B00BE97AD /* User.swift in Sources */,
 				0EF94C442A62B18B00557CD8 /* PhotoLibrary.swift in Sources */,
 				0E6CC3222A5AA09000BE97AD /* GroupingApp.swift in Sources */,
+				0E850C612A70189D006A3837 /* UserListView.swift in Sources */,
 				0EAAD35D2A6989070069ECC8 /* LocalAlbumGridDefaultViewModel.swift in Sources */,
 				0E03F9992A66A5F1006E8FCD /* FetchGroupManager.swift in Sources */,
 				0E309FD02A5DA71E00191B3B /* LoginMainView.swift in Sources */,
@@ -721,6 +736,7 @@
 				0E6CC3472A5AC1CF00BE97AD /* Constant.swift in Sources */,
 				0E850C522A6E9EFD006A3837 /* SearchManager.swift in Sources */,
 				0EF94C352A62865900557CD8 /* UIView+.swift in Sources */,
+				0E850C632A7018A4006A3837 /* UserListViewModel.swift in Sources */,
 				0EAAD3612A6BE8660069ECC8 /* GroupListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

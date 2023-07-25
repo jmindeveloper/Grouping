@@ -13,19 +13,22 @@ protocol ProfileViewModelInterface: ObservableObject {
     var posts: [Post] { get set }
     var groups: [Group] { get set }
     var postCount: Int { get }
-    var followerCount: Int { get }
-    var followingCount: Int { get }
+    var follower: [String] { get }
+    var following: [String] { get }
+    var userIsMe: Bool { get }
     
     func getUserGroups()
+    func follow()
 }
 
 final class ProfileViewModel: ProfileViewModelInterface {
     private var fetchPostManager: FetchPostManagerInterface?
     private var fetchGroupManager: FetchGroupManagerInterface?
+    private let followManager: FollowManagementManagerInterface = FollowManagementManager()
     @Published var user: User?
     @Published var posts: [Post] = []
     @Published var groups: [Group] = []
-    private var userIsMe: Bool
+    @Published var userIsMe: Bool
     
     private var subscriptions = Set<AnyCancellable>()
     
@@ -33,12 +36,12 @@ final class ProfileViewModel: ProfileViewModelInterface {
         posts.count
     }
     
-    var followerCount: Int {
-        return user?.followers.count ?? 0
+    var follower: [String] {
+        return user?.followers ?? []
     }
     
-    var followingCount: Int {
-        return user?.following.count ?? 0
+    var following: [String] {
+        return user?.following ?? []
     }
     
     init() {
@@ -53,7 +56,7 @@ final class ProfileViewModel: ProfileViewModelInterface {
     }
     
     init(user: User) {
-        userIsMe = false
+        userIsMe = user.id == UserAuthManager.shared.user?.id
         self.fetchPostManager = FetchPostManager(user: user)
         self.fetchGroupManager = FetchGroupManager(user: user)
         self.user = user
@@ -93,6 +96,16 @@ final class ProfileViewModel: ProfileViewModelInterface {
         fetchGroupManager?.getUserGroups { [weak self] groups in
             self?.groups = groups
             print(groups)
+        }
+    }
+    
+    func follow() {
+        guard let user = user,
+              user.id != UserAuthManager.shared.user?.id else {
+            return
+        }
+        followManager.follow(subjectUser: user) {
+            print("follow")
         }
     }
 }
