@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct ProfileGroupCell: View {
     @State var group: Group
@@ -34,7 +35,13 @@ struct ProfileGroupCell: View {
                 .padding(.trailing, 16)
         }
         .frame(maxWidth: .infinity)
-        .background(Color.random)
+        .background(
+            WebImage(url: URL(string: group.groupThumbnailImageURL ?? ""))
+                .resizable()
+                .scaledToFill()
+                .clipped()
+                .background(Color.random)
+        )
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 }

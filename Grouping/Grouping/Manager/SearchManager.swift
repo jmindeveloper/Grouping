@@ -11,6 +11,7 @@ import FirebaseFirestore
 protocol SearchManagerInterface {
     func searchEqualField(collection: SearchManager.Collection, fieldName: String, keyword: String, completion: (([QueryDocumentSnapshot]) -> Void)?)
     func searchContainsField(collection: SearchManager.Collection, fieldName: String, keyword: String, completion: (([QueryDocumentSnapshot]) -> Void)?)
+    func searchEqualFieldToArray(collection: SearchManager.Collection, fieldName: String, keyword: String, completion: (([QueryDocumentSnapshot]) -> Void)?)
 }
 
 final class SearchManager: SearchManagerInterface {
@@ -34,6 +35,23 @@ final class SearchManager: SearchManagerInterface {
         let query = Firestore.firestore()
             .collection(collection.fieldName)
             .whereField(fieldName, isEqualTo: keyword)
+        
+        query.getDocuments { snapshot, error in
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            guard let snapshot = snapshot else {
+                return
+            }
+            completion?(snapshot.documents)
+        }
+    }
+    
+    func searchEqualFieldToArray(collection: Collection, fieldName: String, keyword: String, completion: (([QueryDocumentSnapshot]) -> Void)? = nil) {
+        let query = Firestore.firestore()
+            .collection(collection.fieldName)
+            .whereField(fieldName, arrayContains: keyword)
         
         query.getDocuments { snapshot, error in
             guard error == nil else {
