@@ -15,6 +15,7 @@ protocol ProfileViewModelInterface: ObservableObject {
     var postCount: Int { get }
     var followerCount: Int { get }
     var followingCount: Int { get }
+    var userIsMe: Bool { get }
     
     func getUserGroups()
 }
@@ -22,10 +23,11 @@ protocol ProfileViewModelInterface: ObservableObject {
 final class ProfileViewModel: ProfileViewModelInterface {
     private var fetchPostManager: FetchPostManagerInterface?
     private var fetchGroupManager: FetchGroupManagerInterface?
+    private let followManager = FollowManagementManager()
     @Published var user: User?
     @Published var posts: [Post] = []
     @Published var groups: [Group] = []
-    private var userIsMe: Bool
+    @Published var userIsMe: Bool
     
     private var subscriptions = Set<AnyCancellable>()
     
@@ -53,7 +55,7 @@ final class ProfileViewModel: ProfileViewModelInterface {
     }
     
     init(user: User) {
-        userIsMe = false
+        userIsMe = user.id == UserAuthManager.shared.user?.id
         self.fetchPostManager = FetchPostManager(user: user)
         self.fetchGroupManager = FetchGroupManager(user: user)
         self.user = user

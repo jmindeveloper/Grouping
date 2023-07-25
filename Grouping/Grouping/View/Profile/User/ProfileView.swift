@@ -75,16 +75,29 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
                 Spacer()
             }
             
-            NavigationLink {
-                ProfileEditView(viewModel: ProfileEditViewModel())
-            } label: {
-                Text("프로필 편집")
-                    .foregroundColor(.white)
-                    .frame(width: Constant.screenWidth - 32, height: 35)
-                    .background(RoundedRectangle(cornerRadius: 14).fill(Color(uiColor: .systemGray2)))
+            if viewModel.userIsMe {
+                NavigationLink {
+                    ProfileEditView(viewModel: ProfileEditViewModel())
+                } label: {
+                    Text("프로필 편집")
+                        .foregroundColor(.white)
+                        .frame(width: Constant.screenWidth - 32, height: 35)
+                        .background(RoundedRectangle(cornerRadius: 14).fill(Color(uiColor: .systemGray2)))
+                }
+                .contentShape(Rectangle())
+                .padding(.top)
+            } else {
+                Button {
+                    
+                } label: {
+                    Text("팔로우")
+                        .foregroundColor(.white)
+                        .frame(width: Constant.screenWidth - 32, height: 35)
+                        .background(RoundedRectangle(cornerRadius: 14).fill(Color(uiColor: .blue)))
+                }
+                .contentShape(Rectangle())
+                .padding(.top)
             }
-            .contentShape(Rectangle())
-            .padding(.top)
             
             ValueChangeToggleView(toggle: $isShowPost, lineColor: .red, leftTitle: "게시물", rightTitle: "그룹")
                 .padding(.horizontal, 16)
