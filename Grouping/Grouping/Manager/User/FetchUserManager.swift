@@ -18,8 +18,11 @@ protocol FetchUserManagerInterface {
     func getStartPosts(userId: String, completion: ((_ postIds: [String]) -> Void)?)
     func getStartGroups(userId: String, completion: ((_ groupIds: [String]) -> Void)?)
     func updateUserStartPost(completion: ((_ ids: [String]) -> Void)?)
+    func getUserList(ids: [String], completion: (([User]) -> Void)?)
 }
 
+// TODO: - FetchUserManager 는 구조 다시한번 생각해보기
+// TODO: - 일단은 그냥 사용?!
 final class FetchUserManager: FetchUserManagerInterface {
     let userDB = Firestore.firestore().collection(FBFieldName.users)
     var starPostIds: [String] = []
@@ -57,6 +60,10 @@ final class FetchUserManager: FetchUserManagerInterface {
         getStartGroups(userId: userId) { [weak self] group in
             self?.starGroupIds = group
         }
+    }
+    
+    init(a: Bool = true) {
+        
     }
     
     func getUser(userId: String, completion: ((_ user: User) -> Void)? = nil) {
@@ -128,7 +135,8 @@ final class FetchUserManager: FetchUserManagerInterface {
                 completion?(starPosts)
             }
     }
-    
+
+    // TODO: - 여기 있는게 맞음 >???????<
     func updateUserStartPost(completion: ((_ ids: [String]) -> Void)? = nil) {
         userDB.document(userId)
             .collection(FBFieldName.starPost)
@@ -141,5 +149,36 @@ final class FetchUserManager: FetchUserManagerInterface {
                 guard let self = self else { return }
                 completion?(self.starPostIds)
             }
+    }
+    
+    func getUserList(ids: [String], completion: (([User]) -> Void)? = nil) {
+        let refs = ids.map {
+            Firestore.firestore()
+                .collection(FBFieldName.users)
+                .document($0)
+        }
+        
+        refs.publisher
+            .asyncMap { [weak self] ref in
+                return await self?.getUser(ref: ref)
+            }
+            .collect()
+            .map { users in
+                return users.compactMap { $0 }
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { users in
+                completion?(users)
+            }.store(in: &subscriptions)
+    }
+    
+    private func getUser(ref: DocumentReference) async -> User? {
+        do {
+            let user = try await ref.getDocument(as: User.self)
+            return user
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
     }
 }
