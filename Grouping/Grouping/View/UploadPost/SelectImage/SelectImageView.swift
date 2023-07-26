@@ -31,7 +31,7 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
                 GeometryReader { proxy in
                     ZStack {
                         
-                        LocalAlbumGridView(viewModel: viewModel)
+                         LocalAlbumGridView(viewModel: viewModel)
                             .multiSelect(true)
                             .padding(.top, 37)
                         

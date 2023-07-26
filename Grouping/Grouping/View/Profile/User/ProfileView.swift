@@ -30,7 +30,7 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
             if isShowPost {
                 albumGrid()
             } else {
-                ProfileGroupView<ProfileViewModel> { group in
+                GroupListView<ProfileViewModel> { group in
                     selectedGroup = group
                 }
             }

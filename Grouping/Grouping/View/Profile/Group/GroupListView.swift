@@ -1,5 +1,5 @@
 //
-//  ProfileGroupView.swift
+//  GroupListView.swift
 //  Grouping
 //
 //  Created by J_Min on 2023/07/17.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProfileGroupView<VM>: View where VM: ProfileViewModelInterface {
+struct GroupListView<VM>: View where VM: ProfileViewModelInterface {
     @State var createGroup: Bool = false
     @EnvironmentObject var viewModel: VM
     private var groupSelectAction: ((Group) -> Void)?
@@ -19,13 +19,11 @@ struct ProfileGroupView<VM>: View where VM: ProfileViewModelInterface {
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
-                ForEach(viewModel.groups, id: \.groupId) { group in
-                    ProfileGroupCell(group: group)
+                ForEach(viewModel.groups) { group in
+                    let _ = print("currentGroupName --> ", group.groupName)
+                    GroupListCell(group: group, groupSelectAction: groupSelectAction)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 3)
-                        .onTapGesture {
-                            groupSelectAction?(group)
-                        }
                 }
             }
         }

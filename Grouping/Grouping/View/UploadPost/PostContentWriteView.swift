@@ -55,7 +55,7 @@ struct PostContentWriteView<VM>: View where VM: PostUploadViewModelInterface {
                 }
             }
             .sheet(isPresented: $showGroupSelectView) {
-                ProfileGroupView<ProfileViewModel> { group in
+                GroupListView<ProfileViewModel> { group in
                     viewModel.selectedGroup = group
                     showGroupSelectView = false
                 }

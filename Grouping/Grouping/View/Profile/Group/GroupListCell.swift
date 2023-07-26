@@ -8,8 +8,14 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct ProfileGroupCell: View {
+struct GroupListCell: View {
     @State var group: Group
+    private var groupSelectAction: ((Group) -> Void)?
+    
+    init(group: Group, groupSelectAction: ((Group) -> Void)? = nil) {
+        self.groupSelectAction = groupSelectAction
+        self._group = State(initialValue: group)
+    }
     
     var body: some View {
         HStack {
@@ -43,13 +49,22 @@ struct ProfileGroupCell: View {
                 .background(Color.random)
         )
         .clipShape(RoundedRectangle(cornerRadius: 10))
+        .contentShape(Rectangle())
+        .onTapGesture {
+            let group = group
+            groupSelectAction?(group)
+        }
     }
 }
 
-struct ProfileGroupCell_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileGroupCell(group: Group(groupId: "", groupName: "dummyGroup", groupDescription: "더미 그룹입니다ㅠㅠ", posts: [], createUserId: "", managementUsers: [], shareMembers: [], startUsers: [], approvalWaitingUsers: []))
-//            .padding(.horizontal, 16)
-            .previewLayout(.sizeThatFits)
-    }
-}
+//struct ProfileGroupCell_Previews: PreviewProvider {
+//    let group = Group(groupId: "", groupName: "dummyGroup", groupDescription: "더미 그룹입니다ㅠㅠ", posts: [], createUserId: "", managementUsers: [], shareMembers: [], startUsers: [], approvalWaitingUsers: [])
+//
+//    static var previews: some View {
+//        GroupListCell(group: group, groupSelectAction: { group in
+//            print("groupName")
+//        })
+////            .padding(.horizontal, 16)
+//            .previewLayout(.sizeThatFits)
+//    }
+//}

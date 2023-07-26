@@ -30,12 +30,11 @@ struct SearchResultView<VM>: View where VM: SearchResultViewModelInterface {
                 UserListView(viewModel: UserListViewModel(users: viewModel.users))
             } else if let viewModel = viewModel as? GroupSearchResultViewModel {
                 ForEach(viewModel.groups) { group in
-                    ProfileGroupCell(group: group)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 3)
-                        .onTapGesture {
-                            selectedGroup = group
-                        }
+                    GroupListCell(group: group) { group in
+                        selectedGroup = group
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 3)
                 }
                 .fullScreenCover(item: $selectedGroup) { group in
                     NavigationView {
