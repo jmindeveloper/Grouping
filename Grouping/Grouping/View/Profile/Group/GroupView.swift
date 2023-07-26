@@ -12,6 +12,7 @@ struct GroupView<VM>: View where VM: GroupViewModelInterface {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var viewModel: VM
+    @State var showPostUploadView: Bool = false
     
     private var gradientColor: [Color] {
         if colorScheme == .dark {
@@ -82,7 +83,7 @@ struct GroupView<VM>: View where VM: GroupViewModelInterface {
                 HStack {
                     Spacer()
                     Button {
-                        
+                        showPostUploadView = true
                     } label: {
                         Image(systemName: "plus")
                             .resizable()
@@ -100,6 +101,10 @@ struct GroupView<VM>: View where VM: GroupViewModelInterface {
                 .padding(.trailing, 19)
                 .padding(.bottom)
             }
+        }
+        .fullScreenCover(isPresented: $showPostUploadView) {
+            SelectImageView<PostUploadViewModel>(isTabPresent: false)
+                .environmentObject(PostUploadViewModel())
         }
     }
     

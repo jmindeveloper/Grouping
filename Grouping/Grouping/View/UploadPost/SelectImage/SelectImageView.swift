@@ -9,8 +9,14 @@ import SwiftUI
 
 struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
     @EnvironmentObject var viewModel: VM
+    @Environment(\.presentationMode) var presentationMode
+    var isTabPresent: Bool
     
-    var columns = Array(
+    init(isTabPresent: Bool) {
+        self.isTabPresent = isTabPresent
+    }
+    
+    private var columns = Array(
         repeating: GridItem(
             .flexible(),
             spacing: 0
@@ -40,7 +46,11 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        MainTabView.changeSelection(MainTabView.previousTab)
+                        if isTabPresent {
+                            MainTabView.changeSelection(MainTabView.previousTab)
+                        } else {
+                            presentationMode.wrappedValue.dismiss()
+                        }
                     } label: {
                         Image(systemName: "xmark")
                             .foregroundColor(.primary)
@@ -60,7 +70,6 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
                 }
             }
         }
-        .hideTabBar()
     }
     
     @State var showAlbumCollection: Bool = false
@@ -114,6 +123,6 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
 
 struct SelectImageView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectImageView<PostUploadViewModel>()
+        SelectImageView<PostUploadViewModel>(isTabPresent: false)
     }
 }

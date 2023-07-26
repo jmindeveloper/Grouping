@@ -44,8 +44,11 @@ struct MainTabView: View {
                 }
                 .tag(1)
             
-            SelectImageView<PostUploadViewModel>()
+            SelectImageView<PostUploadViewModel>(isTabPresent: true)
                 .environmentObject(postUploadViewModel)
+                .onAppear {
+                    UITabBar.hideTabBar()
+                }
                 .tabItem {
                     Image(systemName: "plus.circle")
                 }
