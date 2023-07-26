@@ -84,7 +84,7 @@ struct PostView<VM>: View where VM: PostViewModelInterface {
                 
                 Spacer()
                 
-                Text("5시간 전")
+                Text(viewModel.timeText)
                     .foregroundColor(.gray)
             }
             .padding(.horizontal, 16)
