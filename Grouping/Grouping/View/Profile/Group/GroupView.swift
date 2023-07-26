@@ -111,8 +111,11 @@ struct GroupView<VM>: View where VM: GroupViewModelInterface {
                     
                     Spacer()
                     
-                    Button {
-                        
+                    NavigationLink {
+                        ScrollView {
+                            UserListView(viewModel: UserListViewModel(ids: viewModel.group.shareMembers))
+                                .foregroundColor(.primary)
+                        }
                     } label: {
                         HStack {
                             Text("Members")
@@ -120,6 +123,7 @@ struct GroupView<VM>: View where VM: GroupViewModelInterface {
                         }
                         .foregroundColor(.primary)
                     }
+                    .buttonStyle(.plain)
                     .padding(.bottom, 50)
                     .padding(.trailing)
                 }
