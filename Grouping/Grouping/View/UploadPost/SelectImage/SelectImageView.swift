@@ -8,22 +8,21 @@
 import SwiftUI
 
 struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
-    @Binding var tabSelectionIndex: Int
-    private var previousTab: Int
     @EnvironmentObject var viewModel: VM
+    @Environment(\.presentationMode) var presentationMode
+    var isTabPresent: Bool
     
-    var columns = Array(
+    init(isTabPresent: Bool) {
+        self.isTabPresent = isTabPresent
+    }
+    
+    private var columns = Array(
         repeating: GridItem(
             .flexible(),
             spacing: 0
         ),
         count: 3
     )
-    
-    init(tabSelectionIndex: Binding<Int>, previousTab: Int) {
-        self._tabSelectionIndex = tabSelectionIndex
-        self.previousTab = previousTab
-    }
     
     var body: some View {
         NavigationView {
@@ -47,7 +46,11 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        tabSelectionIndex = previousTab
+                        if isTabPresent {
+                            MainTabView.changeSelection(MainTabView.previousTab)
+                        } else {
+                            presentationMode.wrappedValue.dismiss()
+                        }
                     } label: {
                         Image(systemName: "xmark")
                             .foregroundColor(.primary)
@@ -67,7 +70,6 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
                 }
             }
         }
-        .hideTabBar()
     }
     
     @State var showAlbumCollection: Bool = false
@@ -121,6 +123,6 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
 
 struct SelectImageView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectImageView<PostUploadViewModel>(tabSelectionIndex: .constant(1), previousTab: 1)
+        SelectImageView<PostUploadViewModel>(isTabPresent: false)
     }
 }

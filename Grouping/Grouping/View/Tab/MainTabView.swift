@@ -6,10 +6,18 @@
 //
 
 import SwiftUI
+import Combine
 
 struct MainTabView: View {
     @State private var selection = 0
-    @State private var previousTab: Int = 0
+    @State private var subscriptions = Set<AnyCancellable>()
+    
+    static let tapSelectionChangePublisher = PassthroughSubject<Int, Never>()
+    static var previousTab: Int = 0
+    
+    static func changeSelection(_ index: Int) {
+        tapSelectionChangePublisher.send(index)
+    }
     
     @StateObject private var currentUserProfileViewModel = ProfileViewModel()
     @StateObject private var postUploadViewModel = PostUploadViewModel()
@@ -36,8 +44,11 @@ struct MainTabView: View {
                 }
                 .tag(1)
             
-            SelectImageView<PostUploadViewModel>(tabSelectionIndex: $selection, previousTab: previousTab)
+            SelectImageView<PostUploadViewModel>(isTabPresent: true)
                 .environmentObject(postUploadViewModel)
+                .onAppear {
+                    UITabBar.hideTabBar()
+                }
                 .tabItem {
                     Image(systemName: "plus.circle")
                 }
@@ -67,8 +78,14 @@ struct MainTabView: View {
         .accentColor(.primary)
         .onChange(of: selection) { index in
             if index != 2 {
-                previousTab = index
+                MainTabView.previousTab = index
             }
+        }
+        .onAppear {
+            MainTabView.tapSelectionChangePublisher
+                .sink { index in
+                    selection = index
+                }.store(in: &subscriptions)
         }
     }
 }

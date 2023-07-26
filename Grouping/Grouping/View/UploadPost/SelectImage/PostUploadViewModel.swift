@@ -38,6 +38,15 @@ final class PostUploadViewModel: LocalAlbumGridDefaultViewModel, PostUploadViewM
     
     private var subscriptions = Set<AnyCancellable>()
     
+    override init() {
+        super.init()
+    }
+    
+    convenience init(group: Group) {
+        self.init()
+        self.selectedGroup = group
+    }
+    
     deinit {
         print("SelectImageViewModel", #function)
     }

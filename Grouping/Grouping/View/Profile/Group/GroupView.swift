@@ -12,6 +12,7 @@ struct GroupView<VM>: View where VM: GroupViewModelInterface {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var viewModel: VM
+    @State var showPostUploadView: Bool = false
     
     private var gradientColor: [Color] {
         if colorScheme == .dark {
@@ -76,6 +77,34 @@ struct GroupView<VM>: View where VM: GroupViewModelInterface {
                 .padding(.trailing, 18)
                 Spacer()
             }
+            
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button {
+                        showPostUploadView = true
+                    } label: {
+                        Image(systemName: "plus")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundColor(.primary)
+                            .frame(width: 35, height: 35)
+                            .padding(14)
+                            .background(
+                                Circle().fill(.red).opacity(0.7)
+                            )
+                            .shadow(radius: 5, x: 3, y: 3)
+                    }
+                    .buttonStyle(.plain)
+                }
+                .padding(.trailing, 19)
+                .padding(.bottom)
+            }
+        }
+        .fullScreenCover(isPresented: $showPostUploadView) {
+            SelectImageView<PostUploadViewModel>(isTabPresent: false)
+                .environmentObject(PostUploadViewModel(group: viewModel.group))
         }
     }
     
@@ -148,5 +177,12 @@ struct GroupView<VM>: View where VM: GroupViewModelInterface {
                 .buttonStyle(.plain)
             }
         }
+    }
+}
+
+struct GroupView_Previews: PreviewProvider {
+    static var previews: some View {
+        GroupView<GroupViewModel>()
+            .environmentObject(GroupViewModel(group: Group(groupId: "dkldk", groupName: "더미그룹1", groupDescription: "더미그룹1ㅇㅁㄹㄴㅇㄹ", posts: [], createUserId: "", managementUsers: [], shareMembers: [], startUsers: [], approvalWaitingUsers: [])))
     }
 }
