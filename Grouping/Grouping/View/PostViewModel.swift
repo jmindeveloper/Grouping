@@ -17,6 +17,7 @@ protocol PostViewModelInterface: ObservableObject {
     var userBookMarkContains: Bool { get set }
     var isMyPost: Bool { get }
     var group: Group? { get set }
+    var timeText: String { get }
     
     init(post: Post)
     
@@ -49,6 +50,23 @@ final class PostViewModel: PostViewModelInterface {
     }
     var isHeart: Bool {
         post.heartUsers.contains(user?.id ?? "")
+    }
+    
+    var timeText: String {
+        let difference = post.createdAt.hoursDifference()
+        if difference.day < 1 {
+            if difference.hour < 1 {
+                if difference.min == 0 {
+                    return "방금전"
+                } else {
+                    return "\(difference.min)분 전"
+                }
+            } else {
+                return "\(difference.hour)시간 전"
+            }
+        } else {
+            return post.createdAt.date2PostDateString()
+        }
     }
     
     private let interactionManager: PostInteractionManagerInterface = PostInteractionManager()
