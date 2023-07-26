@@ -104,7 +104,7 @@ struct GroupView<VM>: View where VM: GroupViewModelInterface {
         }
         .fullScreenCover(isPresented: $showPostUploadView) {
             SelectImageView<PostUploadViewModel>(isTabPresent: false)
-                .environmentObject(PostUploadViewModel())
+                .environmentObject(PostUploadViewModel(group: viewModel.group))
         }
     }
     
