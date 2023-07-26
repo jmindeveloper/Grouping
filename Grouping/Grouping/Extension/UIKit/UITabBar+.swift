@@ -13,7 +13,7 @@ extension UITabBar {
             let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
             windowScene?.windows.first(where: { $0.isKeyWindow })?.allSubviews().forEach({ (v) in
                 if let view = v as? UITabBar {
-//                    view.selectIndex(index)
+                    
                 }
             })
         }

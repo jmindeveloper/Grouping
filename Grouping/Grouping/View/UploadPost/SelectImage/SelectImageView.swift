@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
-    @Binding var tabSelectionIndex: Int
-    private var previousTab: Int
     @EnvironmentObject var viewModel: VM
     
     var columns = Array(
@@ -19,11 +17,6 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
         ),
         count: 3
     )
-    
-    init(tabSelectionIndex: Binding<Int>, previousTab: Int) {
-        self._tabSelectionIndex = tabSelectionIndex
-        self.previousTab = previousTab
-    }
     
     var body: some View {
         NavigationView {
@@ -47,7 +40,7 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        tabSelectionIndex = previousTab
+                        MainTabView.changeSelection(MainTabView.previousTab)
                     } label: {
                         Image(systemName: "xmark")
                             .foregroundColor(.primary)
@@ -121,6 +114,6 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
 
 struct SelectImageView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectImageView<PostUploadViewModel>(tabSelectionIndex: .constant(1), previousTab: 1)
+        SelectImageView<PostUploadViewModel>()
     }
 }
