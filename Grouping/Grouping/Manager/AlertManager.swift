@@ -92,6 +92,6 @@ struct AlertManager {
             }
         }
         
-        Constant.rootVC?.present(alert, animated: true)
+        Constant.currentVC?.present(alert, animated: true)
     }
 }
