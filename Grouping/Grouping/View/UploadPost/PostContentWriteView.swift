@@ -10,7 +10,6 @@ import SwiftUI
 struct PostContentWriteView<VM>: View where VM: PostUploadViewModelInterface {
     @Environment(\.rootPresentationMode) var rootPresentationMode
     @Environment(\.dismissHear) var dismissHearMode
-    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var viewModel: VM
     @State var tagFieldText: String = ""
     @State var showGroupSelectView: Bool = false

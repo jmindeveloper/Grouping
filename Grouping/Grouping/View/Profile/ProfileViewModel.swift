@@ -64,6 +64,10 @@ final class ProfileViewModel: ProfileViewModelInterface {
         binding()
     }
     
+    deinit {
+        print("profileViewModel", #function)
+    }
+    
     private func binding() {
         NotificationCenter.default.publisher(for: .userLogin)
             .sink { [weak self] _ in
@@ -83,6 +87,13 @@ final class ProfileViewModel: ProfileViewModelInterface {
                 self?.user = UserAuthManager.shared.user
             }
         }.store(in: &subscriptions)
+        
+        NotificationCenter.default.publisher(for: .uploadPost)
+            .sink { [weak self] noti in
+                if let post = noti.userInfo?[FBFieldName.post] as? Post {
+                    self?.posts.insert(post, at: 0)
+                }
+            }.store(in: &subscriptions)
     }
     
     private func getUserPosts() {

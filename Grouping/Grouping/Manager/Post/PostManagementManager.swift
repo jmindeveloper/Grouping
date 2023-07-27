@@ -69,6 +69,7 @@ final class PostManagementManager: PostManagementManagerInterface {
                                     return
                                 }
                                 if groupId == nil {
+                                    NotificationCenter.default.post(name: .uploadPost, object: nil, userInfo: [FBFieldName.post: post])
                                     completion?(post)
                                 } else {
                                     Firestore.firestore()
@@ -79,6 +80,7 @@ final class PostManagementManager: PostManagementManagerInterface {
                                                 print(error!.localizedDescription)
                                                 return
                                             }
+                                            NotificationCenter.default.post(name: .uploadPost, object: nil, userInfo: [FBFieldName.post: post])
                                             completion?(post)
                                         }
                                 }

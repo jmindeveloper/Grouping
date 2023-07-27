@@ -20,7 +20,6 @@ struct GroupListView<VM>: View where VM: ProfileViewModelInterface {
         ScrollView {
             VStack(spacing: 0) {
                 ForEach(viewModel.groups) { group in
-                    let _ = print("currentGroupName --> ", group.groupName)
                     GroupListCell(group: group, groupSelectAction: groupSelectAction)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 3)

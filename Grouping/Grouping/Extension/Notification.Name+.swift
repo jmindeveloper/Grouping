@@ -10,4 +10,5 @@ import Foundation
 extension Notification.Name {
     static let userLogin = Notification.Name(rawValue: "USER_LOGIN")
     static let userUpdate = Notification.Name(rawValue: "USER_UPDATE")
+    static let uploadPost = Notification.Name(rawValue: "POST_UPLOAD")
 }

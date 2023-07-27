@@ -97,7 +97,7 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
             
             if viewModel.userIsMe {
                 NavigationLink {
-                    ProfileEditView(viewModel: ProfileEditViewModel())
+                    LazyView(ProfileEditView(viewModel: ProfileEditViewModel()))
                 } label: {
                     Text("프로필 편집")
                         .foregroundColor(.white)
