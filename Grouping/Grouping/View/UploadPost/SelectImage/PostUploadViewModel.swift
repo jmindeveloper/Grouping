@@ -18,7 +18,7 @@ protocol PostUploadViewModelInterface: LocalAlbumInterface {
     func selectCollection(_ index: Int)
     func appendTag(_ tag: String)
     func removeTag(_ tag: String)
-    func upload()
+    func upload(completion: (() -> Void)?)
 }
 
 final class PostUploadViewModel: LocalAlbumGridDefaultViewModel, PostUploadViewModelInterface {
@@ -82,7 +82,7 @@ final class PostUploadViewModel: LocalAlbumGridDefaultViewModel, PostUploadViewM
         }
     }
     
-    func upload() {
+    func upload(completion: (() -> Void)?) {
         let selectAssets = selectedImageIndexes.map { $0.asset }
         
         library.getImageData(with: selectAssets, quality: 0.3) { [weak self] data in
@@ -96,7 +96,7 @@ final class PostUploadViewModel: LocalAlbumGridDefaultViewModel, PostUploadViewM
                 tags: tags,
                 groupId: self.selectedGroup?.groupId
             ) { post in
-                
+                completion?()
             }
         }
     }

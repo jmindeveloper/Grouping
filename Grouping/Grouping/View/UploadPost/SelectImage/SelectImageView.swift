@@ -12,6 +12,8 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
     @Environment(\.presentationMode) var presentationMode
     var isTabPresent: Bool
     
+    @State private var isActive: Bool = false
+    
     init(isTabPresent: Bool) {
         self.isTabPresent = isTabPresent
     }
@@ -59,9 +61,7 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink {
-                        PostContentWriteView<PostUploadViewModel>()
-                    } label: {
+                    NavigationLink(destination: PostContentWriteView<PostUploadViewModel>(isTabPresent: isTabPresent), isActive: $isActive) {
                         Text("다음")
                             .foregroundColor(.primary)
                             .opacity(viewModel.selectedImageIndexes.isEmpty ? 0.6 : 1)
@@ -70,6 +70,8 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
                 }
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .environment(\.rootPresentationMode, $isActive)
     }
     
     @State var showAlbumCollection: Bool = false
