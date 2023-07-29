@@ -27,7 +27,9 @@ struct GroupListView<VM>: View where VM: ProfileViewModelInterface {
             }
         }
         .fullScreenCover(isPresented: $createGroup) {
-            CreateGroupView(viewModel: CreateGroupViewModel())
+            LazyView(
+                CreateGroupView(viewModel: CreateGroupViewModel())
+            )
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

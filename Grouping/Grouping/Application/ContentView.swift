@@ -13,16 +13,18 @@ struct ContentView: View {
     var body: some View {
         
         MainTabView()
-        .fullScreenCover(isPresented: $showLoginVC) {
-            LoginMainView()
-        }
-        .onAppear {
-            UserAuthManager.shared.getUser() { isSuccess in
-                if !isSuccess {
-                    showLoginVC = true
+            .fullScreenCover(isPresented: $showLoginVC) {
+                LazyView(
+                    LoginMainView()
+                )
+            }
+            .onAppear {
+                UserAuthManager.shared.getUser() { isSuccess in
+                    if !isSuccess {
+                        showLoginVC = true
+                    }
                 }
             }
-        }
     }
 }
 

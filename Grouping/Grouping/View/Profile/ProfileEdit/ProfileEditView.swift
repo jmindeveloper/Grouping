@@ -60,32 +60,34 @@ struct ProfileEditView<VM>: View where VM: ProfileEditViewModelInterface {
         }
         .fullScreenCover(isPresented: $showSelectImageView) {
             NavigationView {
-                LocalAlbumGridView(viewModel: viewModel)
-                    .multiSelect(false)
-                    .navigationTitle("프로필 이미지 선택")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            Button {
-                                showSelectImageView.toggle()
-                                viewModel.profileImageLocalData = nil
-                            } label: {
-                                Image(systemName: "xmark")
-                                    .foregroundColor(.primary)
+                LazyView(
+                    LocalAlbumGridView(viewModel: viewModel)
+                        .multiSelect(false)
+                        .navigationTitle("프로필 이미지 선택")
+                        .navigationBarTitleDisplayMode(.inline)
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                Button {
+                                    showSelectImageView.toggle()
+                                    viewModel.profileImageLocalData = nil
+                                } label: {
+                                    Image(systemName: "xmark")
+                                        .foregroundColor(.primary)
+                                }
                             }
                         }
-                    }
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            Button {
-                                viewModel.selectProfileImage()
-                                showSelectImageView.toggle()
-                            } label: {
-                                Text("완료")
-                                    .foregroundColor(.primary)
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                Button {
+                                    viewModel.selectProfileImage()
+                                    showSelectImageView.toggle()
+                                } label: {
+                                    Text("완료")
+                                        .foregroundColor(.primary)
+                                }
                             }
                         }
-                    }
+                )
             }
         }
     }

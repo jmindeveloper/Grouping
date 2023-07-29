@@ -38,13 +38,16 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
         .navigationTitle(viewModel.user?.nickName ?? "Profile")
         .navigationBarTitleDisplayMode(.inline)
         .fullScreenCover(isPresented: $createGroup) {
-            CreateGroupView(viewModel: CreateGroupViewModel())
+            LazyView(
+                CreateGroupView(viewModel: CreateGroupViewModel())
+            )
         }
         .fullScreenCover(item: $selectedGroup) { group in
             NavigationView {
+                LazyView(
                 GroupView<GroupViewModel>()
                     .environmentObject(GroupViewModel(group: group))
-                    .navigationBarHidden(true)
+                    .navigationBarHidden(true))
             }
         }
     }

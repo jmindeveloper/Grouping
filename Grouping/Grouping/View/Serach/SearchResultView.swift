@@ -38,8 +38,10 @@ struct SearchResultView<VM>: View where VM: SearchResultViewModelInterface {
                 }
                 .fullScreenCover(item: $selectedGroup) { group in
                     NavigationView {
-                        GroupView<GroupViewModel>()
-                            .environmentObject(GroupViewModel(group: group))
+                        LazyView(
+                            GroupView<GroupViewModel>()
+                                .environmentObject(GroupViewModel(group: group))
+                        )
                     }
                 }
             } else if let viewModel = viewModel as? TagSearchResultViewModel {
