@@ -68,6 +68,7 @@ struct MainTabView: View {
                 ProfileView<ProfileViewModel>()
             }
             .environmentObject(currentUserProfileViewModel)
+            .navigationViewStyle(StackNavigationViewStyle())
             .onAppear {
                 UITabBar.showTabBar(animated: true)
             }

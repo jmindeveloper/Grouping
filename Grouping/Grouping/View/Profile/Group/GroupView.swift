@@ -102,6 +102,12 @@ struct GroupView<VM>: View where VM: GroupViewModelInterface {
                 .padding(.bottom)
             }
         }
+        .onAppear {
+            viewModel.isCanUpdateView = true
+        }
+        .onDisappear {
+            viewModel.isCanUpdateView = false
+        }
         .fullScreenCover(isPresented: $showPostUploadView) {
             LazyView(
                 SelectImageView<PostUploadViewModel>(isTabPresent: false)

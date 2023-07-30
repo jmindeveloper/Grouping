@@ -16,19 +16,35 @@ protocol ProfileViewModelInterface: ObservableObject {
     var follower: [String] { get }
     var following: [String] { get }
     var userIsMe: Bool { get }
+    var isCanUpdateView: Bool { get set }
     
     func getUserGroups()
     func follow()
 }
 
 final class ProfileViewModel: ProfileViewModelInterface {
+    
+    
     private var fetchPostManager: FetchPostManagerInterface?
     private var fetchGroupManager: FetchGroupManagerInterface?
     private let followManager: FollowManagementManagerInterface = FollowManagementManager()
     @Published var user: User?
-    @Published var posts: [Post] = []
+    var posts: [Post] = [] {
+        didSet {
+            if isCanUpdateView {
+                objectWillChange.send()
+            }
+        }
+    }
     @Published var groups: [Group] = []
     @Published var userIsMe: Bool
+    var isCanUpdateView: Bool = true {
+        didSet {
+            if isCanUpdateView {
+                objectWillChange.send()
+            }
+        }
+    }
     
     private var subscriptions = Set<AnyCancellable>()
     
@@ -92,6 +108,15 @@ final class ProfileViewModel: ProfileViewModelInterface {
             .sink { [weak self] noti in
                 if let post = noti.userInfo?[FBFieldName.post] as? Post {
                     self?.posts.insert(post, at: 0)
+                }
+            }.store(in: &subscriptions)
+        
+        NotificationCenter.default.publisher(for: .deletePost)
+            .sink { [weak self] noti in
+                if let post = noti.userInfo?[FBFieldName.post] as? Post {
+                    self?.posts.removeAll {
+                        $0.id == post.id
+                    }
                 }
             }.store(in: &subscriptions)
     }
