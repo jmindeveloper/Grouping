@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct PostContentWriteView<VM>: View where VM: PostUploadViewModelInterface {
+    @Environment(\.rootPresentationMode) var rootPresentationMode
+    @Environment(\.dismissHear) var dismissHearMode
     @EnvironmentObject var viewModel: VM
     @State var tagFieldText: String = ""
     @State var showGroupSelectView: Bool = false
+    var isTabPresent: Bool
     
     var body: some View {
         ScrollView {
@@ -47,7 +50,14 @@ struct PostContentWriteView<VM>: View where VM: PostUploadViewModelInterface {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        viewModel.upload()
+                        viewModel.upload {
+                            if isTabPresent {
+                                rootPresentationMode.wrappedValue.toggle()
+                                MainTabView.changeSelection(MainTabView.previousTab)
+                            } else {
+                                dismissHearMode.wrappedValue.toggle()
+                            }
+                        }
                     } label: {
                         Text("업로드")
                             .foregroundColor(.primary)
@@ -120,7 +130,7 @@ struct PostContentWriteView<VM>: View where VM: PostUploadViewModelInterface {
 
 struct PostContentWriteView_Previews: PreviewProvider {
     static var previews: some View {
-        PostContentWriteView<PostUploadViewModel>()
+        PostContentWriteView<PostUploadViewModel>(isTabPresent: false)
             .environmentObject(PostUploadViewModel())
     }
 }

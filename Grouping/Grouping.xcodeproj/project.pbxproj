@@ -19,6 +19,8 @@
 		0E309FDA2A5DA77500191B3B /* EmailLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E309FD92A5DA77500191B3B /* EmailLoginViewModel.swift */; };
 		0E309FDD2A5DA7F900191B3B /* UserAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E309FDC2A5DA7F900191B3B /* UserAuthManager.swift */; };
 		0E309FDF2A5EEF7E00191B3B /* FollowManagementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E309FDE2A5EEF7E00191B3B /* FollowManagementManager.swift */; };
+		0E3778942A729ABD00E6798D /* EnvironmentValues+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3778932A729ABD00E6798D /* EnvironmentValues+.swift */; };
+		0E3778962A72AC0600E6798D /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3778952A72AC0600E6798D /* UIApplication+.swift */; };
 		0E6C5F942A6559A4006FECEE /* GroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6C5F932A6559A4006FECEE /* GroupListView.swift */; };
 		0E6C5F972A655B95006FECEE /* CreateGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6C5F962A655B95006FECEE /* CreateGroupView.swift */; };
 		0E6C5F992A655D30006FECEE /* CreateGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6C5F982A655D30006FECEE /* CreateGroupViewModel.swift */; };
@@ -96,6 +98,8 @@
 		0E309FD92A5DA77500191B3B /* EmailLoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailLoginViewModel.swift; path = Email/EmailLoginViewModel.swift; sourceTree = "<group>"; };
 		0E309FDC2A5DA7F900191B3B /* UserAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthManager.swift; sourceTree = "<group>"; };
 		0E309FDE2A5EEF7E00191B3B /* FollowManagementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowManagementManager.swift; sourceTree = "<group>"; };
+		0E3778932A729ABD00E6798D /* EnvironmentValues+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+.swift"; sourceTree = "<group>"; };
+		0E3778952A72AC0600E6798D /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		0E6C5F932A6559A4006FECEE /* GroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListView.swift; sourceTree = "<group>"; };
 		0E6C5F962A655B95006FECEE /* CreateGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupView.swift; sourceTree = "<group>"; };
 		0E6C5F982A655D30006FECEE /* CreateGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupViewModel.swift; sourceTree = "<group>"; };
@@ -321,6 +325,8 @@
 				0E8DBF272A641C0D00D374DF /* Notification.Name+.swift */,
 				0E03F99A2A66DD6F006E8FCD /* PHAsset+.swift */,
 				0E850C642A714D26006A3837 /* Date+.swift */,
+				0E3778932A729ABD00E6798D /* EnvironmentValues+.swift */,
+				0E3778952A72AC0600E6798D /* UIApplication+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -683,6 +689,7 @@
 				0E850C652A714D26006A3837 /* Date+.swift in Sources */,
 				0EAAD3562A6831EF0069ECC8 /* PostViewModel.swift in Sources */,
 				0E850C5A2A6FEB65006A3837 /* UserSearchResultViewModel.swift in Sources */,
+				0E3778942A729ABD00E6798D /* EnvironmentValues+.swift in Sources */,
 				0E03F99B2A66DD6F006E8FCD /* PHAsset+.swift in Sources */,
 				0EF94C402A629C4C00557CD8 /* SelectedImage.swift in Sources */,
 				0EF94C422A62A0D800557CD8 /* PostUploadViewModel.swift in Sources */,
@@ -739,6 +746,7 @@
 				0E309FD62A5DA74A00191B3B /* LoginButton.swift in Sources */,
 				0E6CC3472A5AC1CF00BE97AD /* Constant.swift in Sources */,
 				0E850C522A6E9EFD006A3837 /* SearchManager.swift in Sources */,
+				0E3778962A72AC0600E6798D /* UIApplication+.swift in Sources */,
 				0EF94C352A62865900557CD8 /* UIView+.swift in Sources */,
 				0E850C632A7018A4006A3837 /* UserListViewModel.swift in Sources */,
 				0EAAD3612A6BE8660069ECC8 /* GroupListCell.swift in Sources */,

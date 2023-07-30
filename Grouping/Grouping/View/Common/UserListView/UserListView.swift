@@ -17,8 +17,10 @@ struct UserListView<VM>: View where VM: UserListViewModelInterface {
     var body: some View {
         ForEach(viewModel.users, id: \.id) { user in
             NavigationLink {
-                ProfileView<ProfileViewModel>()
-                    .environmentObject(ProfileViewModel(user: user))
+                LazyView(
+                    ProfileView<ProfileViewModel>()
+                        .environmentObject(ProfileViewModel(user: user))
+                )
             } label: {
                 UserListCell(user: user)
             }

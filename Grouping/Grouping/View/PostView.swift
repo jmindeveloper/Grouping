@@ -97,9 +97,11 @@ struct PostView<VM>: View where VM: PostViewModelInterface {
         }
         .fullScreenCover(isPresented: $showGroupView) {
             NavigationView {
-                GroupView<GroupViewModel>()
-                    .environmentObject(GroupViewModel(group: viewModel.group!))
-                    .navigationBarHidden(true)
+                LazyView(
+                    GroupView<GroupViewModel>()
+                        .environmentObject(GroupViewModel(group: viewModel.group!))
+                        .navigationBarHidden(true)
+                )
             }
         }
     }

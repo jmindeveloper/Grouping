@@ -54,6 +54,7 @@ final class UserAuthManager {
                 self?.db.document(user.id).collection(FBFieldName.starGroup).document(FBFieldName.starGroup).setData([FBFieldName.userStarGroup: Array<String>()])
                 
                 NotificationCenter.default.post(name: .userLogin, object: nil)
+                self?.bindingUserDocument(id: user.id)
                 completion?()
             }
         } catch {
@@ -99,6 +100,7 @@ final class UserAuthManager {
                 }
                 
                 self?.user = user
+                self?.bindingUserDocument(id: user.id)
                 NotificationCenter.default.post(name: .userLogin, object: nil)
                 completion?(true)
             } catch {
@@ -114,6 +116,24 @@ final class UserAuthManager {
             completion?()
         } catch {
             print(error.localizedDescription)
+        }
+    }
+    
+    func bindingUserDocument(id: String) {
+        db.document(id).addSnapshotListener { [weak self] snapshot, error in
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            do {
+                guard let user = try snapshot?.data(as: User.self) else {
+                    return
+                }
+                self?.user = user
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
 }

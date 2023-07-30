@@ -26,7 +26,8 @@ struct MainTabView: View {
     
     var body: some View {
         TabView(selection: $selection) {
-            PostFeedView(viewModel: postFeedViewModel, scrollTag: "")
+//            PostFeedView(viewModel: postFeedViewModel, scrollTag: "")
+            Text("Feed")
                 .onAppear {
                     UITabBar.showTabBar(animated: true)
                 }
@@ -67,6 +68,7 @@ struct MainTabView: View {
                 ProfileView<ProfileViewModel>()
             }
             .environmentObject(currentUserProfileViewModel)
+            .navigationViewStyle(StackNavigationViewStyle())
             .onAppear {
                 UITabBar.showTabBar(animated: true)
             }

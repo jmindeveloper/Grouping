@@ -55,7 +55,9 @@ struct LoginMainView: View {
             
             HStack {
                 NavigationLink {
-                    EmailSignInView(viewModel: EmailLoginViewModel(type: .SignIn))
+                    LazyView(
+                        EmailSignInView(viewModel: EmailLoginViewModel(type: .SignIn))
+                    )
                 } label: {
                     Text("이메일로 로그인")
                         .foregroundColor(.gray)
@@ -67,7 +69,9 @@ struct LoginMainView: View {
                     .padding(.horizontal, 3)
                 
                 NavigationLink {
-                    EmailSignUpView(viewModel: EmailLoginViewModel(type: .SignUp))
+                    LazyView(
+                        EmailSignUpView(viewModel: EmailLoginViewModel(type: .SignUp))
+                    )
                 } label: {
                     Text("이메일로 회원가입")
                         .foregroundColor(.gray)
