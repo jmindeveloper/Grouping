@@ -15,6 +15,7 @@ app.use("/api", groupingApp);
 
 exports.groupingApp = functions.region("asia-northeast3").https.onRequest(app);
 
+// get User
 groupingApp.get("/users", async (req, res) => {
     try {
         const userId = req.query.userId;
@@ -27,9 +28,9 @@ groupingApp.get("/users", async (req, res) => {
             .collection("Users")
             .doc(userId)
             .get();
-
+            
         if (!userDoc.exists) {
-            res.send(404).send("유저정보를 가져오는데 실패했습니다");
+            res.status(404).send("유저정보를 가져오는데 실패했습니다");
             return
         }
 
@@ -39,6 +40,7 @@ groupingApp.get("/users", async (req, res) => {
     }
 });
 
+// create User
 groupingApp.post("/users", async (req, res) => {
     try {
         const userId = req.body.id;
@@ -64,12 +66,41 @@ groupingApp.post("/users", async (req, res) => {
             .doc(userId)
             .set(user);
 
+        db
+            .collection("Users")
+            .doc(userId)
+            .collection("Post")
+            .doc("Post")
+            .set({ "posts": [] })
+
+        db
+            .collection("Users")
+            .doc(userId)
+            .collection("Group")
+            .doc("Group")
+            .set({ "groups": [] })
+
+        db
+            .collection("Users")
+            .doc(userId)
+            .collection("StarGroup")
+            .doc("StarGroup")
+            .set({ "starGroups": [] })
+
+        db
+            .collection("Users")
+            .doc(userId)
+            .collection("StarPost")
+            .doc("StarPost")
+            .set({ "starPosts": [] })
+
         res.status(200).json(user);
     } catch (error) {
         res.status(400).send(`유저를 생성하는데 실패했습니다: ${error.message}`);
     }
 });
 
+// follow
 groupingApp.patch("/users/follow", async (req, res) => {
     const userId = req.query.userId;
     const followId = req.query.followId;
