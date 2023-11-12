@@ -10,3 +10,7 @@ Grouping/Grouping.xcworkspace/xcuserdata
 Grouping/Pods/
 Grouping/Podfile.lock
 Grouping/Grouping/Application/GoogleService-Info.plist
+
+Server/.firebase
+Server/functions/node_modules
+Server/functions/ui-debug.log

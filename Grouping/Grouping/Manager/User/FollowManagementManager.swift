@@ -20,51 +20,27 @@ final class FollowManagementManager: FollowManagementManagerInterface {
     private let db = Firestore.firestore().collection(FBFieldName.users)
     
     func follow(subjectUser: User, completion: (() -> Void)? = nil) {
-        followUpdate(subjectId: subjectUser.id) { [weak self] in
-            self?.followingUpdate(subjectUser: subjectUser) {
+        guard let user = user else {
+            return
+        }
+        let baseURL = "https://asia-northeast3-grouping-3944d.cloudfunctions.net/groupingApp/api/users/follow?userId=\(user.id)&followId=\(subjectUser.id)"
+        
+        guard let url = URL(string: baseURL) else {
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        
+        URLSession.shared.dataTask(with: request) { data, response, err in
+            if let err = err {
+                print(err.localizedDescription)
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse, response.statusCode == 200 {
                 completion?()
             }
-        }
+        }.resume()
     }
-    
-    private func followUpdate(subjectId: String, completion: (() -> Void)? = nil) {
-        guard let user = user else {
-            return
-        }
-        
-        if let index = user.followers.firstIndex(of: subjectId) {
-            user.followers.remove(at: index)
-        } else {
-            user.followers.append(subjectId)
-        }
-        
-        db.document(user.id).updateData([FBFieldName.followers: user.followers]) { error in
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return
-            }
-            completion?()
-        }
-    }
-    
-    private func followingUpdate(subjectUser: User, completion: (() -> Void)? = nil) {
-        guard let user = user else {
-            return
-        }
-        
-        if let index = subjectUser.following.firstIndex(of: user.id) {
-            subjectUser.following.remove(at: index)
-        } else {
-            subjectUser.following.append(user.id)
-        }
-        
-        db.document(subjectUser.id).updateData([FBFieldName.following: subjectUser.following]) { error in
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return
-            }
-            completion?()
-        }
-    }
-    
 }
