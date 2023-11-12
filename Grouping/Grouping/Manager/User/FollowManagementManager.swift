@@ -39,7 +39,9 @@ final class FollowManagementManager: FollowManagementManagerInterface {
             }
             
             if let response = response as? HTTPURLResponse, response.statusCode == 200 {
-                completion?()
+                DispatchQueue.main.async {
+                    completion?()
+                }
             }
         }.resume()
     }

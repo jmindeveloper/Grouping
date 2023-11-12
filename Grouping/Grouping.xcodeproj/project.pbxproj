@@ -65,6 +65,7 @@
 		0ED26E962A6D2B06008F2037 /* GroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED26E952A6D2B06008F2037 /* GroupViewModel.swift */; };
 		0EE52F392A6E99C6007B45FF /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE52F382A6E99C6007B45FF /* SearchView.swift */; };
 		0EF0C6E02A681B2F009F48BB /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF0C6DF2A681B2F009F48BB /* ProfileEditView.swift */; };
+		0EF1D7FD2B00D53E0020C04F /* URLRequest+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF1D7FC2B00D53E0020C04F /* URLRequest+.swift */; };
 		0EF94C282A601C9F00557CD8 /* PostManagementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C272A601C9F00557CD8 /* PostManagementManager.swift */; };
 		0EF94C2B2A615ECA00557CD8 /* GroupManagementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C2A2A615ECA00557CD8 /* GroupManagementManager.swift */; };
 		0EF94C2D2A615F4100557CD8 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C2C2A615F4100557CD8 /* Group.swift */; };
@@ -143,6 +144,7 @@
 		0ED26E952A6D2B06008F2037 /* GroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewModel.swift; sourceTree = "<group>"; };
 		0EE52F382A6E99C6007B45FF /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		0EF0C6DF2A681B2F009F48BB /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
+		0EF1D7FC2B00D53E0020C04F /* URLRequest+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+.swift"; sourceTree = "<group>"; };
 		0EF94C272A601C9F00557CD8 /* PostManagementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManagementManager.swift; sourceTree = "<group>"; };
 		0EF94C2A2A615ECA00557CD8 /* GroupManagementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagementManager.swift; sourceTree = "<group>"; };
 		0EF94C2C2A615F4100557CD8 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				0E8DBF272A641C0D00D374DF /* Notification.Name+.swift */,
 				0E03F99A2A66DD6F006E8FCD /* PHAsset+.swift */,
 				0E850C642A714D26006A3837 /* Date+.swift */,
+				0EF1D7FC2B00D53E0020C04F /* URLRequest+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 				0E8DBF282A641C0D00D374DF /* Notification.Name+.swift in Sources */,
 				0E8DBF2B2A64297100D374DF /* PostFeedView.swift in Sources */,
 				0E309FDF2A5EEF7E00191B3B /* FollowManagementManager.swift in Sources */,
+				0EF1D7FD2B00D53E0020C04F /* URLRequest+.swift in Sources */,
 				0E6CC3502A5ACD8100BE97AD /* PostView.swift in Sources */,
 				0E850C5E2A6FEBA9006A3837 /* TagSearchResultViewModel.swift in Sources */,
 				0EAAD35A2A697B300069ECC8 /* LocalAlbumGridView.swift in Sources */,

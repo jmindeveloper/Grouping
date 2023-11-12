@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct ContentView: View {
     @State var showLoginVC: Bool = false
@@ -17,6 +18,9 @@ struct ContentView: View {
             LoginMainView()
         }
         .onAppear {
+            
+//            UserAuthManager.shared.logout()
+            
             UserAuthManager.shared.getUser() { isSuccess in
                 if !isSuccess {
                     showLoginVC = true

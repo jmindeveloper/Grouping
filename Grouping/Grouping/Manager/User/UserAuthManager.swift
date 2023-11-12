@@ -40,25 +40,35 @@ final class UserAuthManager {
     
     /// 유저 업로드
     func uploadUser(user: User, completion: (() -> Void)? = nil) {
-        do {
-            try db.document(user.id).setData(from: user) { [weak self] error in
-                guard error == nil else {
-                    print(error!.localizedDescription)
-                    return
-                }
-                self?.user = user
-                
-                self?.db.document(user.id).collection(FBFieldName.post).document(FBFieldName.post).setData([FBFieldName.userPosts: Array<String>()])
-                self?.db.document(user.id).collection(FBFieldName.group).document(FBFieldName.group).setData([FBFieldName.userGroup: Array<String>()])
-                self?.db.document(user.id).collection(FBFieldName.starPost).document(FBFieldName.starPost).setData([FBFieldName.userStarPost: Array<String>()])
-                self?.db.document(user.id).collection(FBFieldName.starGroup).document(FBFieldName.starGroup).setData([FBFieldName.userStarGroup: Array<String>()])
-                
-                NotificationCenter.default.post(name: .userLogin, object: nil)
-                completion?()
-            }
-        } catch {
-            print(error.localizedDescription)
+        let urlString = "https://asia-northeast3-grouping-3944d.cloudfunctions.net/groupingApp/api/users"
+        guard let url = URL(string: urlString) else {
+            return
         }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        guard let body = try? JSONEncoder().encode(user) else {
+            return
+        }
+        
+        request.httpBody = body
+        request.application_json()
+        
+        URLSession.shared.dataTask(with: request) { data, response, err in
+            if let err = err {
+                print(err.localizedDescription)
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                DispatchQueue.main.async { [weak self] in
+                    self?.user = user
+                    NotificationCenter.default.post(name: .userLogin, object: nil)
+                    completion?()
+                }
+            }
+        }.resume()
     }
     
     func updateUser(user: User, completion: (() -> Void)? = nil) {
