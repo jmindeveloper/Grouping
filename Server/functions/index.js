@@ -169,10 +169,21 @@ groupingApp.post("/posts", async (req, res) => {
     const createUserId = req.query.createUserId;
 
     if (!createUserId) {
-        return res.status(404).send("createUserId가 잘못됐습니다");        
+        return res.status(400).send("createUserId가 잘못됐습니다");
     }
     if (!postId) {
-        return res.status(404).send("postId가 잘못됐습니다");
+        return res.status(400).send("postId가 잘못됐습니다");
+    }
+
+    const createdAt = new Date(req.body.createdAt);
+    const updatedAt = req.body.updatedAt ? new Date(req.body.updatedAt) : null;
+
+    if (isNaN(createdAt.getTime())) {
+        return res.status(400).send("올바르지 않은 createdAt 값입니다");
+    }
+    
+    if (updatedAt && isNaN(updatedAt.getTime())) {
+        return res.status(400).send("올바르지 않은 updatedAt 값입니다");
     }
 
     const post = {
@@ -180,8 +191,8 @@ groupingApp.post("/posts", async (req, res) => {
         createUserId: req.body.createUserId,
         images: req.body.images,
         content: req.body.content,
-        createdAt: req.body.createdAt,
-        updatedAt : req.body.updatedAt || null,
+        createdAt: createdAt,
+        updatedAt: updatedAt,
         location: req.body.location || null,
         heartUsers: req.body.heartUsers,
         commentCount: req.body.commentCount,
@@ -190,10 +201,7 @@ groupingApp.post("/posts", async (req, res) => {
     };
 
     try {
-        await db
-        .collection("Post")
-        .doc(postId)
-        .set(post);
+        await db.collection("Post").doc(postId).set(post);
 
         await db
             .collection("Users")
@@ -206,6 +214,6 @@ groupingApp.post("/posts", async (req, res) => {
 
         res.status(200).json(post);
     } catch (error) {
-        res.status(404).send(`Post 업로드에 실패했습니다 ${error.message}`);
+        res.status(400).send(`Post 업로드에 실패했습니다: ${error.message}`);
     }
 });
