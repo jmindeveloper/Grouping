@@ -17,7 +17,6 @@ final class FollowManagementManager: FollowManagementManagerInterface {
     private var user: User? {
         UserAuthManager.shared.user
     }
-    private let db = Firestore.firestore().collection(FBFieldName.users)
     
     func follow(subjectUser: User, completion: (() -> Void)? = nil) {
         guard let user = user else {

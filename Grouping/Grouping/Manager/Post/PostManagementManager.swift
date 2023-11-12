@@ -35,10 +35,9 @@ final class PostManagementManager: PostManagementManagerInterface {
         
         uploadImages(id: postId, images: images) { totalCount, doneCount in
             print("uploadCount --> ", totalCount, doneCount)
-        } completion: { [weak self] urlStrings in
-            guard let self = self else { return }
+        } completion: { urlStrings in
             let post =  Post(
-                id: UUID().uuidString,
+                id: postId,
                 createUserId: user.id,
                 images: urlStrings,
                 content: content,
@@ -51,42 +50,34 @@ final class PostManagementManager: PostManagementManagerInterface {
                 groupId: groupId
             )
             
-            do {
-                try self.postDB
-                    .document(post.id)
-                    .setData(from: post) { [weak self] error in
-                        guard let self = self else { return }
-                        guard error == nil else {
-                            print(error!.localizedDescription)
-                            return
-                        }
-                        self.userDB.document(user.id)
-                            .collection(FBFieldName.post)
-                            .document(FBFieldName.post)
-                            .updateData([FBFieldName.userPosts: FieldValue.arrayUnion([post.id])]) { error in
-                                guard error == nil else {
-                                    print(error!.localizedDescription)
-                                    return
-                                }
-                                if groupId == nil {
-                                    completion?(post)
-                                } else {
-                                    Firestore.firestore()
-                                        .collection(FBFieldName.group)
-                                        .document(groupId!)
-                                        .updateData(["posts": FieldValue.arrayUnion([post.id])]) { error in
-                                            guard error == nil else {
-                                                print(error!.localizedDescription)
-                                                return
-                                            }
-                                            completion?(post)
-                                        }
-                                }
-                            }
-                    }
-            } catch {
-                print(error.localizedDescription)
+            let urlString = "https://asia-northeast3-grouping-3944d.cloudfunctions.net/groupingApp/api/posts?createUserId=\(user.id)&postId=\(postId)"
+            
+            guard let url = URL(string: urlString) else {
+                return
             }
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            guard let body = try? DateJsonEncoder().encode(post) else {
+                return
+            }
+            
+            request.httpBody = body
+            request.application_json()
+            
+            URLSession.shared.dataTask(with: request) { data, response, err in
+                if let err = err {
+                    print(err.localizedDescription)
+                    return
+                }
+                
+                if let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                    DispatchQueue.main.async {
+                        completion?(post)
+                    }
+                }
+            }.resume()
         }
     }
     
