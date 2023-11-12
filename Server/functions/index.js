@@ -35,7 +35,7 @@ groupingApp.get("/users", async (req, res) => {
 
         res.status(200).send({ id: userDoc.id, ...userDoc.data() });
     } catch (error) {
-        res.status(400).send("유저정보를 가져오는데 실패했습니다: ${error.message}");
+        res.status(400).send(`유저정보를 가져오는데 실패했습니다: ${error.message}`);
     }
 });
 
@@ -67,5 +67,63 @@ groupingApp.post("/users", async (req, res) => {
         res.status(200).json(user);
     } catch (error) {
         res.status(400).send(`유저를 생성하는데 실패했습니다: ${error.message}`);
+    }
+});
+
+groupingApp.patch("/users/follow", async (req, res) => {
+    const userId = req.query.userId;
+    const followId = req.query.followId;
+
+    if (!userId || !followId) {
+        return res.status(404).send("userId가 잘못됐습니다")
+    }
+
+    try {
+        const userDoc = await db
+        .collection("Users")
+        .doc(userId)
+        .get();
+
+        if (!userDoc) {
+            return res.status(404).send("유저정보를 가져오는데 실패했습니다")
+        }
+
+        const userFollowers = userDoc.data().following || [];
+
+        if (userFollowers.includes(followId)) {
+            await db
+                .collection("Users")
+                .doc(userId)
+                .update({
+                    following: admin.firestore.FieldValue.arrayRemove(followId)
+                })
+            
+            await db
+                .collection("Users")
+                .doc(followId)
+                .update({
+                    followers: admin.firestore.FieldValue.arrayRemove(userId)
+                })
+
+            res.status(200).json({ "isFollow": false })
+        } else {
+            await db
+                .collection("Users")
+                .doc(userId)
+                .update({
+                    following: admin.firestore.FieldValue.arrayUnion(followId)
+                })
+            
+            await db
+                .collection("Users")
+                .doc(followId)
+                .update({
+                    followers: admin.firestore.FieldValue.arrayUnion(userId)
+                })
+
+            res.status(200).json({ "isFollow": true })
+        }
+    } catch (error) {
+        res.status(400).send(`user를 follow 하는데 실패했습니다 ${error.message}`)
     }
 });
