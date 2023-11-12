@@ -2,6 +2,7 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const express = require('express');
+const status = require('statuses');
 
 admin.initializeApp();
 
@@ -15,6 +16,7 @@ app.use("/api", groupingApp);
 
 exports.groupingApp = functions.region("asia-northeast3").https.onRequest(app);
 
+// MARK: - User
 // get User
 groupingApp.get("/users", async (req, res) => {
     try {
@@ -156,5 +158,54 @@ groupingApp.patch("/users/follow", async (req, res) => {
         }
     } catch (error) {
         res.status(400).send(`user를 follow 하는데 실패했습니다 ${error.message}`)
+    }
+});
+
+// MARK: - Post
+
+// upload post
+groupingApp.post("/posts", async (req, res) => {
+    const postId = req.body.id;
+    const createUserId = req.query.createUserId;
+
+    if (!createUserId) {
+        return res.status(404).send("createUserId가 잘못됐습니다");        
+    }
+    if (!postId) {
+        return res.status(404).send("postId가 잘못됐습니다");
+    }
+
+    const post = {
+        id: req.body.id,
+        createUserId: req.body.createUserId,
+        images: req.body.images,
+        content: req.body.content,
+        createdAt: req.body.createdAt,
+        updatedAt : req.body.updatedAt || null,
+        location: req.body.location || null,
+        heartUsers: req.body.heartUsers,
+        commentCount: req.body.commentCount,
+        tags: req.body.tags,
+        groupId: req.body.groupId || null
+    };
+
+    try {
+        await db
+        .collection("Post")
+        .doc(postId)
+        .set(post);
+
+        await db
+            .collection("Users")
+            .doc(createUserId)
+            .collection("Post")
+            .doc("Post")
+            .update({
+                posts: admin.firestore.FieldValue.arrayUnion(postId)
+            });
+
+        res.status(200).json(post);
+    } catch (error) {
+        res.status(404).send(`Post 업로드에 실패했습니다 ${error.message}`);
     }
 });
