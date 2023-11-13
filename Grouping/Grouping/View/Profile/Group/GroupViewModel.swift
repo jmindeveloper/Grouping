@@ -18,15 +18,16 @@ final class GroupViewModel: GroupViewModelInterface {
     @Published var group: Group
     @Published var posts: [Post] = []
     
-    private let fetchPostManager: FetchPostManagerInterface = FetchPostManager()
+    private let fetchPostManager: FetchPostManagerInterface
     
     init(group: Group) {
         self.group = group
+        fetchPostManager = FetchPostManager(group: group)
         getPost()
     }
     
     func getPost() {
-        fetchPostManager.getPosts(ids: group.posts) { [weak self] post in
+        fetchPostManager.getGroupPosts() { [weak self] post in
             self?.posts = post
         }
     }
