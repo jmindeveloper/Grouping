@@ -67,6 +67,7 @@
 		0EF0C6E02A681B2F009F48BB /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF0C6DF2A681B2F009F48BB /* ProfileEditView.swift */; };
 		0EF1D7FD2B00D53E0020C04F /* URLRequest+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF1D7FC2B00D53E0020C04F /* URLRequest+.swift */; };
 		0EF1D7FF2B012F650020C04F /* DateJsonEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF1D7FE2B012F650020C04F /* DateJsonEncoder.swift */; };
+		0EF1D8022B0281370020C04F /* DateJsonDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF1D8012B0281370020C04F /* DateJsonDecoder.swift */; };
 		0EF94C282A601C9F00557CD8 /* PostManagementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C272A601C9F00557CD8 /* PostManagementManager.swift */; };
 		0EF94C2B2A615ECA00557CD8 /* GroupManagementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C2A2A615ECA00557CD8 /* GroupManagementManager.swift */; };
 		0EF94C2D2A615F4100557CD8 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF94C2C2A615F4100557CD8 /* Group.swift */; };
@@ -147,6 +148,7 @@
 		0EF0C6DF2A681B2F009F48BB /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		0EF1D7FC2B00D53E0020C04F /* URLRequest+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+.swift"; sourceTree = "<group>"; };
 		0EF1D7FE2B012F650020C04F /* DateJsonEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateJsonEncoder.swift; sourceTree = "<group>"; };
+		0EF1D8012B0281370020C04F /* DateJsonDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateJsonDecoder.swift; sourceTree = "<group>"; };
 		0EF94C272A601C9F00557CD8 /* PostManagementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManagementManager.swift; sourceTree = "<group>"; };
 		0EF94C2A2A615ECA00557CD8 /* GroupManagementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManagementManager.swift; sourceTree = "<group>"; };
 		0EF94C2C2A615F4100557CD8 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -198,7 +200,7 @@
 				0EF94C432A62B18B00557CD8 /* PhotoLibrary.swift */,
 				0EAAD35E2A6ABF450069ECC8 /* AlertManager.swift */,
 				0E850C512A6E9EFD006A3837 /* SearchManager.swift */,
-				0EF1D7FE2B012F650020C04F /* DateJsonEncoder.swift */,
+				0EF1D8002B0280F70020C04F /* DateJsonCodable */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -472,6 +474,15 @@
 			path = ProfileEdit;
 			sourceTree = "<group>";
 		};
+		0EF1D8002B0280F70020C04F /* DateJsonCodable */ = {
+			isa = PBXGroup;
+			children = (
+				0EF1D7FE2B012F650020C04F /* DateJsonEncoder.swift */,
+				0EF1D8012B0281370020C04F /* DateJsonDecoder.swift */,
+			);
+			path = DateJsonCodable;
+			sourceTree = "<group>";
+		};
 		0EF94C262A601C8F00557CD8 /* Post */ = {
 			isa = PBXGroup;
 			children = (
@@ -740,6 +751,7 @@
 				0E8DBF1F2A64112F00D374DF /* FetchPostManager.swift in Sources */,
 				0EAAD3502A681D020069ECC8 /* ProfileView.swift in Sources */,
 				0E6C5F972A655B95006FECEE /* CreateGroupView.swift in Sources */,
+				0EF1D8022B0281370020C04F /* DateJsonDecoder.swift in Sources */,
 				0E309FD42A5DA73500191B3B /* EmailSignUpView.swift in Sources */,
 				0EF94C3D2A62878700557CD8 /* ShowTabBar.swift in Sources */,
 				0EF0C6E02A681B2F009F48BB /* ProfileEditView.swift in Sources */,
