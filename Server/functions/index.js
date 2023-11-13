@@ -161,6 +161,38 @@ groupingApp.patch("/users/follow", async (req, res) => {
     }
 });
 
+// getUserPosts
+groupingApp.get("/users/posts", async (req, res) => {
+    const userId = req.query.userId;
+
+    if (!userId) {
+        return res.status(400).send("userId가 제공되지 않았습니다.");
+    }
+
+    try {
+        const posts = (await db.collection("Users").doc(userId).collection("Post").doc("Post").get()).data().posts
+        const matchingPosts = await db.collection("Post").where(admin.firestore.FieldPath.documentId(), 'in', posts).get();
+        
+        const postsData = matchingPosts.docs.map(doc => {
+            const data = doc.data();
+
+            if (data.createdAt instanceof admin.firestore.Timestamp) {
+                data.createdAt = data.createdAt.toDate().toISOString().replace(/\.\d{3}Z$/, 'Z');
+            }
+        
+            if (data.updatedAt instanceof admin.firestore.Timestamp) {
+                data.updatedAt = data.updatedAt.toDate().toISOString().replace(/\.\d{3}Z$/, 'Z');
+            }
+
+            return data;
+        });
+        
+        res.status(200).json(postsData)
+    } catch (error) {
+        return res.status(404).send(`post를 가져오는데 실패했습니다 ${error}`);
+    }
+});
+
 // MARK: - Post
 
 // upload post
