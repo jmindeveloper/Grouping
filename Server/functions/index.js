@@ -16,6 +16,11 @@ app.use("/api", groupingApp);
 
 exports.groupingApp = functions.region("asia-northeast3").https.onRequest(app);
 
+// MARK: - Utills
+function dateToString(date) {
+    return date.toISOString().replace(/\.\d{3}Z$/, 'Z');
+}
+
 // MARK: - User
 // get User
 groupingApp.get("/users", async (req, res) => {
@@ -170,18 +175,18 @@ groupingApp.get("/users/posts", async (req, res) => {
     }
 
     try {
-        const posts = (await db.collection("Users").doc(userId).collection("Post").doc("Post").get()).data().posts
+        const posts = (await db.collection("Users").doc(userId).collection("Post").doc("Post").get()).data().posts;
         const matchingPosts = await db.collection("Post").where(admin.firestore.FieldPath.documentId(), 'in', posts).get();
         
         const postsData = matchingPosts.docs.map(doc => {
             const data = doc.data();
 
             if (data.createdAt instanceof admin.firestore.Timestamp) {
-                data.createdAt = data.createdAt.toDate().toISOString().replace(/\.\d{3}Z$/, 'Z');
+                data.createdAt = dateToString(data.createdAt.toDate());
             }
         
             if (data.updatedAt instanceof admin.firestore.Timestamp) {
-                data.updatedAt = data.updatedAt.toDate().toISOString().replace(/\.\d{3}Z$/, 'Z');
+                data.updatedAt = dateToString(data.updatedAt.toDate());
             }
 
             return data;
@@ -194,7 +199,6 @@ groupingApp.get("/users/posts", async (req, res) => {
 });
 
 // MARK: - Post
-
 // upload post
 groupingApp.post("/posts", async (req, res) => {
     const postId = req.body.id;
@@ -247,5 +251,38 @@ groupingApp.post("/posts", async (req, res) => {
         res.status(200).json(post);
     } catch (error) {
         res.status(400).send(`Post 업로드에 실패했습니다: ${error.message}`);
+    }
+});
+
+// Mark: - Group
+// getGroupPosts
+groupingApp.get("/groups/posts", async (req, res) => {
+    const groupId = req.query.groupId;
+
+    if (!groupId) {
+        return res.status(400).send("groupId가 제공되지 않았습니다.");
+    }
+
+    try {
+        const posts = (await db.collection("Group").doc(groupId).get()).data().posts;
+        const matchingPosts = await db.collection("Post").where(admin.firestore.FieldPath.documentId(), 'in', posts).get();
+        
+        const postsData = matchingPosts.docs.map(doc => {
+            const data = doc.data();
+
+            if (data.createdAt instanceof admin.firestore.Timestamp) {
+                data.createdAt = dateToString(data.createdAt.toDate());
+            }
+        
+            if (data.updatedAt instanceof admin.firestore.Timestamp) {
+                data.updatedAt = dateToString(data.updatedAt.toDate());
+            }
+
+            return data;
+        });
+        
+        res.status(200).json(postsData)
+    } catch (error) {
+        return res.status(404).send(`post를 가져오는데 실패했습니다 ${error}`);
     }
 });
