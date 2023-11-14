@@ -74,6 +74,7 @@ final class PostManagementManager: PostManagementManagerInterface {
                 
                 if let response = response as? HTTPURLResponse, response.statusCode == 200 {
                     DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: .uploadPost, object: nil, userInfo: [FBFieldName.post: post])
                         completion?(post)
                     }
                 }
@@ -130,40 +131,28 @@ final class PostManagementManager: PostManagementManagerInterface {
             return
         }
         
-        postDB
-            .document(post.id)
-            .delete { [weak self] error in
-                guard let self = self else { return }
-                guard error == nil else {
-                    print(error!.localizedDescription)
-                    return
-                }
-                self.userDB.document(user.id)
-                    .collection(FBFieldName.post)
-                    .document(FBFieldName.post)
-                    .updateData([FBFieldName.userPosts: FieldValue.arrayRemove([post.id])]) { error in
-                        guard error == nil else {
-                            print(error!.localizedDescription)
-                            return
-                        }
-                        if let groupId = post.groupId {
-                            Firestore.firestore()
-                                .collection(FBFieldName.group)
-                                .document(groupId)
-                                .updateData(["posts": FieldValue.arrayRemove([post.id])]) { error in
-                                    guard error == nil else {
-                                        print(error!.localizedDescription)
-                                        return
-                                    }
-                                    NotificationCenter.default.post(name: .deletePost, object: nil, userInfo: [FBFieldName.post: post])
-                                    completion?(post)
-                                }
-                        } else {
-                            NotificationCenter.default.post(name: .deletePost, object: nil, userInfo: [FBFieldName.post: post])
-                            completion?(post)
-                        }
-                    }
+        let urlString = "https://asia-northeast3-grouping-3944d.cloudfunctions.net/groupingApp/api/posts?userId=\(user.id)&postId=\(post.id)"
+        
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        
+        URLSession.shared.dataTask(with: request) { data, response, err in
+            if let err = err {
+                print(err.localizedDescription)
+                return
             }
+            
+            if let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .deletePost, object: nil, userInfo: [FBFieldName.post: post])
+                    completion?(post)
+                }
+            }
+        }.resume()
     }
     
     private func uploadImages(

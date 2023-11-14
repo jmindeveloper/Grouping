@@ -105,6 +105,7 @@ final class ProfileViewModel: ProfileViewModelInterface {
         }.store(in: &subscriptions)
         
         NotificationCenter.default.publisher(for: .uploadPost)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] noti in
                 if let post = noti.userInfo?[FBFieldName.post] as? Post {
                     self?.posts.insert(post, at: 0)
