@@ -248,6 +248,16 @@ groupingApp.post("/posts", async (req, res) => {
             .update({
                 posts: admin.firestore.FieldValue.arrayUnion(postId)
             });
+        
+        if (req.body.groupId) {
+            console.log(`create group post | groupId --> ${req.body.groupId}`)
+            await db
+                .collection("Group")
+                .doc(req.body.groupId)
+                .update({
+                    posts: admin.firestore.FieldValue.arrayUnion(postId)
+                });
+        }
 
         res.status(200).json(post);
     } catch (error) {
