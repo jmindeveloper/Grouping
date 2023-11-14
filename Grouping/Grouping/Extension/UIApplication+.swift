@@ -30,4 +30,8 @@ extension UIApplication {
 
         return base
     }
+    
+    class func rootViewController() -> UIViewController? {
+        UIApplication.shared.keyWindow?.rootViewController
+    }
 }

@@ -21,6 +21,7 @@
 		0E309FDF2A5EEF7E00191B3B /* FollowManagementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E309FDE2A5EEF7E00191B3B /* FollowManagementManager.swift */; };
 		0E5E48552B03D6B4006DCB9D /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E48542B03D6B4006DCB9D /* UIApplication+.swift */; };
 		0E5E48572B03D73E006DCB9D /* EnvironmentValues+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E48562B03D73E006DCB9D /* EnvironmentValues+.swift */; };
+		0E5E485F2B03E43B006DCB9D /* RootPresentationModeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E485E2B03E43B006DCB9D /* RootPresentationModeKey.swift */; };
 		0E6C5F942A6559A4006FECEE /* GroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6C5F932A6559A4006FECEE /* GroupListView.swift */; };
 		0E6C5F972A655B95006FECEE /* CreateGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6C5F962A655B95006FECEE /* CreateGroupView.swift */; };
 		0E6C5F992A655D30006FECEE /* CreateGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6C5F982A655D30006FECEE /* CreateGroupViewModel.swift */; };
@@ -103,6 +104,7 @@
 		0E309FDE2A5EEF7E00191B3B /* FollowManagementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowManagementManager.swift; sourceTree = "<group>"; };
 		0E5E48542B03D6B4006DCB9D /* UIApplication+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		0E5E48562B03D73E006DCB9D /* EnvironmentValues+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+.swift"; sourceTree = "<group>"; };
+		0E5E485E2B03E43B006DCB9D /* RootPresentationModeKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootPresentationModeKey.swift; sourceTree = "<group>"; };
 		0E6C5F932A6559A4006FECEE /* GroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListView.swift; sourceTree = "<group>"; };
 		0E6C5F962A655B95006FECEE /* CreateGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupView.swift; sourceTree = "<group>"; };
 		0E6C5F982A655D30006FECEE /* CreateGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupViewModel.swift; sourceTree = "<group>"; };
@@ -236,6 +238,14 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		0E5E485D2B03E423006DCB9D /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				0E5E485E2B03E43B006DCB9D /* RootPresentationModeKey.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
 		0E6C5F912A655993006FECEE /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +295,7 @@
 		0E6CC3202A5AA09000BE97AD /* Grouping */ = {
 			isa = PBXGroup;
 			children = (
+				0E5E485D2B03E423006DCB9D /* Environment */,
 				0EF94C452A62B2CC00557CD8 /* Info.plist */,
 				0EF94C392A62873700557CD8 /* ViewModifiers */,
 				0E309FC32A5D795E00191B3B /* Manager */,
@@ -725,6 +736,7 @@
 				0E6CC34F2A5ACCD800BE97AD /* Post.swift in Sources */,
 				0E03F99D2A6816BA006E8FCD /* ValueChangeToggleView.swift in Sources */,
 				0EF94C4A2A63BE1500557CD8 /* TextView.swift in Sources */,
+				0E5E485F2B03E43B006DCB9D /* RootPresentationModeKey.swift in Sources */,
 				0E6CC3412A5AC08900BE97AD /* View+.swift in Sources */,
 				0E6CC3442A5AC0B900BE97AD /* RoundedCorner.swift in Sources */,
 				0EF94C2F2A6279DD00557CD8 /* MainTabView.swift in Sources */,

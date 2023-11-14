@@ -61,7 +61,7 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: LazyView( PostContentWriteView<PostUploadViewModel>(isTabPresent: isTabPresent)), isActive: $isActive) {
+                    NavigationLink(destination: LazyView(PostContentWriteView<PostUploadViewModel>(isTabPresent: isTabPresent))) {
                         Text("다음")
                             .foregroundColor(.primary)
                             .opacity(viewModel.selectedImageIndexes.isEmpty ? 0.6 : 1)
@@ -71,7 +71,6 @@ struct SelectImageView<VM>: View where VM: PostUploadViewModelInterface {
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .environment(\.rootPresentationMode, $isActive)
     }
     
     @State var showAlbumCollection: Bool = false
