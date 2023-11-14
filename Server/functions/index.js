@@ -3,6 +3,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const express = require('express');
 const status = require('statuses');
+const { async } = require('@firebase/util');
 
 admin.initializeApp();
 
@@ -252,6 +253,60 @@ groupingApp.post("/posts", async (req, res) => {
     } catch (error) {
         res.status(400).send(`Post 업로드에 실패했습니다: ${error.message}`);
     }
+});
+
+// delete post
+groupingApp.delete("/posts", async (req, res) => {
+    const postId = req.query.postId;
+    const userId = req.query.userId;
+    
+    if (!postId) {
+        return res.status(400).send("postId가 잘못됐습니다.");
+    }
+
+    if (!userId) {
+        return res.status(400).send("userId가 잘못됐습니다.");
+    }
+
+    try {
+
+        const post = await (await db.collection("Post").doc(postId).get()).data();
+        const createUserId = post.createUserId;
+        const groupId = post.groupId;
+
+        if (createUserId !== userId) {
+            return res.status(400).send("user의 삭제권한이 없습니다.");
+        }
+
+        await db.collection("Post").doc(postId).delete();
+
+        await db
+            .collection("Users")
+            .doc(createUserId)
+            .collection("Post")
+            .doc("Post")
+            .update({
+                posts: admin.firestore.FieldValue.arrayRemove(postId)
+            });
+
+        if (groupId) {
+            await db
+                .collection("Group")
+                .doc(groupId)
+                .update({
+                    posts: admin.firestore.FieldValue.arrayRemove(postId)
+                }); 
+        }
+
+        res.status(200).send("게시물이 성공적으로 삭제되었습니다.");
+    } catch (error) {
+        res.status(404).send(`게시물 삭제 중 오류가 발생했습니다. ${error}`);
+    }
+});
+
+// update post
+groupingApp.put("/posts", async (req, res) => {
+
 });
 
 // Mark: - Group
