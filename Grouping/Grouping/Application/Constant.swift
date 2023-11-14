@@ -28,6 +28,10 @@ struct Constant {
     static var safeAreaInsets: UIEdgeInsets? {
         UIApplication.shared.keyWindow?.safeAreaInsets
     }
+    
+    static var rootViewController: UIViewController? {
+        UIApplication.rootViewController()
+    }
 }
 
 struct FBFieldName {

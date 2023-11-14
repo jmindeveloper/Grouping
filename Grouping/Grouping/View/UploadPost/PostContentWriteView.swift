@@ -52,7 +52,7 @@ struct PostContentWriteView<VM>: View where VM: PostUploadViewModelInterface {
                     Button {
                         viewModel.upload {
                             if isTabPresent {
-                                rootPresentationMode.wrappedValue.toggle()
+                                rootPresentationMode.wrappedValue.dismiss()
                                 MainTabView.changeSelection(MainTabView.previousTab)
                             } else {
                                 dismissHearMode.wrappedValue.toggle()
