@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 import SDWebImageSwiftUI
 
 struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
@@ -14,6 +15,7 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
     @State private var createGroup: Bool = false
     
     @State private var selectedGroup: Group? = nil
+    @State private var showFeedView: Bool = false
     
     private var columns = Array(
         repeating: GridItem(
@@ -37,15 +39,25 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
         }
         .navigationTitle(viewModel.user?.nickName ?? "Profile")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationViewStyle(StackNavigationViewStyle())
         .fullScreenCover(isPresented: $createGroup) {
-            CreateGroupView(viewModel: CreateGroupViewModel())
+            LazyView(
+                CreateGroupView(viewModel: CreateGroupViewModel())
+            )
         }
         .fullScreenCover(item: $selectedGroup) { group in
             NavigationView {
+                LazyView(
                 GroupView<GroupViewModel>()
                     .environmentObject(GroupViewModel(group: group))
-                    .navigationBarHidden(true)
+                    .navigationBarHidden(true))
             }
+        }
+        .onAppear {
+            viewModel.isCanUpdateView = true
+        }
+        .onDisappear {
+            viewModel.isCanUpdateView = false
         }
     }
     
@@ -97,7 +109,7 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
             
             if viewModel.userIsMe {
                 NavigationLink {
-                    ProfileEditView(viewModel: ProfileEditViewModel())
+                    LazyView(ProfileEditView(viewModel: ProfileEditViewModel()))
                 } label: {
                     Text("프로필 편집")
                         .foregroundColor(.white)
@@ -148,7 +160,9 @@ struct ProfileView<VM>: View where VM: ProfileViewModelInterface {
         LazyVGrid(columns: columns, alignment: .leading, spacing: 2, pinnedViews: .sectionFooters) {
             ForEach(viewModel.posts, id: \.id) { post in
                 NavigationLink {
-                    PostFeedView(viewModel: PostFeedViewModel(posts: viewModel.posts), scrollTag: post.id)
+                    LazyView(
+                        PostFeedView(viewModel: PostFeedViewModel(posts: viewModel.posts), scrollTag: post.id)
+                    )
                 } label: {
                     WebImage(url: URL(string: post.images[0]))
                         .resizable()

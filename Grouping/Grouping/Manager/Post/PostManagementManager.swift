@@ -12,7 +12,7 @@ import FirebaseStorage
 protocol PostManagementManagerInterface {
     func upload(images: [Data], content: String, location: Location?, tags: [String], groupId: String?, completion: ((_ post: Post) -> Void)?)
     func update(post: Post, content: String, location: Location?, tags: [String],  groupId: String?, completion: ((_ post: Post) -> Void)?)
-    func delete(post: Post, completion: ((_ isSuccess: Bool) -> Void)?)
+    func delete(post: Post, completion: ((_ post: Post) -> Void)?)
 }
 
 final class PostManagementManager: PostManagementManagerInterface {
@@ -124,7 +124,7 @@ final class PostManagementManager: PostManagementManagerInterface {
         }
     }
     
-    func delete(post: Post, completion: ((_ isSuccess: Bool) -> Void)? = nil) {
+    func delete(post: Post, completion: ((_ post: Post) -> Void)? = nil) {
         guard let user = UserAuthManager.shared.user,
               user.id == post.createUserId else {
             return
@@ -146,7 +146,22 @@ final class PostManagementManager: PostManagementManagerInterface {
                             print(error!.localizedDescription)
                             return
                         }
-                        completion?(true)
+                        if let groupId = post.groupId {
+                            Firestore.firestore()
+                                .collection(FBFieldName.group)
+                                .document(groupId)
+                                .updateData(["posts": FieldValue.arrayRemove([post.id])]) { error in
+                                    guard error == nil else {
+                                        print(error!.localizedDescription)
+                                        return
+                                    }
+                                    NotificationCenter.default.post(name: .deletePost, object: nil, userInfo: [FBFieldName.post: post])
+                                    completion?(post)
+                                }
+                        } else {
+                            NotificationCenter.default.post(name: .deletePost, object: nil, userInfo: [FBFieldName.post: post])
+                            completion?(post)
+                        }
                     }
             }
     }

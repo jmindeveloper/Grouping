@@ -42,32 +42,34 @@ struct CreateGroupView<VM>: View where VM: CreateGroupViewModelInterface {
             .navigationBarTitleDisplayMode(.inline)
             .fullScreenCover(isPresented: $showAlbum) {
                 NavigationView {
-                    LocalAlbumGridView(viewModel: viewModel)
-                        .multiSelect(false)
-                        .navigationTitle("프로필 이미지 선택")
-                        .navigationBarTitleDisplayMode(.inline)
-                        .toolbar {
-                            ToolbarItem(placement: .navigationBarLeading) {
-                                Button {
-                                    showAlbum.toggle()
-                                    viewModel.groupThumbnailImage = nil
-                                } label: {
-                                    Image(systemName: "xmark")
-                                        .foregroundColor(.primary)
+                    LazyView(
+                        LocalAlbumGridView(viewModel: viewModel)
+                            .multiSelect(false)
+                            .navigationTitle("프로필 이미지 선택")
+                            .navigationBarTitleDisplayMode(.inline)
+                            .toolbar {
+                                ToolbarItem(placement: .navigationBarLeading) {
+                                    Button {
+                                        showAlbum.toggle()
+                                        viewModel.groupThumbnailImage = nil
+                                    } label: {
+                                        Image(systemName: "xmark")
+                                            .foregroundColor(.primary)
+                                    }
                                 }
                             }
-                        }
-                        .toolbar {
-                            ToolbarItem(placement: .navigationBarTrailing) {
-                                Button {
-                                    viewModel.selectGroupThumbnailImage()
-                                    showAlbum.toggle()
-                                } label: {
-                                    Text("완료")
-                                        .foregroundColor(.primary)
+                            .toolbar {
+                                ToolbarItem(placement: .navigationBarTrailing) {
+                                    Button {
+                                        viewModel.selectGroupThumbnailImage()
+                                        showAlbum.toggle()
+                                    } label: {
+                                        Text("완료")
+                                            .foregroundColor(.primary)
+                                    }
                                 }
                             }
-                        }
+                    )
                 }
             }
             .toolbar {

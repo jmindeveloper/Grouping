@@ -19,6 +19,8 @@
 		0E309FDA2A5DA77500191B3B /* EmailLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E309FD92A5DA77500191B3B /* EmailLoginViewModel.swift */; };
 		0E309FDD2A5DA7F900191B3B /* UserAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E309FDC2A5DA7F900191B3B /* UserAuthManager.swift */; };
 		0E309FDF2A5EEF7E00191B3B /* FollowManagementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E309FDE2A5EEF7E00191B3B /* FollowManagementManager.swift */; };
+		0E5E48552B03D6B4006DCB9D /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E48542B03D6B4006DCB9D /* UIApplication+.swift */; };
+		0E5E48572B03D73E006DCB9D /* EnvironmentValues+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E5E48562B03D73E006DCB9D /* EnvironmentValues+.swift */; };
 		0E6C5F942A6559A4006FECEE /* GroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6C5F932A6559A4006FECEE /* GroupListView.swift */; };
 		0E6C5F972A655B95006FECEE /* CreateGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6C5F962A655B95006FECEE /* CreateGroupView.swift */; };
 		0E6C5F992A655D30006FECEE /* CreateGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6C5F982A655D30006FECEE /* CreateGroupViewModel.swift */; };
@@ -99,6 +101,8 @@
 		0E309FD92A5DA77500191B3B /* EmailLoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailLoginViewModel.swift; path = Email/EmailLoginViewModel.swift; sourceTree = "<group>"; };
 		0E309FDC2A5DA7F900191B3B /* UserAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthManager.swift; sourceTree = "<group>"; };
 		0E309FDE2A5EEF7E00191B3B /* FollowManagementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowManagementManager.swift; sourceTree = "<group>"; };
+		0E5E48542B03D6B4006DCB9D /* UIApplication+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
+		0E5E48562B03D73E006DCB9D /* EnvironmentValues+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+.swift"; sourceTree = "<group>"; };
 		0E6C5F932A6559A4006FECEE /* GroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListView.swift; sourceTree = "<group>"; };
 		0E6C5F962A655B95006FECEE /* CreateGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupView.swift; sourceTree = "<group>"; };
 		0E6C5F982A655D30006FECEE /* CreateGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupViewModel.swift; sourceTree = "<group>"; };
@@ -326,6 +330,8 @@
 				0E90B8762A5C1BBC006725B1 /* Color+.swift */,
 				0E8DBF202A64138B00D374DF /* Publisher+.swift */,
 				0E8DBF272A641C0D00D374DF /* Notification.Name+.swift */,
+				0E5E48562B03D73E006DCB9D /* EnvironmentValues+.swift */,
+				0E5E48542B03D6B4006DCB9D /* UIApplication+.swift */,
 				0E03F99A2A66DD6F006E8FCD /* PHAsset+.swift */,
 				0E850C642A714D26006A3837 /* Date+.swift */,
 				0EF1D7FC2B00D53E0020C04F /* URLRequest+.swift */,
@@ -754,9 +760,11 @@
 				0EF1D8022B0281370020C04F /* DateJsonDecoder.swift in Sources */,
 				0E309FD42A5DA73500191B3B /* EmailSignUpView.swift in Sources */,
 				0EF94C3D2A62878700557CD8 /* ShowTabBar.swift in Sources */,
+				0E5E48572B03D73E006DCB9D /* EnvironmentValues+.swift in Sources */,
 				0EF0C6E02A681B2F009F48BB /* ProfileEditView.swift in Sources */,
 				0EAAD3542A6831270069ECC8 /* PostInteractionManager.swift in Sources */,
 				0E309FD62A5DA74A00191B3B /* LoginButton.swift in Sources */,
+				0E5E48552B03D6B4006DCB9D /* UIApplication+.swift in Sources */,
 				0E6CC3472A5AC1CF00BE97AD /* Constant.swift in Sources */,
 				0E850C522A6E9EFD006A3837 /* SearchManager.swift in Sources */,
 				0EF94C352A62865900557CD8 /* UIView+.swift in Sources */,

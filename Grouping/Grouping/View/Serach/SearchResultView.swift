@@ -38,8 +38,10 @@ struct SearchResultView<VM>: View where VM: SearchResultViewModelInterface {
                 }
                 .fullScreenCover(item: $selectedGroup) { group in
                     NavigationView {
-                        GroupView<GroupViewModel>()
-                            .environmentObject(GroupViewModel(group: group))
+                        LazyView(
+                            GroupView<GroupViewModel>()
+                                .environmentObject(GroupViewModel(group: group))
+                        )
                     }
                 }
             } else if let viewModel = viewModel as? TagSearchResultViewModel {
@@ -53,7 +55,9 @@ struct SearchResultView<VM>: View where VM: SearchResultViewModelInterface {
         LazyVGrid(columns: columns, alignment: .leading, spacing: 2, pinnedViews: .sectionFooters) {
             ForEach(viewModel.posts, id: \.id) { post in
                 NavigationLink {
-                    PostFeedView(viewModel: PostFeedViewModel(posts: viewModel.posts), scrollTag: post.id)
+                    LazyView(
+                        PostFeedView(viewModel: PostFeedViewModel(posts: viewModel.posts), scrollTag: post.id)
+                    )
                 } label: {
                     WebImage(url: URL(string: post.images[0]))
                         .resizable()
@@ -66,5 +70,4 @@ struct SearchResultView<VM>: View where VM: SearchResultViewModelInterface {
             }
         }
     }
-
 }

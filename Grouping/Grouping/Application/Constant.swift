@@ -21,6 +21,10 @@ struct Constant {
         UIApplication.shared.windows.first?.rootViewController
     }
     
+    static var currentVC: UIViewController? {
+        UIApplication.topViewController()
+    }
+    
     static var safeAreaInsets: UIEdgeInsets? {
         UIApplication.shared.keyWindow?.safeAreaInsets
     }
